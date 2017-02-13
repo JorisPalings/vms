@@ -1,0 +1,24 @@
+{
+  "name": "vms",
+  "version": "1.0.0",
+  "description": "Afstudeerproject 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorisPalings/vms.git"
+  },
+  "author": "Sander Lenaerts, Joris Palings, Bert Vandormael, Nick Van Vynckt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JorisPalings/vms/issues"
+  },
+  "homepage": "https://github.com/JorisPalings/vms#readme",
+  "devDependencies": {
+    "bower": "^1.8.0",
+    "gulp": "^3.9.1",
+    "sass": "^0.5.0"
+  }
+}
