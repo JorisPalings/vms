@@ -18,7 +18,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/static', require('./controllers/static_routes.js'));
+app.use('/static', require('./controllers/static_routes'));
+app.use('/api', require('./controllers/api/routes'));
 
 app.listen(port, function(){
     console.log('Server started on port ' + port);
