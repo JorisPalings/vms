@@ -64,5 +64,28 @@ describe('Company', function() {
             expect(err.errors.location).to.exist;
             done();
         });
-    });    
+    });
+    it('should be valid if everything is complete', function(){
+        let company = new Company({
+            name: 'Craftworkz',
+            contactPerson: new External({
+                name:"Georges Petrofski", pictureURL:"url", email:"e-mail", company:this
+            }),
+            location: new Location({
+                address:"Gaston Geenslaan 11 B4", postalCode:3000, country:"BEL"
+            })
+        });
+
+        company.save(function(err){
+            expect(err).to.not.exist;
+        });
+
+        company.remove(function(err){
+            expect(err).to.not.exist;
+        });
+
+        company.validate(function(err){
+            expect(err).to.not.exist;
+        });
+    });   
 });
