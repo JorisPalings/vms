@@ -12,7 +12,8 @@ var location = new mongoose.Schema({
     },
     country: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 3
     }
 });
 
