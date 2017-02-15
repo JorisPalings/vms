@@ -1,7 +1,9 @@
-var db = require('../db');
-var mongoose = require('mongoose');
+'use strict'
 
-var note = new mongoose.Schema({
+const db = require('../db');
+const mongoose = require('mongoose');
+
+let note = new mongoose.Schema({
     //Will save it as a simple string for now
     content: {
         type: String,
