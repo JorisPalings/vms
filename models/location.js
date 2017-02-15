@@ -16,4 +16,4 @@ var location = new mongoose.Schema({
     }
 });
 
-mongoose.model('Location', location);
+module.exports = mongoose.model('Location', location);
