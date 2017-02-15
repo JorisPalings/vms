@@ -86,4 +86,29 @@ describe('Meeting', function() {
             done();
         });
     });
+
+    it('should be valid when everything is complete', function(){
+        let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
+        let meeting = undefined;
+        meeting = new Meeting({
+           room: "Cho Oyu",
+           date: Date.now,
+           meetee: [employee],
+           notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
+           project: new Project({name:"3D printing", budget:300, meetings:[meeting]})
+        });
+
+        meeting.save(function(err){
+            expect(err).to.not.exist;
+        });
+
+        meeting.remove(function(err){
+            expect(err).to.not.exist;
+        });
+
+        meeting.validate(function(err){
+            expect(err).to.not.exist;
+            done();
+        });
+    });
 });
