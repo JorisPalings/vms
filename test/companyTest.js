@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var Company = require('../models/company');
 
-describe('company', function() {
+describe('Company', function() {
     it('should be invalid if name is empty', function(done) {
         var company = new Company();
  
