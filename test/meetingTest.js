@@ -10,8 +10,8 @@ describe('Meeting', function() {
     it('should be invalid if room is empty', function(done) {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
         let meeting = new Meeting({
-           date: Date.now,
-           notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
+           date: Date.now(),
+           notes: [new Note({content:"This is a note!", date:Date.now(), meeting:meeting, author:employee})],
            meetee: [employee],
            project: new Project({name:"3D printing", budget:300, meetings:[meeting]})
         });
@@ -26,7 +26,7 @@ describe('Meeting', function() {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
         let meeting = new Meeting({
            room: "Cho Oyu",
-           notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
+           notes: [new Note({content:"This is a note!", date:Date.now(), meeting:meeting, author:employee})],
            meetee: [employee],
            project: new Project({name:"3D printing", budget:300, meetings:[meeting]})
         });
@@ -41,7 +41,7 @@ describe('Meeting', function() {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
         let meeting = new Meeting({
            room: "Cho Oyu",
-           date: Date.now,
+           date: Date.now(),
            meetee: [employee],
            project: new Project({name:"3D printing", budget:300, meetings:[meeting]})
         });
@@ -56,8 +56,8 @@ describe('Meeting', function() {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
         let meeting = new Meeting({
            room: "Cho Oyu",
-           date: Date.now,
-           notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
+           date: Date.now(),
+           notes: [new Note({content:"This is a note!", date:Date.now(), meeting:meeting, author:employee})],
            project: new Project({name:"3D printing", budget:300, meetings:[meeting]})
         });
  
@@ -71,9 +71,9 @@ describe('Meeting', function() {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
         let meeting = new Meeting({
            room: "Cho Oyu",
-           date: Date.now,
+           date: Date.now(),
            meetee: [employee],
-           notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
+           notes: [new Note({content:"This is a note!", date:Date.now(), meeting:meeting, author:employee})],
         });
  
         meeting.validate(function(err) {
