@@ -1,10 +1,12 @@
-var expect = require('chai').expect;
-var Project = require('../models/project');
-var Meeting = require('../models/meeting');
+'use strict'
+
+const expect = require('chai').expect;
+const Project = require('../models/project');
+const Meeting = require('../models/meeting');
 
 describe('Project', function(){
     it('should be invalid if name is empty', function(done){
-        var projectEmptyName = new Project({
+        let projectEmptyName = new Project({
             budget: 500
         });
         projectEmptyName.validate(function(err){
@@ -13,7 +15,7 @@ describe('Project', function(){
         });
     });
     it('should be invalid if budget is empty', function(done){
-        var projectEmptyBudget = new Project({
+        let projectEmptyBudget = new Project({
             name: "VMS"
         });
         projectEmptyBudget.validate(function(err){
@@ -21,8 +23,8 @@ describe('Project', function(){
             done();
         });
     });
-    it('should have an array of meetings', function(done){
-        var completeProject = new Project({
+    it('should have an array of meetings and be valid', function(done){
+        let completeProject = new Project({
             name: "VMS",
             budget: 500,
             meetings: [new Meeting({

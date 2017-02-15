@@ -1,10 +1,12 @@
-var db = require('../db');
-var mongoose = require('mongoose');
-var util = require('util');
+'use strict'
 
-var options = { discriminatorKey: 'kind' };
+const db = require('../db');
+const mongoose = require('mongoose');
+const util = require('util');
 
-var Schema = mongoose.Schema;
+const options = { discriminatorKey: 'kind' };
+
+const Schema = mongoose.Schema;
 
 function baseSchema() {
     Schema.apply(this, options);
@@ -27,19 +29,19 @@ function baseSchema() {
 
 util.inherits(baseSchema, Schema);
 
-var employeeSchema = new baseSchema({
+let employeeSchema = new baseSchema({
     hashedPassword: {
         type: String,
         required: true
     }
 });
 
-var externalSchema = new baseSchema({
+let externalSchema = new baseSchema({
     company: {type: [mongoose.Schema.Types.ObjectId], ref: 'Company'}
 });
 
-var personSchema = new baseSchema();
-var Person = mongoose.model('Person', personSchema);
+let personSchema = new baseSchema();
+let Person = mongoose.model('Person', personSchema);
 module.exports = Person;
 //discriminator is used for stating that a class is a subclass of another class
 Person.discriminator('Employee', employeeSchema);
