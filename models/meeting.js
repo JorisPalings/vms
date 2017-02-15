@@ -8,13 +8,22 @@ var meeting = new mongoose.Schema({
     },
     date: {
         type: Date,
-        //Added a default Date for now, will possibly delete it later!
-        default: Date.now,
         required: true
     },
-    notes: [{type: [mongoose.Schema.Types.ObjectId], ref: 'Note'}],
-    meetee: [{type: [mongoose.Schema.Types.ObjectId], ref: 'Person'}],
-    project: {type: [mongoose.Schema.Types.ObjectId], ref: 'Project'}
+    notes: {
+        type:[{type: [mongoose.Schema.Types.ObjectId], ref: 'Note'}],
+        required:true
+    },
+    meetee: {
+        type:[{type: [mongoose.Schema.Types.ObjectId], ref: 'Employee'}],
+        required:true,
+        validate: [arrayLimit, '{PATH} cannot be 0']
+    },
+    project: {type: [mongoose.Schema.Types.ObjectId], ref: 'Project', required:true}
 });
 
 module.exports = mongoose.model('Meeting', meeting);
+
+function arrayLimit(val) {
+  return val.length > 0;
+}
