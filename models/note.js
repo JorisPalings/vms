@@ -12,11 +12,10 @@ let note = new mongoose.Schema({
     date: {
         type: Date,
         //Added a default Date for now, will possibly delete it later!
-        default: Date.now,
-        required: true
+        default: Date.now
     },
-    meeting: {type: [mongoose.Schema.Types.ObjectId], ref: 'Meeting'},
-    author: {type: [mongoose.Schema.Types.ObjectId], ref: 'Employee'}
+    meeting: {type: [mongoose.Schema.Types.ObjectId], ref: 'Meeting', required: true},
+    author: {type: [mongoose.Schema.Types.ObjectId], ref: 'Employee', required: true}
 });
 
 module.exports = mongoose.model('Note', note);
