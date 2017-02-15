@@ -17,4 +17,4 @@ var note = new mongoose.Schema({
     author: {type: [mongoose.Schema.Types.ObjectId], ref: 'Employee'}
 });
 
-mongoose.model('Note', note);
+module.exports = mongoose.model('Note', note);

@@ -29,7 +29,7 @@ var external = new mongoose.Schema({
     company: {type: [mongoose.Schema.Types.ObjectId], ref: 'Company'}
 }, options);
 
-mongoose.model('Person', person);
+module.exports = mongoose.model('Person', person);
 //discriminator is used for stating that a class is a subclass of another class
 Person.discriminator('Employee', employee);
 Person.discriminator('External', external);

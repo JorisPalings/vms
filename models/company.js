@@ -10,4 +10,4 @@ var company = new mongoose.Schema({
     location: {type: [mongoose.Schema.Types.ObjectId], ref: 'Location'}
 });
 
-mongoose.model('Company', company);
+module.exports = mongoose.model('Company', company);

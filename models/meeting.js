@@ -17,4 +17,4 @@ var meeting = new mongoose.Schema({
     project: {type: [mongoose.Schema.Types.ObjectId], ref: 'Project'}
 });
 
-mongoose.model('Meeting', meeting);
+module.exports = mongoose.model('Meeting', meeting);
