@@ -1,10 +1,17 @@
 'use strict';
 
-var gulp = require('gulp');
-var sass = require('gulp-sass');
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const imagemin = require('gulp-imagemin');
 
-gulp.task('sass', function () {
+gulp.task('sass', function() {
  return gulp.src('./sass/**/*.scss')
    .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
    .pipe(gulp.dest('./assets/css'));
+});
+
+gulp.task('images', function() {
+ return gulp.src('./images/**/*', {base: '.'})
+   .pipe(imagemin())
+   .pipe(gulp.dest('./assets'))
 });
