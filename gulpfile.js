@@ -17,7 +17,7 @@ gulp.task('images', function() {
    .pipe(gulp.dest('./assets'))
 });
 
-gulp.task('default', function () {
+gulp.task('babel', function () {
     return gulp.src('./**/*.js')
         .pipe(babel())
         .pipe(gulp.dest('dist'));
