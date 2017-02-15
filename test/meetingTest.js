@@ -9,7 +9,8 @@ const Project = require('../models/project');
 describe('Meeting', function() {
     it('should be invalid if room is empty', function(done) {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
-        let meeting = new Meeting({
+        let meeting = undefined;
+        meeting = new Meeting({
            date: Date.now,
            notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
            meetee: [employee],
@@ -24,7 +25,8 @@ describe('Meeting', function() {
 
     it('should be invalid if date is empty', function(done) {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
-        let meeting = new Meeting({
+        let meeting = undefined;
+        meeting = new Meeting({
            room: "Cho Oyu",
            notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
            meetee: [employee],
@@ -39,7 +41,8 @@ describe('Meeting', function() {
 
     it('should be invalid if notes is empty', function(done) {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
-        let meeting = new Meeting({
+        let meeting = undefined;
+        meeting = new Meeting({
            room: "Cho Oyu",
            date: Date.now,
            meetee: [employee],
@@ -54,7 +57,8 @@ describe('Meeting', function() {
 
     it('should be invalid if metee is empty', function(done) {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
-        let meeting = new Meeting({
+        let meeting = undefined;
+        meeting = new Meeting({
            room: "Cho Oyu",
            date: Date.now,
            notes: [new Note({content:"This is a note!", date:Date.now, meeting:meeting, author:employee})],
@@ -69,7 +73,8 @@ describe('Meeting', function() {
 
     it('should be invalid if project is empty', function(done) {
         let employee = new Employee({name:"Georges Petrofski", pictureURL:"url", email:"e-mail", hashedPassword:"imahacker"});
-        let meeting = new Meeting({
+        let meeting = undefined;
+        meeting = new Meeting({
            room: "Cho Oyu",
            date: Date.now,
            meetee: [employee],
