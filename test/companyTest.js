@@ -1,11 +1,13 @@
-var expect = require('chai').expect;
-var Company = require('../models/company');
-var External = require('../models/persons');
-var Location = require('../models/location');
+'use strict'
+
+const expect = require('chai').expect;
+const Company = require('../models/company');
+const External = require('../models/persons');
+const Location = require('../models/location');
 
 describe('Company', function() {
     it('should be invalid if name is empty', function(done) {
-        var company = new Company({
+        let company = new Company({
             contactPerson: new External({
                 name:"Georges Petrofski", pictureURL:"url", email:"e-mail", company:this
             }),
@@ -21,7 +23,7 @@ describe('Company', function() {
     });
 
     it('should be invalid if contact person is empty', function(done) {
-        var company = new Company({
+        let company = new Company({
             name: 'Craftworkz',
             location: new Location({
                 address:"Gaston Geenslaan 11 B4", postalCode:3000, country:"BEL"
@@ -35,7 +37,7 @@ describe('Company', function() {
     });
 
     it('should be invalid if contact person array has length 0', function(done) {
-        var company = new Company({
+        let company = new Company({
             name: 'Craftworkz',
             contactPerson: [],
             location: new Location({
@@ -50,7 +52,7 @@ describe('Company', function() {
     });
 
     it('should be invalid if location is empty', function(done) {
-        var company = new Company({
+        let company = new Company({
             name: 'Craftworkz',
             contactPerson: new External({
                 name:"Georges Petrofski", pictureURL:"url", email:"e-mail", company:this
