@@ -24,6 +24,8 @@ let meeting = new mongoose.Schema({
     project: {type: [mongoose.Schema.Types.ObjectId], ref: 'Project', required:true}
 });
 
+meeting.index({room: 1, date: 1, notes: 1, meetee: 1, project: 1}, {unique: true});
+
 module.exports = mongoose.model('Meeting', meeting);
 
 function arrayLimit(val) {

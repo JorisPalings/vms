@@ -18,4 +18,6 @@ let note = new mongoose.Schema({
     author: {type: [mongoose.Schema.Types.ObjectId], ref: 'Employee', required: true}
 });
 
+note.index({content: 1, date: 1, meeting: 1, author: 1}, {unique: true});
+
 module.exports = mongoose.model('Note', note);

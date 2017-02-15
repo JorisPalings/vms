@@ -16,6 +16,8 @@ let company = new mongoose.Schema({
     location: {type: [mongoose.Schema.Types.ObjectId], ref: 'Location', required: true}
 });
 
+company.index({ name: 1, contactPerson: 1, location: 1}, {unique: true});
+
 module.exports = mongoose.model('Company', company);
 
 function arrayLimit(val) {

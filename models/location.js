@@ -19,4 +19,6 @@ let location = new mongoose.Schema({
     }
 });
 
+location.index({ address: 1, postalCode: 1, country: 1}, {unique: true});
+
 module.exports = mongoose.model('Location', location);

@@ -15,4 +15,6 @@ let project = new mongoose.Schema({
     meetings: [{type: [mongoose.Schema.Types.ObjectId], ref: 'Meeting'}]
 });
 
+project.index({name: 1, budget: 1, meetings: 1}, {unique: true});
+
 module.exports = mongoose.model('Project', project);
