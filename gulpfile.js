@@ -17,3 +17,12 @@ gulp.task('images', function() {
         .pipe(imagemin())
         .pipe(gulp.dest('./assets'))
 });
+
+gulp.task('watch', function() {
+  gulp.watch('./sass/**/*.scss', ['sass']);
+  gulp.watch('./images/**/*.+(jpg|jpeg|gif|png)', ['images']);
+  //gulp.watch('./**/*.html', ['html']);
+  //gulp.watch('./js/**/*', ['js']);
+});
+
+gulp.task('default', ['watch']);
