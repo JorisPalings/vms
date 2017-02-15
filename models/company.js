@@ -8,8 +8,16 @@ let company = new mongoose.Schema({
         type: String,
         required: true
     },
-    contactPerson: [{type: [mongoose.Schema.Types.ObjectId], ref: 'External'}],
-    location: {type: [mongoose.Schema.Types.ObjectId], ref: 'Location'}
+    contactPerson: {
+        type: [{type: [mongoose.Schema.Types.ObjectId], ref: 'External'}],
+        validate: [arrayLimit, '{PATH} cannot be 0'],
+        required: true
+    },
+    location: {type: [mongoose.Schema.Types.ObjectId], ref: 'Location', required: true}
 });
 
 module.exports = mongoose.model('Company', company);
+
+function arrayLimit(val) {
+  return val.length > 0;
+}
