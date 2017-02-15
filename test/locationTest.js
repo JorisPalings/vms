@@ -52,11 +52,12 @@ describe('Location', function(){
             country: "BEL"
         });
 
-        locationComplete.save(function(err, locationComplete){
-            if(err){
-                console.log(err);
-            }
-            console.log(locationComplete);
+        locationComplete.save(function(err){
+            expect(err).to.not.exist;
+        });
+
+        locationComplete.remove(function(err){
+            expect(err).to.not.exist;
         });
 
         locationComplete.validate(function(err){
