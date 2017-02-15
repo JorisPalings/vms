@@ -42,10 +42,9 @@ let externalSchema = new baseSchema({
 
 let personSchema = new baseSchema();
 let Person = mongoose.model('Person', personSchema);
-module.exports = Person;
+
 //discriminator is used for stating that a class is a subclass of another class
 Person.discriminator('Employee', employeeSchema);
 Person.discriminator('External', externalSchema);
 
-employeeSchema.index({name: 1, email: 1, hashedPassword: 1}, {unique: true});
-externalSchema.index({name: 1, email: 1, company: 1}, {unique: true});
+module.exports = Person;
