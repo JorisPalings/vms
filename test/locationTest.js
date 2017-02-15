@@ -51,6 +51,14 @@ describe('Location', function(){
             postalCode: 3150,
             country: "BEL"
         });
+
+        locationComplete.save(function(err, locationComplete){
+            if(err){
+                console.log(err);
+            }
+            console.log(locationComplete);
+        });
+
         locationComplete.validate(function(err){
             expect(err).to.not.exist;
             done();

@@ -4,6 +4,7 @@ const expect = require('chai').expect;
 const Company = require('../models/company');
 const External = require('../models/persons');
 const Location = require('../models/location');
+const db = require('../db');
 
 describe('Company', function() {
     it('should be invalid if name is empty', function(done) {
@@ -15,7 +16,7 @@ describe('Company', function() {
                 address:"Gaston Geenslaan 11 B4", postalCode:3000, country:"BEL"
             })
         });
- 
+
         company.validate(function(err) {
             expect(err.errors.name).to.exist;
             done();
