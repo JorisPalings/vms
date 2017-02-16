@@ -1,0 +1,26 @@
+form {
+    input {
+        border-radius: 8px;
+        border: 0;
+        box-sizing: border-box;
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: $font-size-large;
+        margin-top: 1rem;
+        padding: .75rem 1.25rem;
+        width: 100%;
+    }
+
+    input {
+        border: 1px solid $cw-blue-lighten;
+    }
+
+    input::placeholder {
+        color: $grey;
+    }
+
+    input:focus {
+        border: 1px solid $cw-blue;
+        outline: 0;
+    }
+}

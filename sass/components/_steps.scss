@@ -1,0 +1,13 @@
+.step {
+    background: $white;
+    border-radius: 32px;
+    border: 1px solid $cw-blue;
+    display: inline-block;
+    height: 12px;
+    margin: 24px 4px 16px;
+    width: 12px;
+}
+
+.current-step {
+    background: $cw-blue;
+}
