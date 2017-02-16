@@ -1,0 +1,41 @@
+.private-dash-header {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 40px;
+  align-items: center;
+
+  h1 {
+    font-size: $font-size-larger;
+    position: relative;
+    padding-bottom: 5px;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 50%;
+      height: 2px;
+      bottom: 0;
+      left: 25%;
+      border-bottom: 2px solid #232323;
+    }
+  }
+
+  .profile {
+    span {
+      display: inline-block;
+      font-size: $font-size-large;
+      margin-right: 15px
+    }
+
+    .profile-image {
+      display: inline-block;
+
+      img {
+        vertical-align: middle;
+        border-radius: 100%;
+        width: 72px;
+      }
+    }
+  }
+
+}
