@@ -4,7 +4,9 @@
 @import "components";
 
 html, body {
-    background: $off-white;
-    color: $dark-grey;
+    color: $faded-black;
     font-family: 'Montserrat', sans-serif;
+    background-color: $off-white;
+    width: 100vw;
+    height: 100vh;
 }
