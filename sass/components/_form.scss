@@ -1,0 +1,17 @@
+.form-instruction {
+    font-size: $font-size-small;
+    float: right;
+    margin: .5rem .25rem 1rem;
+}
+
+.form-title, .form-subtitle {
+    color: $cw-blue;
+}
+
+.form-title {
+    font-size: $font-size-larger;
+}
+
+.form-subtitle {
+    font-size: $font-size-small;
+}
