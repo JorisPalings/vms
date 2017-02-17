@@ -5,13 +5,12 @@
   align-items: center;
 
   i {
-    font-size: $font-size-larger;
+    font-size: $font-size-large;
     margin-right: 16px;
   }
 
   h1 {
     display: inline-block;
-    font-size: $font-size-larger;
     position: relative;
     padding-bottom: 5px;
 
@@ -29,7 +28,7 @@
   .profile {
     span {
       display: inline-block;
-      font-size: $font-size-large;
+      font-size: $font-size-normal;
       margin-right: 15px
     }
 
