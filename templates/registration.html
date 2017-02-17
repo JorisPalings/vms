@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-        <link rel="stylesheet" href="/css/main.css">
         <title>Virtual Meeting Secretary - Register</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/main.js" defer></script>
     </head>
     <body>
         <div class="container">
@@ -15,9 +16,10 @@
                     <div class="step"></div>
                     <h2 class="form-subtitle">Step 1 - Credentials</h2>
                     <form>
-                        <input type="text" placeholder="EMAIL" autofocus />
-                        <input type="password" placeholder="PASSWORD" />
-                        <input type="password" placeholder="REPEAT PASSWORD" />
+                        <input type="text" id="email" placeholder="EMAIL" autofocus />
+                        <input type="password" id="password" placeholder="PASSWORD" />
+                        <div id="rating"></div>
+                        <input type="password" id="repeat-password" placeholder="REPEAT PASSWORD" />
                         <button type="submit">NEXT</button>
                     </form>
                 </div>
