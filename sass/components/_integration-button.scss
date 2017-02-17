@@ -1,0 +1,46 @@
+.integration-button {
+    background: red;
+    border-radius: 8px;
+    border: 0;
+    box-sizing: border-box;
+    color: $white;
+    cursor: pointer;
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: $font-size-large;
+    margin-top: 1rem;
+    padding: 0.75rem 1.25rem;
+    width: 100%;
+
+    &.microsoft {
+        background: $ms-yellow;
+
+        &.linked {
+            background: $ms-yellow-lighten;
+        }
+    }
+
+    &.google {
+        background: $google-red;
+
+        &.linked {
+            background: $google-red-lighten;
+        }
+    }
+
+    &.linkedin {
+        background: $li-blue;
+
+        &.linked {
+            background: $li-blue-lighten;
+        }
+    }
+
+    &.twitter {
+        background: $twitter-blue;
+
+        &.linked {
+            background: $twitter-blue-lighten;
+        }
+    }
+}
