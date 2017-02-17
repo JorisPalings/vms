@@ -1,4 +1,4 @@
-form {
+.form {
     .form-instruction {
         font-size: $font-size-small;
         float: right;
@@ -10,10 +10,12 @@ form {
     }
 
     .form-title {
+        color: $cw-blue;
         font-size: $font-size-large;
     }
 
     .form-subtitle {
-        font-size: $font-size-small;
+        color: $cw-blue;
+        font-size: $font-size-normal;
     }
 }
