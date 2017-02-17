@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
-        <link rel="stylesheet" href="/css/main.css">
-        <title>Virtual Meeting Secretary - Private dashboard</title>
-    </head>
-    <body>
-        <header class="private-dash-header">
-            <div class="branding">
-                <div class="branding-logo">
-                    <img src="images/craftworkz.svg">
-                </div>
-                <div class="branding-text">
-                    <span>Virtual</span>
-                    <span>Meeting</span>
-                    <span>Secretary</span>
-                </div>
-            </div>
-            <h1>Meetings</h1>
-            <div class="profile">
-                <span>Firstname Lastname</span>
-                <div class="profile-image">
-                    <img src="https://s-media-cache-ak0.pinimg.com/originals/36/06/ce/3606cebe8d048b71aaea38b52c4eb4bd.jpg">
-                </div>
-            </div>
-        </header>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <title>Virtual Meeting Secretary - Private Dashboard</title>
+
+    <!-- Import default font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <!-- Import stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
+
+  </head>
+  <body>
+    <header class="private-dash-header">
+      <div class="branding">
+        <div class="branding-logo">
+          <img src="images/craftworkz.svg">
+        </div>
+        <div class="branding-text">
+          <span>Virtual</span>
+          <span>Meeting</span>
+          <span>Secretary</span>
+        </div>
+
+      </div>
+      <h1>Meetings</h1>
+      <div class="profile">
+        <span>Firstname Lastname</span>
+        <div class="profile-image">
+          <img src="https://s-media-cache-ak0.pinimg.com/originals/36/06/ce/3606cebe8d048b71aaea38b52c4eb4bd.jpg">
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="timeline">
+         <!-- columns should be the immediate child of a .row -->
+         <div class="row">
+           <div class="two columns date">Today</div>
+           <div class="ten columns card-wrapper">
+              <div class="meeting-card row">
+                <div class="time-box three columns">10:00 -  11:00</div>
+                <div class="meeting-info six columns">Sander Lenaerts</div>
+                <div class="profile-image three columns">Image</div>
+              </div>
+           </div>
+         </div>
+      </section>
+    </main>
+  </body>
 </html>
