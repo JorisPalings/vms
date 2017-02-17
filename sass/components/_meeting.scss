@@ -1,5 +1,4 @@
 .timeline {
-  width: 100vw;
 
   .timerow {
     display: flex;
@@ -53,8 +52,8 @@
     }
 
     .meeting-card {
-        display: flex;
-        min-width: 60vw;
+      display: flex;
+      min-width: 60vw;
 
 
       .time-box {
@@ -81,7 +80,7 @@
       .meeting-info {
         flex-grow: 4;
         padding: 10px;
-        border: 1px solid $cw-blue-lighten;
+        border: 1px solid $cw-blue;
 
         p {
           line-height: 2;
