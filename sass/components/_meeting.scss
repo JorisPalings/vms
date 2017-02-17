@@ -1,0 +1,113 @@
+.timeline {
+  width: 100vw;
+
+  .timerow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+
+    .bell {
+      width: 150px;
+      vertical-align: middle;
+      min-height: 100px;
+      display: block;
+      background: url('/images/bell.svg') no-repeat;
+      background-size: 32px 32px;
+      background-position: 15px center;
+      transition: background 0.375s;
+      -webkit-transition: background 0.375s;
+      display: flex;
+      align-items: center;
+
+      span {
+        color: $cw-blue;
+        transition: opacity 0.375s, visibility 0.375s;
+        -webkit-transition: opacity 0.375s, visibility 0.375s;
+        width: auto;
+        visibility: hidden;
+        opacity: 0;
+        position: relative;
+        right: -64px;
+      }
+
+      &:hover {
+        background: url('/images/bellfill.png') no-repeat;
+        background-size: 32px 32px;
+        background-position: 15px center;
+
+        span {
+          visibility: visible;
+          opacity: 1;
+          display: block;
+        }
+      }
+
+    }
+
+
+    .date {
+      text-align: right;
+      min-width: 10vw;
+      margin-right: 40px;
+    }
+
+    .meeting-card {
+        display: flex;
+        min-width: 60vw;
+
+
+      .time-box {
+        font-size: $font-size-large;
+        color: $off-white;
+        text-align: center;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+        background-color: $cw-blue;
+        padding: 20px;
+        width: 100px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+
+        span {
+          padding: 5px 0 5px 0;
+          display: block;
+          vertical-align: middle;
+        }
+      }
+
+      .meeting-info {
+        flex-grow: 4;
+        padding: 10px;
+        border: 1px solid $cw-blue-lighten;
+
+        p {
+          line-height: 2;
+        }
+      }
+
+      .profile-image {
+        width: 100px;
+        padding: 20px;
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+        background-color: $cw-blue;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 72px;
+          border-radius: 100%;
+
+
+        }
+      }
+    }
+  }
+
+
+}
