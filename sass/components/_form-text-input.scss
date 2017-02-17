@@ -1,7 +1,7 @@
 form {
     input {
         border-radius: 8px;
-        border: 0;
+        border: 1px solid $cw-blue-lighten;
         box-sizing: border-box;
         display: block;
         font-family: 'Montserrat', sans-serif;
@@ -11,16 +11,17 @@ form {
         width: 100%;
     }
 
-    input {
-        border: 1px solid $cw-blue-lighten;
-    }
-
     input::placeholder {
         color: $grey;
+        letter-spacing: 0;
     }
 
     input:focus {
         border: 1px solid $cw-blue;
         outline: 0;
+    }
+
+    input[type="password"] {
+        letter-spacing: 2px;
     }
 }
