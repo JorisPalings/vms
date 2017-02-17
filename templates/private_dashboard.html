@@ -10,6 +10,9 @@
     <!-- Import stylesheet -->
     <link rel="stylesheet" href="css/main.css">
 
+    <!-- FontAwesome import -->
+    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
   </head>
   <body>
     <header class="private-dash-header">
@@ -27,8 +30,12 @@
       <h1>Meetings</h1>
       <div class="profile">
         <span>Firstname Lastname</span>
-        <div class="profile-image">
-          <img src="https://s-media-cache-ak0.pinimg.com/originals/36/06/ce/3606cebe8d048b71aaea38b52c4eb4bd.jpg">
+        <div class="profile-image dropdown">
+          <img class="img-profile" onclick="triggerProfileDropdown()" src="https://s-media-cache-ak0.pinimg.com/originals/36/06/ce/3606cebe8d048b71aaea38b52c4eb4bd.jpg">
+          <div id="profileDropdown" class="dropdown-content">
+            <a href="#"><i class="fa fa-cog fa-lg"></i>Settings</a>
+            <a href="#"><i class="fa fa-sign-out fa-lg"></i>Log out</a>
+          </div>
         </div>
       </div>
     </header>
@@ -85,7 +92,7 @@
              <span>Running late</span>
            </div>
          </div>
-         <div class="timerow">
+         <div class="timerow padded">
            <div class="date">Friday</div>
            <div class="card-wrapper">
               <div class="meeting-card">
@@ -110,7 +117,7 @@
              <span>Running late</span>
            </div>
          </div>
-         <div class="timerow">
+         <div class="timerow padded">
            <div class="date">21 Feb 2017</div>
            <div class="card-wrapper">
               <div class="meeting-card">
@@ -137,5 +144,8 @@
          </div>
       </section>
     </main>
+    <!-- Import the main JavaScript file -->
+    <script src="js/main.js"></script>
   </body>
+
 </html>
