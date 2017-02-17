@@ -1,46 +1,46 @@
 .private-dash-header {
-  display: flex;
-  justify-content: space-between;
-  margin: 30px 40px;
-  align-items: center;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 40px;
 
-  i {
-    font-size: $font-size-large;
-    margin-right: 16px;
-  }
-
-  h1 {
-    display: inline-block;
-    position: relative;
-    padding-bottom: 5px;
-
-    &:after {
-      content: "";
-      position: absolute;
-      width: 50%;
-      height: 2px;
-      bottom: 0;
-      left: 25%;
-      border-bottom: 2px solid #232323;
-    }
-  }
-
-  .profile {
-    span {
-      display: inline-block;
-      font-size: $font-size-normal;
-      margin-right: 15px
+    i {
+        font-size: $font-size-large;
+        margin-right: 16px;
     }
 
-    .profile-image {
-      display: inline-block;
+    h1 {
+        display: inline-block;
+        padding-bottom: 8px;
+        position: relative;
+        text-transform: uppercase;
 
-      img {
-        vertical-align: middle;
-        border-radius: 100%;
-        width: 72px;
-      }
+        &:after {
+            border-bottom: 2px solid #232323;
+            bottom: 0;
+            content: "";
+            height: 2px;
+            left: 25%;
+            position: absolute;
+            width: 50%;
+        }
     }
-  }
 
+    .profile {
+        span {
+            display: inline-block;
+            font-size: $font-size-normal;
+            margin-right: 15px;
+        }
+
+        .profile-image {
+            display: inline-block;
+
+            img {
+                border-radius: 100%;
+                vertical-align: middle;
+                width: 72px;
+            }
+        }
+    }
 }
