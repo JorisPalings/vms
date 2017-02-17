@@ -2,17 +2,17 @@ $white: #fff;
 $off-white: #f8f8f8;
 $grey: #c3c3c3;
 $dark-grey: #767676;
-$black: #000;
 $faded-black: #232323;
+$black: #000;
 
 $cw-blue: #029cbb;
 $cw-blue-lighten: rgba(2, 156, 187, .33);
 
-$ms-yellow: #fdbd00;
-$ms-yellow-lighten: rgba(256, 189, 0, .5);
-
 $google-red: #df4a32;
 $google-red-lighten: rgba(223, 74, 50, .5);
+
+$ms-yellow: #fdbd00;
+$ms-yellow-lighten: rgba(256, 189, 0, .5);
 
 $li-blue: #0077b5;
 $li-blue-lighten: rgba(0, 119, 181, .5);
@@ -20,7 +20,15 @@ $li-blue-lighten: rgba(0, 119, 181, .5);
 $twitter-blue: #1da1f2;
 $twitter-blue-lighten: rgba(29, 161, 242, .5);
 
+// font-size
 $font-size-small: 12px;
 $font-size-normal: 16px;
 $font-size-large: 18px;
 $font-size-larger: 32px;
+
+// box-shadow
+$shadow-1: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+$shadow-2: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+$shadow-3: 0 10px 20px rgba(0, 0, 0, .19), 0 6px 6px rgba(0, 0, 0, .23);
+$shadow-4: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22);
+$shadow-5: 0 19px 38px rgba(0, 0, 0, .30), 0 15px 12px rgba(0, 0, 0, .22);
