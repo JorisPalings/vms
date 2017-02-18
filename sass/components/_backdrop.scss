@@ -1,0 +1,19 @@
+.full-container {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    background: url(../images/calendar.png) no-repeat;
+    left: -100px;
+    bottom: 0;
+    top: 20%;
+    overflow: hidden;
+    right: 0;
+    opacity: 0.3;
+    position: absolute;
+    z-index: 1;
+    transform: rotate(15deg);
+    background-size: 30%;
+    background-position:left;
+  }
+}
