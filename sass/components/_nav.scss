@@ -18,7 +18,6 @@
     }
   }
 
-
   h1 {
     font-size: $font-size-large;
     position: relative;
@@ -39,18 +38,18 @@
     text-align: right;
 
     span {
-        display: inline-block;
-        font-size: $font-size-normal;
-        margin-right: 15px;
+      display: inline-block;
+      font-size: $font-size-normal;
+      margin-right: 15px;
     }
 
     .profile-image {
         display: inline-block;
 
         img {
-            border-radius: 100%;
-            vertical-align: middle;
-            width: 72px;
+          border-radius: 100%;
+          vertical-align: middle;
+          width: 72px;
         }
     }
   }
@@ -59,7 +58,6 @@
 .public-dash-header {
   display: block;
   text-align: center;
-
 
   h2 {
     font-size: $font-size-large;
@@ -91,5 +89,20 @@
   .current-time {
     flex-grow: 1;
     text-align: right;
+  }
+}
+
+.front-branding {
+  position: absolute;
+  right: 2.5vw;
+  top: 30px;
+  .text-branding {
+    font-size: $font-size-large;
+  }
+
+  .logo {
+    img {
+      width: 310px;
+    }
   }
 }
