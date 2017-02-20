@@ -8,7 +8,7 @@
 
     .bell {
       align-items: center;
-      background: url('/images/bell.svg') no-repeat 15px center / 32px 32px;
+      background: url('../images/bell.svg') no-repeat 15px center / 32px 32px;
       display: block;
       display: flex;
       min-height: 100px;
@@ -27,7 +27,7 @@
       }
 
       &:hover {
-        background: url('/images/bellfill.png') no-repeat 15px center / 32px 32px;
+        background: url('../images/bellfill.png') no-repeat 15px center / 32px 32px;
 
         span {
           display: block;

@@ -6,7 +6,6 @@ router.get('/', function(req, res){
   res.sendFile(path.join(__dirname, '../layouts/index.html'));
 });
 
-router.use(express.static(path.join(__dirname, 'client')));
-
+router.use(express.static(path.join(__dirname, '../client')));
 
 module.exports = router;
