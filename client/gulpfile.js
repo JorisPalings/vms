@@ -17,12 +17,6 @@ gulp.task('images', function() {
         .pipe(gulp.dest('./assets'))
 });
 
-gulp.task('babel', function () {
-    return gulp.src('./**/*.js')
-        .pipe(babel())
-        .pipe(gulp.dest('dist'));
-});
-
 gulp.task('default', ['sass'], function() {
     gulp.watch('./sass/**/*.scss', ['sass']);
     gulp.watch('./images/**/*.+(jpg|jpeg|gif|png)', ['images']);
