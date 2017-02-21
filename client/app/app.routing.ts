@@ -1,11 +1,12 @@
-import { RouterModule } from '@angular/router';
+import { ModuleWithProviders } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { PrivateDashboardComponent } from './private_dashboard/private_dashboard.component';
 import { PublicDashboardComponent } from './public_dashboard/public_dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
 
-const appRoutes = [
+const appRoutes : Routes = [
   {
     path: '',
     component: LandingComponent
@@ -28,4 +29,4 @@ const appRoutes = [
   }
 ];
 
-export const appRouting = RouterModule.forRoot(appRoutes);
+export const appRouting : ModuleWithProviders = RouterModule.forRoot(appRoutes);
