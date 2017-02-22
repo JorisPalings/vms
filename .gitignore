@@ -2,7 +2,7 @@
 # Created by https://www.gitignore.io/api/node,bower,git,sass
 
 ### Angular 2 ###
-client/dist
+/dist
 
 ### Bower ###
 bower_components

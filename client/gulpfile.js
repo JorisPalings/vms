@@ -8,13 +8,14 @@ const babel = require('gulp-babel');
 gulp.task('sass', function() {
     return gulp.src('./sass/**/*.scss')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(gulp.dest('./dist/assets/css'));
+        .pipe(gulp.dest('../dist/assets/css'));
 });
 
+// Base option maintains folder structure
 gulp.task('images', function() {
-    return gulp.src('./client/dist/images/**/*', {base: '.'})
+    return gulp.src('./assets/images/**/*', {base: '../client/assets/images'})
         .pipe(imagemin())
-        .pipe(gulp.dest('./assets'))
+        .pipe(gulp.dest('../dist/assets/images'))
 });
 
 gulp.task('default', ['sass'], function() {
