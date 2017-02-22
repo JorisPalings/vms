@@ -1,0 +1,20 @@
+@import "vars";
+@import "components/form-button";
+@import "components/form-text-input";
+@import "components/form";
+@import "components/backdrop";
+
+.front-branding {
+  position: absolute;
+  right: 2.5vw;
+  top: 30px;
+  .text-branding {
+    font-size: $font-size-large;
+  }
+
+  .logo {
+    img {
+      width: 310px;
+    }
+  }
+}

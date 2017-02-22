@@ -5,6 +5,7 @@ import { PrivateDashboardComponent } from './private_dashboard/private_dashboard
 import { PublicDashboardComponent } from './public_dashboard/public_dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const appRoutes : Routes = [
   {
@@ -26,6 +27,10 @@ const appRoutes : Routes = [
   {
     path: 'settings',
     component: SettingsComponent
+  },
+  {
+    path: '**',
+    component: NotFoundComponent
   }
 ];
 

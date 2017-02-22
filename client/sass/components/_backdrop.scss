@@ -3,7 +3,7 @@
   overflow: hidden;
   &::after {
     content: "";
-    background: url(../images/calendar.png) no-repeat;
+    background: url(./dist/assets/images/calendar.svg) no-repeat;
     left: -100px;
     bottom: 0;
     top: 20%;
