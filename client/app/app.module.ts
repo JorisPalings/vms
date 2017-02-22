@@ -9,6 +9,11 @@ import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './landing/login.component';
+import { TimelineComponent } from './shared/timeline.component';
+import { MeetingComponent } from './shared/meeting.component';
+import { DropdownComponent } from './shared/dropdown.component';
+import { BrandingComponent } from './shared/branding.component';
+import { ProfileComponent } from './shared/profile.component';
 
 
 @NgModule ({
@@ -24,7 +29,12 @@ import { LoginComponent } from './landing/login.component';
     RegisterComponent,
     SettingsComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    BrandingComponent,
+    MeetingComponent,
+    TimelineComponent,
+    DropdownComponent,
+    ProfileComponent
   ],
   bootstrap: [ AppComponent ]
 })

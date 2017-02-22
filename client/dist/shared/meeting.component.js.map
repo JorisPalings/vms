@@ -1,0 +1,1 @@
+{"version":3,"file":"meeting.component.js","sourceRoot":"","sources":["../../app/shared/meeting.component.ts"],"names":[],"mappings":";;;;;;;AAAA,sCAA0C;AA+B1C,IAAa,gBAAgB;IAA7B;IAA+B,CAAC;IAAD,uBAAC;AAAD,CAAC,AAAhC,IAAgC;AAAnB,gBAAgB;IA7B5B,gBAAS,CAAC;QACT,QAAQ,EAAE,SAAS;QACnB,QAAQ,EAAE,otBAuBT;QACD,SAAS,EAAE,CAAC,gCAAgC,CAAC;KAC9C,CAAC;GAEW,gBAAgB,CAAG;AAAnB,4CAAgB"}

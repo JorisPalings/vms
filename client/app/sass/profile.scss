@@ -1,0 +1,21 @@
+@import "vars";
+
+.profile {
+  text-align: right;
+
+  span {
+    display: inline-block;
+    font-size: $font-size-normal;
+    margin-right: 15px;
+  }
+
+  .profile-image {
+      display: inline-block;
+
+      img {
+        border-radius: 100%;
+        vertical-align: middle;
+        width: 72px;
+      }
+  }
+}

@@ -16,6 +16,11 @@ var register_component_1 = require("./register/register.component");
 var settings_component_1 = require("./settings/settings.component");
 var not_found_component_1 = require("./not-found/not-found.component");
 var login_component_1 = require("./landing/login.component");
+var timeline_component_1 = require("./shared/timeline.component");
+var meeting_component_1 = require("./shared/meeting.component");
+var dropdown_component_1 = require("./shared/dropdown.component");
+var branding_component_1 = require("./shared/branding.component");
+var profile_component_1 = require("./shared/profile.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -35,7 +40,12 @@ AppModule = __decorate([
             register_component_1.RegisterComponent,
             settings_component_1.SettingsComponent,
             not_found_component_1.NotFoundComponent,
-            login_component_1.LoginComponent
+            login_component_1.LoginComponent,
+            branding_component_1.BrandingComponent,
+            meeting_component_1.MeetingComponent,
+            timeline_component_1.TimelineComponent,
+            dropdown_component_1.DropdownComponent,
+            profile_component_1.ProfileComponent
         ],
         bootstrap: [app_component_1.AppComponent]
     })

@@ -14,8 +14,7 @@ var RegisterComponent = (function () {
 RegisterComponent = __decorate([
     core_1.Component({
         selector: 'register-page',
-        template: "\n  <div class=\"container\">\n    <div class=\"row form full-height center-content-vertically\">\n      <div class=\"one-half column offset-by-three center-content\">\n        <h1 class=\"form-title\">Registration</h1>\n        <div class=\"step current-step\"></div>\n        <div class=\"step\"></div>\n        <h2 class=\"form-subtitle\">Step 1 - Credentials</h2>\n        <form>\n          <input type=\"text\" id=\"email\" placeholder=\"EMAIL\" autofocus />\n          <input type=\"password\" id=\"password\" placeholder=\"PASSWORD\" />\n          <div id=\"rating\"></div>\n          <input type=\"password\" id=\"repeat-password\" placeholder=\"REPEAT PASSWORD\" />\n          <button type=\"submit\">NEXT</button>\n        </form>\n      </div>\n    </div>\n  </div>\n  ",
-        styleUrls: ['../dist/assets/css/landing-header.css']
+        template: "\n    Register page\n  "
     })
 ], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;

@@ -14,7 +14,8 @@ var PrivateDashboardComponent = (function () {
 PrivateDashboardComponent = __decorate([
     core_1.Component({
         selector: 'private-dashboard',
-        template: "\n    Private dashboard\n  "
+        template: "\n  <header class=\"private-dash-header\">\n    <branding></branding>\n    <h1>Meetings</h1>\n    <profile></profile>\n  </header>\n  <main>\n    <timeline></timeline>\n  </main>\n  ",
+        styleUrls: ['../dist/assets/css/private-dash.css']
     })
 ], PrivateDashboardComponent);
 exports.PrivateDashboardComponent = PrivateDashboardComponent;

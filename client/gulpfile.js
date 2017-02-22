@@ -19,7 +19,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('default', ['sass'], function() {
-    gulp.watch('./sass/**/*.scss', ['sass']);
+    gulp.watch('./app/sass/**/*.scss', ['sass']);
     gulp.watch('./dist/assets/images/**/*.+(jpg|jpeg|gif|png)', ['images']);
     //gulp.watch('./**/*.html';, ['html']);
     //gulp.watch('./js/**/*', ['js']);
