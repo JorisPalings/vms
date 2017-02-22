@@ -6,7 +6,7 @@ var path = require('path');
 router.use(express.static(path.join(__dirname, '../client')));
 
 router.get('/*', function(req, res){
-  res.sendFile(path.join(__dirname, '../layouts/index.html'));
+  res.sendFile(path.join(__dirname, '../index.html'));
 });
 
 
