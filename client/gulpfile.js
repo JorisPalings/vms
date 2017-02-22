@@ -6,9 +6,9 @@ const imagemin = require('gulp-imagemin');
 const babel = require('gulp-babel');
 
 gulp.task('sass', function() {
-    return gulp.src('./sass/**/*.scss')
+    return gulp.src('./app/sass/**/*.scss')
         .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-        .pipe(gulp.dest('../dist/assets/css'));
+        .pipe(gulp.dest('./dist/assets/css'));
 });
 
 // Base option maintains folder structure
