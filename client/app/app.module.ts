@@ -8,6 +8,7 @@ import { PublicDashboardComponent } from './public_dashboard/public_dashboard.co
 import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './landing/login.component';
 
 
 @NgModule ({
@@ -22,7 +23,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     PublicDashboardComponent,
     RegisterComponent,
     SettingsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    LoginComponent
   ],
   bootstrap: [ AppComponent ]
 })

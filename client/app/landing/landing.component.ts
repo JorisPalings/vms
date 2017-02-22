@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginComponent } from './login.component';
 
 @Component({
   selector: 'landing-page',
@@ -15,16 +16,9 @@ import { Component } from '@angular/core';
       </div>
     </header>
     <div class="container">
-        <div class="row form full-height center-content-vertically">
+        <div class="row full-height center-content-vertically">
             <div class="one-half column offset-by-three center-content">
-                <h1 class="form-title">Login</h1>
-                <form>
-                    <input type="text" placeholder="EMAIL" autofocus />
-                    <input type="password" placeholder="PASSWORD" />
-                    <span class="form-instruction"><a href="#">Forgot your password?</a></span>
-                    <button type="submit">LOG IN</button>
-                    <span class="form-instruction">Need an account? <a href="#">Register</a></span>
-                </form>
+                <login-form></login-form>
             </div>
         </div>
     </div>
