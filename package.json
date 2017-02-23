@@ -1,0 +1,46 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @sanderlenaerts
+ Sign out
+ Unwatch 4
+  Star 0
+  Fork 0 JorisPalings/vms
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs
+Tree: 4ba477191d Find file Copy pathvms/package.json
+7fb25ad  7 days ago
+@JorisPalings JorisPalings [DEV] Added express, express-validator and body-parser to package.json
+2 contributors @nickvanvynckt @JorisPalings
+RawBlameHistory
+49 lines (48 sloc)  1.11 KB
+{
+  "name": "vms",
+  "version": "1.0.0",
+  "description": "Afstudeerproject 2017",
+  "main": "index.js",
+  "scripts": {
+    "gulp": "gulp",
+    "test": "node_modules/.bin/mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorisPalings/vms.git"
+  },
+  "author": "Sander Lenaerts, Joris Palings, Bert Vandormael, Nick Van Vynckt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JorisPalings/vms/issues"
+  },
+  "homepage": "https://github.com/JorisPalings/vms#readme",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1"
+  }
+}
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
