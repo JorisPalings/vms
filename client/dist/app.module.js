@@ -21,6 +21,8 @@ var meeting_component_1 = require("./shared/meeting.component");
 var dropdown_component_1 = require("./shared/dropdown.component");
 var branding_component_1 = require("./shared/branding.component");
 var profile_component_1 = require("./shared/profile.component");
+var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/http");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,7 +32,9 @@ AppModule = __decorate([
     core_1.NgModule({
         imports: [
             platform_browser_1.BrowserModule,
-            app_routing_1.appRouting
+            app_routing_1.appRouting,
+            forms_1.FormsModule,
+            http_1.HttpModule
         ],
         declarations: [
             app_component_1.AppComponent,
