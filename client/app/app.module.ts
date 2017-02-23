@@ -18,10 +18,16 @@ import { DropdownComponent } from './shared/dropdown.component';
 import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
 
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+
 @NgModule ({
   imports: [
     BrowserModule,
-    appRouting
+    appRouting,
+    FormsModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
