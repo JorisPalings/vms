@@ -7,6 +7,7 @@ import { PrivateDashboardComponent } from './private_dashboard/private_dashboard
 import { PublicDashboardComponent } from './public_dashboard/public_dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { RegistrationComponent } from './register/registration.component';
+import { IntegrationsComponent } from './integrations/integrations.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './landing/login.component';
@@ -27,6 +28,8 @@ import { ProfileComponent } from './shared/profile.component';
     PrivateDashboardComponent,
     PublicDashboardComponent,
     RegisterComponent,
+    RegistrationComponent,
+    IntegrationsComponent,
     SettingsComponent,
     NotFoundComponent,
     LoginComponent,
@@ -34,8 +37,7 @@ import { ProfileComponent } from './shared/profile.component';
     MeetingComponent,
     TimelineComponent,
     DropdownComponent,
-    ProfileComponent,
-    RegistrationComponent
+    ProfileComponent
   ],
   bootstrap: [ AppComponent ]
 })
