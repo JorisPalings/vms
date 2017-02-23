@@ -1,21 +1,23 @@
 .form {
-    .form-instruction {
-        font-size: $font-size-small;
-        float: right;
-        margin: .5rem .25rem 1rem;
-    }
+    z-index: 1;
+}
 
-    .form-title, .form-subtitle {
-        color: $cw-blue;
-    }
+.form-instruction {
+    font-size: $font-size-small;
+    float: right;
+    margin: .5rem .25rem 1rem;
+}
 
-    .form-title {
-        color: $cw-blue;
-        font-size: $font-size-large;
-    }
+.form-title, .form-subtitle {
+    color: $cw-blue;
+}
 
-    .form-subtitle {
-        color: $cw-blue;
-        font-size: $font-size-normal;
-    }
+.form-title {
+    color: $cw-blue;
+    font-size: $font-size-large;
+}
+
+.form-subtitle {
+    color: $cw-blue;
+    font-size: $font-size-normal;
 }
