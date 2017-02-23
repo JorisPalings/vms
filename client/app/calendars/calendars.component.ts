@@ -36,7 +36,7 @@ import { Component } from '@angular/core';
                   </fieldset>
                   <fieldset>
                       <input type="checkbox" id="cal3" />
-                      <label for="cal4">Holidays</label>
+                      <label for="cal3">Holidays</label>
                   </fieldset>
                   <button type="submit">FINISH</button>
               </form>
