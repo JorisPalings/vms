@@ -1,0 +1,18 @@
+.zebra-form {
+    text-align: left;
+
+    fieldset {
+        padding: 1rem;
+
+        input[type="checkbox"] {
+            cursor: pointer;
+            margin-right: 1rem;
+            transform: scale(1.25);
+        }
+
+    }
+
+    fieldset:nth-child(2n) {
+        background: $white;
+    }
+}

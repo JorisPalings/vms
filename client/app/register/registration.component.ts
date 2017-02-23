@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   <h1 class="form-title">Registration</h1>
   <div class="step current-step"></div>
   <div class="step"></div>
+  <div class="step"></div>
   <h2 class="form-subtitle">Step 1 - Credentials</h2>
   <form>
       <input type="text" id="email" placeholder="EMAIL" autofocus />

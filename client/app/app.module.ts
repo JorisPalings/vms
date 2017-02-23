@@ -8,6 +8,7 @@ import { PublicDashboardComponent } from './public_dashboard/public_dashboard.co
 import { RegisterComponent } from './register/register.component';
 import { RegistrationComponent } from './register/registration.component';
 import { IntegrationsComponent } from './integrations/integrations.component';
+import { CalendarsComponent } from './calendars/calendars.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './landing/login.component';
@@ -30,6 +31,7 @@ import { ProfileComponent } from './shared/profile.component';
     RegisterComponent,
     RegistrationComponent,
     IntegrationsComponent,
+    CalendarsComponent,
     SettingsComponent,
     NotFoundComponent,
     LoginComponent,
