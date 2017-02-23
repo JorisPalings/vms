@@ -1,21 +1,3 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @sanderlenaerts
- Sign out
- Unwatch 4
-  Star 0
-  Fork 0 JorisPalings/vms
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs
-Tree: 4ba477191d Find file Copy pathvms/package.json
-7fb25ad  7 days ago
-@JorisPalings JorisPalings [DEV] Added express, express-validator and body-parser to package.json
-2 contributors @nickvanvynckt @JorisPalings
-RawBlameHistory
-49 lines (48 sloc)  1.11 KB
 {
   "name": "vms",
   "version": "1.0.0",
@@ -42,5 +24,3 @@ RawBlameHistory
     "express": "^4.14.1"
   }
 }
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
