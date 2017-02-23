@@ -24,7 +24,7 @@ import { Component } from '@angular/core';
               <form>
                   <button class="integration-button google">Google</button>
                   <button class="integration-button linkedin">LinkedIn</button>
-                  <button type="submit">FINISH</button>
+                  <button type="submit">NEXT</button>
               </form>
           </div>
       </div>

@@ -17,6 +17,12 @@
 
         &.linked {
             background: $google-red-lighten;
+            cursor: default;
+        }
+
+        &:hover {
+            background: $google-red-darken;
+            box-shadow: $shadow-2;
         }
     }
 
@@ -25,14 +31,16 @@
 
         &.linked {
             background: $li-blue-lighten;
+            cursor: default;
+        }
+
+        &:hover {
+            background: $li-blue-darken;
+            box-shadow: $shadow-2;
         }
     }
 
-    &.twitter {
-        background: $twitter-blue;
-
-        &.linked {
-            background: $twitter-blue-lighten;
-        }
+    &:focus {
+        outline: none;
     }
 }
