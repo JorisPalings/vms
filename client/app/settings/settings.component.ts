@@ -25,14 +25,13 @@ import { Component } from '@angular/core';
                       <label for="phone">Telephone number:</label>
                       <input type="tel" id="phone" />
                       <button><i class="fa fa-floppy-o"></i> Save changes</button>
-                      <a href="#" class="align-left">Change password</a>
-                      <a href="#" class="align-right dangerous">Delete account</a>
+                      <a href="#" class="float-left">Change password</a>
+                      <a href="#" class="float-right dangerous">Delete account</a>
                   </form>
               </div>
               <div class="form six columns offset-by-one">
                   <h2>Integrations</h2>
-                  <button class="integration-button google">Google</button>
-                  <button class="integration-button linkedin">LinkedIn</button>
+                  <integration-buttons></integration-buttons>
               </div>
           </div>
       </div>

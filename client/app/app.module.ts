@@ -17,6 +17,7 @@ import { MeetingComponent } from './shared/meeting.component';
 import { DropdownComponent } from './shared/dropdown.component';
 import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
+import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -45,7 +46,8 @@ import { HttpModule } from '@angular/http';
     MeetingComponent,
     TimelineComponent,
     DropdownComponent,
-    ProfileComponent
+    ProfileComponent,
+    IntegrationButtonsComponent
   ],
   bootstrap: [ AppComponent ]
 })

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IntegrationButtonsComponent } from '../shared/integration-buttons.component';
 
 @Component({
   selector: 'integrations-page',
@@ -21,9 +22,10 @@ import { Component } from '@angular/core';
               <div class="step"></div>
               <div class="step current-step"></div>
               <h2 class="form-subtitle">Step 2 - Integrations</h2>
+              <p class="successful align-left"><i class="fa fa-check"></i> Your account has been created!</p>
+              <p class="align-left">Link your account with Google and LinkedIn below:</p>
               <form>
-                  <button class="integration-button google">Google</button>
-                  <button class="integration-button linkedin">LinkedIn</button>
+                  <integration-buttons></integration-buttons>
                   <button type="submit">NEXT</button>
               </form>
           </div>
