@@ -11,14 +11,22 @@
     text-align: center;
 }
 
-.align-left {
+.float-left {
     float: left;
 }
 
-.align-right {
+.float-right {
     float: right;
+}
+
+.align-left {
+    text-align: left;
 }
 
 .dangerous {
     color: $danger;
+}
+
+.successful {
+    color: $success;
 }
