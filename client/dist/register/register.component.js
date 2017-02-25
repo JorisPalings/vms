@@ -14,7 +14,8 @@ var RegisterComponent = (function () {
 RegisterComponent = __decorate([
     core_1.Component({
         selector: 'register-page',
-        template: "\n    Register page\n  "
+        template: "\n    <header>\n      <div class=\"front-branding\">\n        <div class=\"logo\">\n          <img src=\"./dist/assets/images/craftworkz.svg\"/>\n        </div>\n        <div class=\"text-branding\">\n          Virtual Meeting Secretary\n        </div>\n      </div>\n    </header>\n    <div class=\"container\">\n      <div class=\"row form full-height center-content-vertically\">\n          <div class=\"one-half column offset-by-three center-content\">\n              <registration-form></registration-form>\n          </div>\n      </div>\n    </div>\n  ",
+        styleUrls: ['../dist/assets/css/landing-header.css']
     })
 ], RegisterComponent);
 exports.RegisterComponent = RegisterComponent;

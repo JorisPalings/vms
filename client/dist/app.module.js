@@ -13,6 +13,9 @@ var landing_component_1 = require("./landing/landing.component");
 var private_dashboard_component_1 = require("./private_dashboard/private_dashboard.component");
 var public_dashboard_component_1 = require("./public_dashboard/public_dashboard.component");
 var register_component_1 = require("./register/register.component");
+var registration_component_1 = require("./register/registration.component");
+var integrations_component_1 = require("./integrations/integrations.component");
+var calendars_component_1 = require("./calendars/calendars.component");
 var settings_component_1 = require("./settings/settings.component");
 var not_found_component_1 = require("./not-found/not-found.component");
 var login_component_1 = require("./landing/login.component");
@@ -21,8 +24,10 @@ var meeting_component_1 = require("./shared/meeting.component");
 var dropdown_component_1 = require("./shared/dropdown.component");
 var branding_component_1 = require("./shared/branding.component");
 var profile_component_1 = require("./shared/profile.component");
+var integration_buttons_component_1 = require("./shared/integration-buttons.component");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
+var cookies_service_1 = require("angular2-cookie/services/cookies.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -42,6 +47,9 @@ AppModule = __decorate([
             private_dashboard_component_1.PrivateDashboardComponent,
             public_dashboard_component_1.PublicDashboardComponent,
             register_component_1.RegisterComponent,
+            registration_component_1.RegistrationComponent,
+            integrations_component_1.IntegrationsComponent,
+            calendars_component_1.CalendarsComponent,
             settings_component_1.SettingsComponent,
             not_found_component_1.NotFoundComponent,
             login_component_1.LoginComponent,
@@ -49,9 +57,11 @@ AppModule = __decorate([
             meeting_component_1.MeetingComponent,
             timeline_component_1.TimelineComponent,
             dropdown_component_1.DropdownComponent,
-            profile_component_1.ProfileComponent
+            profile_component_1.ProfileComponent,
+            integration_buttons_component_1.IntegrationButtonsComponent
         ],
-        bootstrap: [app_component_1.AppComponent]
+        bootstrap: [app_component_1.AppComponent],
+        providers: [cookies_service_1.CookieService]
     })
 ], AppModule);
 exports.AppModule = AppModule;

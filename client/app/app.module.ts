@@ -21,7 +21,7 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
 
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule ({
   imports: [
@@ -49,7 +49,8 @@ import { HttpModule } from '@angular/http';
     ProfileComponent,
     IntegrationButtonsComponent
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  providers: [ CookieService ]
 })
 
 export class AppModule {}

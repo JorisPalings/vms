@@ -14,7 +14,8 @@ var SettingsComponent = (function () {
 SettingsComponent = __decorate([
     core_1.Component({
         selector: 'settings-page',
-        template: "\n    Settings page\n  "
+        template: "\n  <header class=\"private-dash-header\">\n      <branding></branding>\n      <div>\n          <h1>Settings</h1>\n      </div>\n      <profile></profile>\n  </header>\n  <main>\n      <div class=\"container\">\n          <div class=\"row\">\n              <div class=\"form five columns\">\n                  <h2>Profile information</h2>\n                  <form>\n                      <label for=\"first-name\">First name:</label>\n                      <input type=\"text\" id=\"first-name\" />\n                      <label for=\"last-name\">Last name:</label>\n                      <input type=\"text\" id=\"last-name\" />\n                      <label for=\"email\">Email:</label>\n                      <input type=\"email\" id=\"email\" />\n                      <label for=\"phone\">Telephone number:</label>\n                      <input type=\"tel\" id=\"phone\" />\n                      <button><i class=\"fa fa-floppy-o\"></i> Save changes</button>\n                      <a href=\"#\" class=\"float-left\">Change password</a>\n                      <a href=\"#\" class=\"float-right dangerous\">Delete account</a>\n                  </form>\n              </div>\n              <div class=\"form six columns offset-by-one\">\n                  <h2>Integrations</h2>\n                  <integration-buttons></integration-buttons>\n              </div>\n          </div>\n      </div>\n  </main>\n  ",
+        styleUrls: ['../dist/assets/css/settings.css']
     })
 ], SettingsComponent);
 exports.SettingsComponent = SettingsComponent;

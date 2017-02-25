@@ -4,6 +4,8 @@ var landing_component_1 = require("./landing/landing.component");
 var private_dashboard_component_1 = require("./private_dashboard/private_dashboard.component");
 var public_dashboard_component_1 = require("./public_dashboard/public_dashboard.component");
 var register_component_1 = require("./register/register.component");
+var integrations_component_1 = require("./integrations/integrations.component");
+var calendars_component_1 = require("./calendars/calendars.component");
 var settings_component_1 = require("./settings/settings.component");
 var not_found_component_1 = require("./not-found/not-found.component");
 var appRoutes = [
@@ -14,6 +16,14 @@ var appRoutes = [
     {
         path: 'register',
         component: register_component_1.RegisterComponent
+    },
+    {
+        path: 'integrations',
+        component: integrations_component_1.IntegrationsComponent
+    },
+    {
+        path: 'calendars',
+        component: calendars_component_1.CalendarsComponent
     },
     {
         path: 'private-dashboard',
