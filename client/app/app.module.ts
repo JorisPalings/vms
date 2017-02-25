@@ -1,5 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+
+// Validators
+import { EqualValidator } from './directives/equal-validator.directive';
+
+// Components
 import { AppComponent } from './app.component';
 import { appRouting } from './app.routing';
 import { LandingComponent } from './landing/landing.component';
@@ -19,8 +26,7 @@ import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
 import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
 
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+
 
 
 @NgModule ({
@@ -28,10 +34,12 @@ import { HttpModule } from '@angular/http';
     BrowserModule,
     appRouting,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule
   ],
   declarations: [
     AppComponent,
+    EqualValidator,
     LandingComponent,
     PrivateDashboardComponent,
     PublicDashboardComponent,

@@ -1,4 +1,7 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Http, Headers} from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'registration-form',
@@ -8,18 +11,60 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
   <div class="step"></div>
   <div class="step"></div>
   <h2 class="form-subtitle">Step 1 - Credentials</h2>
-  <form>
-      <input type="text" id="email" placeholder="EMAIL" autofocus />
-      <input type="password" #password id="password" placeholder="PASSWORD" />
+  <form (ngSubmit)="doRegister()" [formGroup]="form">
+
+      <div *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched" class="alert alert-danger">You must include a first name.</div>
+      <input type="text" name="firstname" id="firstname" placeholder="FIRSTNAME" autofocus required [formControl]="form.controls['firstname']"/>
+
+
+      <div *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].dirt" class="alert alert-danger">You must include a last name.</div>
+      <input type="text" name="lastname" id="lastname" placeholder="LASTNAME" autofocus required [formControl]="form.controls['lastname']"/>
+
+      <input type="text" name="mail" id="email" placeholder="EMAIL" autofocus required [formControl]="form.controls['mail']"/>
+      <input type="password" #password id="password" placeholder="PASSWORD" [formControl]="form.controls['password']" />
       <div id="rating"></div>
-      <input type="password" id="repeat-password" placeholder="REPEAT PASSWORD" />
-      <button type="submit">NEXT</button>
+
+      <input type="password" id="repeat-password" placeholder="REPEAT PASSWORD" [formControl]="form.controls['repeatpassword']" validateEqual="password" />
+      <small [hidden]="form.controls['repeatpassword'].valid ||  (form.controls['repeatpassword'].pristine && !form.submitted)">
+        Password mismatch
+      </small>
+      <button type="submit" [disabled]="!form.valid">NEXT</button>
   </form>
   `,
   styleUrls: ['../dist/assets/css/registration-form.css']
 })
 
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
+
+  submitted: boolean = false; // check if the form has been submitted
+  differentPasswords: boolean = false;
+  form: FormGroup;
+
+  constructor(private fb: FormBuilder){}
+
+  ngOnInit(){
+    this.form = this.fb.group({
+      firstname: [null, Validators.required],
+      lastname: [null, Validators.required],
+      mail: [null, Validators.required],
+      password: [null, Validators.required],
+      repeatpassword: [null, Validators.required]
+    })
+  }
+
+  doRegister(newUser: any, isValid: boolean){
+    console.log('Request received');
+    console.log(this.form.value);
+
+    // var headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    //
+    // this.http.post('http://localhost:3000/api/register', JSON.stringify(this.newUser), { headers: headers }).subscribe(err => console.log(err));
+  }
+
+    //Password strength
+    // TODO: Remove from borders and text, make a seperate text block to indicate strength
+
     @ViewChild('password') input:ElementRef;
 
     ngAfterViewInit() {
