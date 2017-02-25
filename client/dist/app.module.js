@@ -7,6 +7,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var forms_1 = require("@angular/forms");
+var http_1 = require("@angular/http");
+var cookies_service_1 = require("angular2-cookie/services/cookies.service");
+// Validators
+var equal_validator_directive_1 = require("./directives/equal-validator.directive");
+// Components
 var app_component_1 = require("./app.component");
 var app_routing_1 = require("./app.routing");
 var landing_component_1 = require("./landing/landing.component");
@@ -25,9 +31,6 @@ var dropdown_component_1 = require("./shared/dropdown.component");
 var branding_component_1 = require("./shared/branding.component");
 var profile_component_1 = require("./shared/profile.component");
 var integration_buttons_component_1 = require("./shared/integration-buttons.component");
-var forms_1 = require("@angular/forms");
-var http_1 = require("@angular/http");
-var cookies_service_1 = require("angular2-cookie/services/cookies.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,10 +42,12 @@ AppModule = __decorate([
             platform_browser_1.BrowserModule,
             app_routing_1.appRouting,
             forms_1.FormsModule,
+            forms_1.ReactiveFormsModule,
             http_1.HttpModule
         ],
         declarations: [
             app_component_1.AppComponent,
+            equal_validator_directive_1.EqualValidator,
             landing_component_1.LandingComponent,
             private_dashboard_component_1.PrivateDashboardComponent,
             public_dashboard_component_1.PublicDashboardComponent,
