@@ -27,9 +27,6 @@ import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
 import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
 
-
-
-
 @NgModule ({
   imports: [
     BrowserModule,
