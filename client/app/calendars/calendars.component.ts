@@ -30,7 +30,7 @@ import { CalendarListComponent } from '../shared/calendar-list.component';
       </div>
   </div>
   `,
-   styleUrls: ['../dist/assets/css/landing-header.css']
+   styleUrls: ['../dist/assets/css/landing-header.css', '../dist/assets/css/calendars.css']
 })
 
 export class CalendarsComponent {}
