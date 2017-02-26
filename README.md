@@ -31,5 +31,6 @@ cd ..
 :: Run the server
 node server.js
 
-:: The client is now running on http://localhost:3000/
+:: Open the client in the browser
+START http://localhost:3000/
 ```
