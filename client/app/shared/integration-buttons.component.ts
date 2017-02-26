@@ -5,8 +5,8 @@ import {CookieService} from 'angular2-cookie/core';
 @Component({
     selector: 'integration-buttons',
     template: `
-  <button class="integration-button google" [ngClass]="{'linked': googleAuthenticated}" (click)="authenticateWithGoogle($event)">Google</button>
-  <button class="integration-button linkedin" [ngClass]="{'linked': linkedInAuthenticated}" (click)="authenticateWithLinkedin($event)">LinkedIn</button>
+  <button class="integration-button google" [disabled]="googleAuthenticated" [ngClass]="{'linked no-hover': googleAuthenticated}" (click)="authenticateWithGoogle($event)">Google</button>
+  <button class="integration-button linkedin" [disabled]="linkedInAuthenticated" [ngClass]="{'linked no-hover': linkedInAuthenticated}" (click)="authenticateWithLinkedin($event)">LinkedIn</button>
   `,
     styleUrls: ['../dist/assets/css/integrations.css'],
     providers: [ CookieService ]

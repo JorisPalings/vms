@@ -20,7 +20,7 @@
             cursor: default;
         }
 
-        &:hover {
+        &:not(.no-hover):hover {
             background: $google-red-darken;
             box-shadow: $shadow-2;
         }
@@ -34,7 +34,7 @@
             cursor: default;
         }
 
-        &:hover {
+        &:not(.no-hover):hover {
             background: $li-blue-darken;
             box-shadow: $shadow-2;
         }
