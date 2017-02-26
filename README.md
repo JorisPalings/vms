@@ -29,7 +29,7 @@ gulp sass
 cd ..
 
 :: Run the server
-node server
+node server.js
 
 :: The client is now running on http://localhost:3000/
 ```
