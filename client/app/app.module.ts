@@ -26,6 +26,7 @@ import { DropdownComponent } from './shared/dropdown.component';
 import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
 import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
+import { CalendarListComponent } from './shared/calendar-list.component';
 
 @NgModule ({
   imports: [
@@ -53,7 +54,8 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     TimelineComponent,
     DropdownComponent,
     ProfileComponent,
-    IntegrationButtonsComponent
+    IntegrationButtonsComponent,
+    CalendarListComponent
   ],
   bootstrap: [ AppComponent ],
   providers: [ CookieService ]

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalendarListComponent } from '../shared/calendar-list.component';
 
 @Component({
   selector: 'settings-page',
@@ -32,6 +33,8 @@ import { Component } from '@angular/core';
               <div class="form six columns offset-by-one">
                   <h2>Integrations</h2>
                   <integration-buttons></integration-buttons>
+                  <h2>Calendars</h2>
+                  <calendar-list></calendar-list>
               </div>
           </div>
       </div>

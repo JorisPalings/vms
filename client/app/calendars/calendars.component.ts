@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CalendarListComponent } from '../shared/calendar-list.component';
 
 @Component({
   selector: 'calendars-page',
@@ -21,30 +22,12 @@ import { Component } from '@angular/core';
               <div class="step"></div>
               <div class="step current-step"></div>
               <h2 class="form-subtitle">Step 3 - Calendars</h2>
-              <form class="zebra-form">
-                  <fieldset>
-                      <input type="checkbox" id="cal0" />
-                      <label for="cal0">Personal</label>
-                  </fieldset>
-                  <fieldset>
-                      <input type="checkbox" id="cal1" />
-                      <label for="cal1">Meetings</label>
-                  </fieldset>
-                  <fieldset>
-                      <input type="checkbox" id="cal2" />
-                      <label for="cal2">Birthdays</label>
-                  </fieldset>
-                  <fieldset>
-                      <input type="checkbox" id="cal3" />
-                      <label for="cal3">Holidays</label>
-                  </fieldset>
-                  <button type="submit">FINISH</button>
-              </form>
+              <calendar-list></calendar-list>
           </div>
       </div>
   </div>
   `,
-   styleUrls: ['../dist/assets/css/landing-header.css', '../dist/assets/css/calendars.css']
+   styleUrls: ['../dist/assets/css/landing-header.css']
 })
 
 export class CalendarsComponent {}
