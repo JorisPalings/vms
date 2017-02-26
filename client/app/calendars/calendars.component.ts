@@ -22,7 +22,10 @@ import { CalendarListComponent } from '../shared/calendar-list.component';
               <div class="step"></div>
               <div class="step current-step"></div>
               <h2 class="form-subtitle">Step 3 - Calendars</h2>
-              <calendar-list></calendar-list>
+              <form class="zebra-form">
+                  <calendar-list></calendar-list>
+                  <button type="submit">FINISH</button>
+              </form>
           </div>
       </div>
   </div>
