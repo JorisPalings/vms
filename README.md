@@ -1,5 +1,7 @@
 # Virtual Meeting Secretary
 
+The accompanying API can be found [here](https://github.com/nickvanvynckt/vms-api).
+
 ## Installation
 
 ### Prerequisites
