@@ -43,4 +43,12 @@
     &:focus {
         outline: none;
     }
+
+    .fa-check {
+        float: right;
+    }
+
+    [hidden] {
+        display: none;
+    }
 }
