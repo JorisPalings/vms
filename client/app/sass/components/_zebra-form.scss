@@ -1,22 +1,20 @@
 .zebra-form {
     text-align: left;
+}
 
-    fieldset {
-
-        input[type="checkbox"] {
-            cursor: pointer;
-            float: left;
-            transform: scale(1.25);
-        }
-
-        label {
-            cursor: pointer;
-            display: block;
-            padding: 1rem;
-        }
+fieldset {
+    input[type="checkbox"] {
+        cursor: pointer;
+        margin: 1rem;
+        transform: scale(1.25);
     }
 
-    fieldset:nth-child(2n) {
+    label {
+        cursor: pointer;
+        margin: 1rem 0;
+    }
+
+    &:nth-child(2n) {
         background: $white;
     }
 }
