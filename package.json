@@ -17,11 +17,11 @@
     "url": "https://github.com/JorisPalings/vms/issues"
   },
   "homepage": "https://github.com/JorisPalings/vms#readme",
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
     "body-parser": "^1.16.1",
+    "cors": "*",
     "express": "^4.14.1",
-    "cors": "*"
+    "request": "^2.79.0"
   }
 }
