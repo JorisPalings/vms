@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
+import { Observable } from 'rxjs/Observable';
+
+
+// RxJS operators
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
 export class Credentials {
   mail: string;
   password: string;
@@ -44,6 +52,23 @@ export class LoginComponent implements OnInit {
 
   constructor(private http: Http, public loginUser: Credentials) {}
 
+  private errors: string[];
+  private api: string = "http://localhost:3000/api/"
+
+  private handleError(err) {
+    let errorMessage: string;
+    if (err instanceof Response){
+      let body = err.json() || '';
+      let error = body.error || JSON.stringify(body);
+      errorMessage = `${error}`;
+    }
+    else {
+      errorMessage = err.message ? err.message : err.toString();
+    }
+    return Observable.throw(errorMessage);
+    //return Observable.throw(err.json().data || 'Server error.');
+  }
+
   ngOnInit() {
     // Initialize the model
     this.loginUser = {
@@ -64,8 +89,29 @@ export class LoginComponent implements OnInit {
 
     //Check if the credentials entered are valid
     if (isValid) {
-      console.log('Request sent', this.loginUser);
-       this.http.post('http://localhost:3000/api/login', JSON.stringify(this.loginUser), { headers: headers }).subscribe(err => console.log(err));
+      this.errors = [];
+      console.log(credentials);
+
+      let bodyString = JSON.stringify(credentials);
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      let options = new RequestOptions({ headers: headers }); // Create a request option
+
+
+      this.http.post(this.api + 'login', bodyString, options)
+                      .map(res => res.json())
+                      .catch(this.handleError)
+                      .subscribe(
+                        info => console.log("info", info)
+
+                          //TODO: Save the token in localStorage or as cookie
+                          //TODO: Route to the dashboard
+                        ,
+                        err => {
+                          console.log("error", err);
+                          // show an error message
+                          this.errors.push(err);
+                        });
     }
   }
 

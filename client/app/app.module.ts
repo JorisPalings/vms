@@ -3,12 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { AppComponent } from './app.component';
 
 // Validators
 import { EqualValidator } from './directives/equal-validator.directive';
 
+// Services
+
 // Components
-import { AppComponent } from './app.component';
 import { appRouting } from './app.routing';
 import { LandingComponent } from './landing/landing.component';
 import { PrivateDashboardComponent } from './private_dashboard/private_dashboard.component';
@@ -27,6 +29,7 @@ import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
 import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
 import { CalendarListComponent } from './shared/calendar-list.component';
+
 
 @NgModule ({
   imports: [

@@ -1,7 +1,14 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { Http, Headers} from '@angular/http';
+import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+
+
+// RxJS operators
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 @Component({
   selector: 'registration-form',
@@ -11,6 +18,11 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   <div class="step"></div>
   <div class="step"></div>
   <h2 class="form-subtitle">Step 1 - Credentials</h2>
+  <div *ngIf="errors">
+    <li *ngFor="let error of errors">
+      {{error}}
+    </li>
+  </div>
   <form (ngSubmit)="doRegister()" [formGroup]="form">
 
       <div *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched" class="alert alert-danger">You must include a first name.</div>
@@ -24,7 +36,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
       <input type="password" #password id="password" placeholder="PASSWORD" [formControl]="form.controls['password']" />
       <div id="rating"></div>
 
-      <input type="password" id="repeat-password" placeholder="REPEAT PASSWORD" [formControl]="form.controls['repeatpassword']" validateEqual="password" />
+      <input type="password" id="repeatpassword" placeholder="REPEAT PASSWORD" [formControl]="form.controls['repeatpassword']" validateEqual="password" #repeatpassword />
       <small [hidden]="form.controls['repeatpassword'].valid ||  (form.controls['repeatpassword'].pristine && !form.submitted)">
         Password mismatch
       </small>
@@ -37,10 +49,25 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 export class RegistrationComponent implements OnInit {
 
   submitted: boolean = false; // check if the form has been submitted
-  differentPasswords: boolean = false;
   form: FormGroup;
+  private errors: string[];
+  private api: string = "http://localhost:3000/api/"
 
-  constructor(private fb: FormBuilder){}
+  private handleError(err) {
+    let errorMessage: string;
+    if (err instanceof Response){
+      let body = err.json() || '';
+      let error = body.error || JSON.stringify(body);
+      errorMessage = `${error}`;
+    }
+    else {
+      errorMessage = err.message ? err.message : err.toString();
+    }
+    return Observable.throw(errorMessage);
+    //return Observable.throw(err.json().data || 'Server error.');
+  }
+
+  constructor(private fb: FormBuilder, private http: Http){}
 
   ngOnInit(){
     this.form = this.fb.group({
@@ -52,14 +79,28 @@ export class RegistrationComponent implements OnInit {
     })
   }
 
-  doRegister(newUser: any, isValid: boolean){
-    console.log('Request received');
+  doRegister(isValid: boolean){
+    this.errors = [];
     console.log(this.form.value);
 
-    // var headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    //
-    // this.http.post('http://localhost:3000/api/register', JSON.stringify(this.newUser), { headers: headers }).subscribe(err => console.log(err));
+    let bodyString = JSON.stringify(this.form.value);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers }); // Create a request option
+
+
+    this.http.post(this.api + 'register', bodyString, options)
+                    .map(res => res.json().data)
+                    .catch(this.handleError)
+                    .subscribe(
+                      data => console.log(data),
+                      err => {
+                        console.log(err);
+                        // show an error message
+                        this.errors.push(err);
+                      }
+                    );
+
   }
 
     //Password strength
@@ -111,7 +152,7 @@ export class RegistrationComponent implements OnInit {
 	            passwordInput.style.borderColor = "red";
             } else {
             	passwordInput.style.color = "grey";
-	            passwordInput.style.borderColor = "grey"
+	            passwordInput.style.borderColor = "grey";
             }
         }
 
