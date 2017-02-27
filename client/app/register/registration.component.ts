@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
+//Authentication Service
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 // RxJS operators
 import 'rxjs/add/operator/map';
@@ -51,23 +53,8 @@ export class RegistrationComponent implements OnInit {
   submitted: boolean = false; // check if the form has been submitted
   form: FormGroup;
   private errors: string[];
-  private api: string = "http://localhost:3000/api/"
 
-  private handleError(err) {
-    let errorMessage: string;
-    if (err instanceof Response){
-      let body = err.json() || '';
-      let error = body.error || JSON.stringify(body);
-      errorMessage = `${error}`;
-    }
-    else {
-      errorMessage = err.message ? err.message : err.toString();
-    }
-    return Observable.throw(errorMessage);
-    //return Observable.throw(err.json().data || 'Server error.');
-  }
-
-  constructor(private fb: FormBuilder, private http: Http){}
+  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService){}
 
   ngOnInit(){
     this.form = this.fb.group({
@@ -83,24 +70,18 @@ export class RegistrationComponent implements OnInit {
     this.errors = [];
     console.log(this.form.value);
 
-    let bodyString = JSON.stringify(this.form.value);
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let options = new RequestOptions({ headers: headers }); // Create a request option
-
-
-    this.http.post(this.api + 'register', bodyString, options)
-                    .map(res => res.json().data)
-                    .catch(this.handleError)
-                    .subscribe(
-                      data => console.log(data),
-                      err => {
-                        console.log(err);
-                        // show an error message
-                        this.errors.push(err);
-                      }
-                    );
-
+    this.authenticationService.register(this.form.value)
+                              .subscribe(
+                                data => {
+                                  //TODO: Route to the integrations step
+                                  console.log(data)
+                                },
+                                err => {
+                                  console.log(err);
+                                  // show an error message
+                                  this.errors.push(err);
+                                }
+                              );
   }
 
     //Password strength

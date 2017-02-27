@@ -2,13 +2,18 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AppComponent } from './app.component';
+
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { Observable } from 'rxjs';
 
 // Validators
 import { EqualValidator } from './directives/equal-validator.directive';
 
 // Services
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { AuthenticationService } from './shared/services/authentication.service';
 
 // Components
 import { appRouting } from './app.routing';
@@ -61,7 +66,7 @@ import { CalendarListComponent } from './shared/calendar-list.component';
     CalendarListComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [ CookieService ]
+  providers: [ CookieService, AuthenticationService ]
 })
 
 export class AppModule {}

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-
+import { AuthenticationService } from '../shared/services/authentication.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 
 // RxJS operators
@@ -50,24 +51,9 @@ export class Credentials {
 export class LoginComponent implements OnInit {
   submitted: boolean = false; // check if form is submitted
 
-  constructor(private http: Http, public loginUser: Credentials) {}
+  constructor(private router: Router, private authenticationService: AuthenticationService, public loginUser: Credentials) {}
 
   private errors: string[];
-  private api: string = "http://localhost:3000/api/"
-
-  private handleError(err) {
-    let errorMessage: string;
-    if (err instanceof Response){
-      let body = err.json() || '';
-      let error = body.error || JSON.stringify(body);
-      errorMessage = `${error}`;
-    }
-    else {
-      errorMessage = err.message ? err.message : err.toString();
-    }
-    return Observable.throw(errorMessage);
-    //return Observable.throw(err.json().data || 'Server error.');
-  }
 
   ngOnInit() {
     // Initialize the model
@@ -81,37 +67,28 @@ export class LoginComponent implements OnInit {
     // Check if model is valid
     // if valid, call API (express) to login with credentials
 
-    // Setting the header, telling the express API we are sending json
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
     this.submitted = true;
 
     //Check if the credentials entered are valid
     if (isValid) {
       this.errors = [];
-      console.log(credentials);
+      console.log(credentials)
 
-      let bodyString = JSON.stringify(credentials);
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      let options = new RequestOptions({ headers: headers }); // Create a request option
+      this.authenticationService.login(credentials)
+        .subscribe(
+          success => {
+            if (success){
+              // Log in was successfull
+              this.router.navigate(['/private-dashboard']);
+            }
+          }
+          ,
+          err => {
+            console.log("error", err);
+            // show an error message
+            this.errors.push(err);
+          });
 
-
-      this.http.post(this.api + 'login', bodyString, options)
-                      .map(res => res.json())
-                      .catch(this.handleError)
-                      .subscribe(
-                        info => console.log("info", info)
-
-                          //TODO: Save the token in localStorage or as cookie
-                          //TODO: Route to the dashboard
-                        ,
-                        err => {
-                          console.log("error", err);
-                          // show an error message
-                          this.errors.push(err);
-                        });
     }
   }
 
