@@ -4,6 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
+import { Router } from '@angular/router';
+
 //Authentication Service
 import { AuthenticationService } from '../shared/services/authentication.service';
 
@@ -54,7 +56,7 @@ export class RegistrationComponent implements OnInit {
   form: FormGroup;
   private errors: string[];
 
-  constructor(private fb: FormBuilder, private authenticationService: AuthenticationService){}
+  constructor(private router: Router, private fb: FormBuilder, private authenticationService: AuthenticationService){}
 
   ngOnInit(){
     this.form = this.fb.group({
@@ -73,8 +75,9 @@ export class RegistrationComponent implements OnInit {
     this.authenticationService.register(this.form.value)
                               .subscribe(
                                 data => {
-                                  //TODO: Route to the integrations step
-                                  console.log(data)
+                                  console.log("data", data)
+                                  // Route to the integrations step
+                                  this.router.navigate(['/integrations']);
                                 },
                                 err => {
                                   console.log(err);

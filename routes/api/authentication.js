@@ -54,7 +54,8 @@ var register = function(req, res, next){
     if (!error && response.statusCode == 200){
       //console.log('Register response: ', response);
       //TODO: Do something with the response json and go to the next step
-
+      console.log(response);
+      res.status(200).send({success: "Your account has been created"});
     }
     else {
       console.log(response.body);
