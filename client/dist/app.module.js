@@ -10,10 +10,11 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
 var cookies_service_1 = require("angular2-cookie/services/cookies.service");
+var app_component_1 = require("./app.component");
 // Validators
 var equal_validator_directive_1 = require("./directives/equal-validator.directive");
+// Services
 // Components
-var app_component_1 = require("./app.component");
 var app_routing_1 = require("./app.routing");
 var landing_component_1 = require("./landing/landing.component");
 var private_dashboard_component_1 = require("./private_dashboard/private_dashboard.component");
@@ -31,6 +32,7 @@ var dropdown_component_1 = require("./shared/dropdown.component");
 var branding_component_1 = require("./shared/branding.component");
 var profile_component_1 = require("./shared/profile.component");
 var integration_buttons_component_1 = require("./shared/integration-buttons.component");
+var calendar_list_component_1 = require("./shared/calendar-list.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -63,7 +65,8 @@ AppModule = __decorate([
             timeline_component_1.TimelineComponent,
             dropdown_component_1.DropdownComponent,
             profile_component_1.ProfileComponent,
-            integration_buttons_component_1.IntegrationButtonsComponent
+            integration_buttons_component_1.IntegrationButtonsComponent,
+            calendar_list_component_1.CalendarListComponent
         ],
         bootstrap: [app_component_1.AppComponent],
         providers: [cookies_service_1.CookieService]
