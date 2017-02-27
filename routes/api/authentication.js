@@ -12,7 +12,7 @@ var login = function(req, res, next){
 
   // Send the credentials to the loopback API
   request({
-    uri: "http://178.62.206.7:4000/api/employees/login",
+    uri: "http://localhost:4000/api/employees/login",
     method: "POST",
     form: credentials
   },function(error, response, body){
@@ -47,7 +47,7 @@ var register = function(req, res, next){
 
   // Send the data to the loopback API
   request({
-    uri: "http://178.62.206.7:4000/api/employees",
+    uri: "http://localhost:4000/api/employees",
     method: "POST",
     form: user
   },function(error, response, body){
