@@ -8,5 +8,6 @@ var auth = require('./authentication');
 router.post('/login', auth.login);
 
 // 2. Register
+router.post('/register', auth.register);
 
 module.exports = router;
