@@ -31,13 +31,12 @@ export class IntegrationButtonsComponent implements OnInit {
     ngOnInit() {
         // subscribe to router event
         this.activatedRoute.queryParams.subscribe((params: Params) => {
-            let code = params['code'];
-            let state = params['state'];
-            if(code){
-                if(state){
+            let success = params['success'];
+            if(success){
+                if(success == 'linkedin'){
                     this.cookieService.put('LinkedInAuthenticated', 'true');
                     this.linkedInAuthenticated = true;
-                } else {
+                } else if(success == 'google'){
                     this.cookieService.put('GoogleAuthenticated', 'true');
                     this.googleAuthenticated = true;
                 }

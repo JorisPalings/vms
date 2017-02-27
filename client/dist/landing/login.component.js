@@ -10,6 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
+// RxJS operators
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+require("rxjs/add/observable/throw");
 var Credentials = (function () {
     function Credentials() {
     }
@@ -21,7 +26,21 @@ var LoginComponent = (function () {
         this.http = http;
         this.loginUser = loginUser;
         this.submitted = false; // check if form is submitted
+        this.api = "http://localhost:3000/api/";
     }
+    LoginComponent.prototype.handleError = function (err) {
+        var errorMessage;
+        if (err instanceof http_1.Response) {
+            var body = err.json() || '';
+            var error = body.error || JSON.stringify(body);
+            errorMessage = "" + error;
+        }
+        else {
+            errorMessage = err.message ? err.message : err.toString();
+        }
+        return Observable_1.Observable.throw(errorMessage);
+        //return Observable.throw(err.json().data || 'Server error.');
+    };
     LoginComponent.prototype.ngOnInit = function () {
         // Initialize the model
         this.loginUser = {
@@ -32,14 +51,27 @@ var LoginComponent = (function () {
     LoginComponent.prototype.doLogin = function (credentials, isValid) {
         // Check if model is valid
         // if valid, call API (express) to login with credentials
+        var _this = this;
         // Setting the header, telling the express API we are sending json
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         this.submitted = true;
         //Check if the credentials entered are valid
         if (isValid) {
-            console.log('Request sent', this.loginUser);
-            this.http.post('http://localhost:3000/api/login', JSON.stringify(this.loginUser), { headers: headers }).subscribe(function (err) { return console.log(err); });
+            this.errors = [];
+            console.log(credentials);
+            var bodyString = JSON.stringify(credentials);
+            var headers_1 = new http_1.Headers();
+            headers_1.append('Content-Type', 'application/json');
+            var options = new http_1.RequestOptions({ headers: headers_1 }); // Create a request option
+            this.http.post(this.api + 'login', bodyString, options)
+                .map(function (res) { return res.json(); })
+                .catch(this.handleError)
+                .subscribe(function (info) { return console.log("info", info); }, function (err) {
+                console.log("error", err);
+                // show an error message
+                _this.errors.push(err);
+            });
         }
     };
     return LoginComponent;
