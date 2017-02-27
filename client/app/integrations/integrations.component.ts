@@ -19,8 +19,8 @@ import { IntegrationButtonsComponent } from '../shared/integration-buttons.compo
           <div class="one-half column offset-by-three center-content">
               <h1 class="form-title">Registration</h1>
               <div class="step"></div>
-              <div class="step"></div>
               <div class="step current-step"></div>
+              <div class="step"></div>
               <h2 class="form-subtitle">Step 2 - Integrations</h2>
               <p class="successful align-left"><i class="fa fa-check"></i> Your account has been created!</p>
               <p class="align-left">Link your account with Google and LinkedIn below:</p>
