@@ -6,7 +6,7 @@ import { UserService } from '../shared/services/user.service';
     template: `
         <fieldset *ngFor="let cal of calendars">
             <input type="checkbox" id="cal-{{cal.id}}" />
-            <label for="cal-{{cal.id}}">{{cal.summary}}</label>
+            <label for="cal-{{cal.id}}">{{cal.summaryOverride || cal.summary }}</label>
         </fieldset>
     `,
     styleUrls: ['../dist/assets/css/integrations.css', '../dist/assets/css/calendars.css']
