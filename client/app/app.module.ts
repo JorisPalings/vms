@@ -14,6 +14,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
 // Services
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AuthenticationService } from './shared/services/authentication.service';
+import { MeetingService } from './shared/services/meeting.service';
 import { UserService } from './shared/services/user.service';
 
 // Components
@@ -67,7 +68,7 @@ import { CalendarListComponent } from './shared/calendar-list.component';
     CalendarListComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [ CookieService, AuthenticationService, UserService ]
+  providers: [ CookieService, AuthenticationService, MeetingService, UserService ]
 })
 
 export class AppModule {}
