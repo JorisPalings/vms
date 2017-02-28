@@ -4,4 +4,5 @@ export interface Meeting {
     room: string;
     start: Date;
     end: Date;
+    externals: any[];
 }

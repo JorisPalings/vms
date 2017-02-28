@@ -23,14 +23,17 @@ export class MeetingService {
 
 function mapMeetings(response: Response): Meeting[] {
     console.log('Mapping meetings');
-    return response.json().map(toMeeting);
+    return response.json().meetings.map(toMeeting);
 }
 
 function toMeeting(r: any): Meeting {
     let meeting = <Meeting>({
         externalID: r.externalId,
         start: r.start,
-        end: r.end
+        end: r.end,
+        summary: r.summary,
+        room: r.room,
+        externals: r.externals
     });
     console.log('Parsed meeting: ' + meeting);
     return meeting;
