@@ -26,7 +26,7 @@ import { IntegrationButtonsComponent } from '../shared/integration-buttons.compo
               <p class="align-left">Link your account with Google and LinkedIn below:</p>
               <form>
                   <integration-buttons></integration-buttons>
-                  <button type="submit">NEXT</button>
+                  <button type="submit" routerLink="/calendars">NEXT</button>
               </form>
           </div>
       </div>

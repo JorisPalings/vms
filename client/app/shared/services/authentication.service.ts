@@ -8,6 +8,8 @@ import 'rxjs/add/operator/map';
 export class AuthenticationService {
   public token: string;
 
+
+
   private handleError(err) {
     let errorMessage: string;
     if (err instanceof Response){
@@ -30,6 +32,11 @@ export class AuthenticationService {
       }
   }
 
+  getEmail() {
+    var currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    return currentUser.email;
+  }
+
   login(credentials: any): Observable<boolean> {
 
     let headers = new Headers();
@@ -46,6 +53,7 @@ export class AuthenticationService {
             console.log(token);
 
             // store username and jwt token as cookie to keep user logged in between page refreshes
+
             this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token }));
 
             // return true to indicate successful login

@@ -1,26 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
     selector: 'calendar-list',
     template: `
-        <fieldset>
-            <input type="checkbox" id="cal0" />
-            <label for="cal0">Personal</label>
-        </fieldset>
-        <fieldset>
-            <input type="checkbox" id="cal1" />
-            <label for="cal1">Meetings</label>
-        </fieldset>
-        <fieldset>
-            <input type="checkbox" id="cal2" />
-            <label for="cal2">Birthdays</label>
-        </fieldset>
-        <fieldset>
-            <input type="checkbox" id="cal3" />
-            <label for="cal3">Holidays</label>
+        <fieldset *ngFor="let cal of calendars">
+            <input type="checkbox" id="cal-{{cal.id}}" />
+            <label for="cal-{{cal.id}}">{{cal.summary}}</label>
         </fieldset>
     `,
     styleUrls: ['../dist/assets/css/integrations.css', '../dist/assets/css/calendars.css']
 })
 
-export class CalendarListComponent {}
+export class CalendarListComponent implements OnInit {
+
+  private calendars;
+
+  constructor(private userService: UserService){}
+
+  ngOnInit(){
+    this.userService.getCalendars()
+      .subscribe(data => {
+        console.log("Data", data);
+        this.calendars = data.calendars;
+        console.log("Calendars", this.calendars);
+      },
+      error => console.log(error));
+  }
+
+}
