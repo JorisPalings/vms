@@ -34,7 +34,10 @@ import { CalendarListComponent } from '../shared/calendar-list.component';
                   <h2>Integrations</h2>
                   <integration-buttons></integration-buttons>
                   <h2>Calendars</h2>
-                  <calendar-list></calendar-list>
+                  <fieldset *ngFor="let cal of calendars">
+                      <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" />
+                      <label for="cal-{{cal.id}}">{{cal.summaryOverride || cal.summary }}</label>
+                  </fieldset>
               </div>
           </div>
       </div>
