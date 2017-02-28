@@ -73,18 +73,35 @@ export class RegistrationComponent implements OnInit {
     console.log(this.form.value);
 
     this.authenticationService.register(this.form.value)
-                              .subscribe(
-                                data => {
-                                  console.log("data", data)
-                                  // Route to the integrations step
-                                  this.router.navigate(['/integrations']);
-                                },
-                                err => {
-                                  console.log(err);
-                                  // show an error message
-                                  this.errors.push(err);
-                                }
-                              );
+      .subscribe(
+        data => {
+          //TODO: Log in the user
+          console.log(this.form.value.mail);
+          console.log(this.form.value.password);
+
+          var credentials = {
+            mail: this.form.value.mail,
+            password: this.form.value.password
+          }
+
+          console.log(credentials);
+
+          // Send the login request using the authentication service
+          this.authenticationService.login(credentials)
+            .subscribe(data => {
+              console.log('Login after register success', data);
+            },
+            error => console.error(error));
+
+          // Route to the integrations step
+          this.router.navigate(['/integrations']);
+        },
+        err => {
+          console.log(err);
+          // show an error message
+          this.errors.push(err);
+        }
+      );
   }
 
     //Password strength

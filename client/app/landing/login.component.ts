@@ -41,7 +41,7 @@ export class Credentials {
         <span class="form-instruction"><a href="#">Forgot your password?</a></span>
 
         <button type="submit" [disabled]="!login.valid">LOG IN</button>
-        <span class="form-instruction">Need an account? <a href="#">Register</a></span>
+        <span class="form-instruction">Need an account? <a href="/register">Register</a></span>
     </form>
   </div>
   `,

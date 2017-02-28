@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CalendarListComponent } from '../shared/calendar-list.component';
+
+import { Router } from '@angular/router';
+import { UserService } from '../shared/services/user.service';
 
 @Component({
   selector: 'calendars-page',
@@ -23,8 +26,11 @@ import { CalendarListComponent } from '../shared/calendar-list.component';
               <div class="step current-step"></div>
               <h2 class="form-subtitle">Step 3 - Calendars</h2>
               <form class="zebra-form">
-                  <calendar-list></calendar-list>
-                  <button type="submit">FINISH</button>
+                <fieldset *ngFor="let cal of calendars">
+                    <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" />
+                    <label for="cal-{{cal.id}}">{{cal.summaryOverride || cal.summary }}</label>
+                </fieldset>
+                <button type="submit">FINISH</button>
               </form>
           </div>
       </div>
@@ -33,4 +39,21 @@ import { CalendarListComponent } from '../shared/calendar-list.component';
    styleUrls: ['../dist/assets/css/landing-header.css', '../dist/assets/css/calendars.css']
 })
 
-export class CalendarsComponent {}
+export class CalendarsComponent{
+
+
+  private calendars;
+
+  constructor(private userService: UserService, private router: Router){}
+
+  ngOnInit(){
+    this.userService.getCalendars()
+      .subscribe(data => {
+        console.log("Data", data);
+        this.calendars = data.calendars;
+        console.log("Calendars", this.calendars);
+      },
+      error => console.log(error));
+  }
+
+}

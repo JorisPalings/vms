@@ -51,10 +51,9 @@ export class AuthenticationService {
             // set token property
             this.token = token;
             console.log(token);
-
             // store username and jwt token as cookie to keep user logged in between page refreshes
 
-            this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token }));
+            this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token, id: response.json().userId }));
 
             // return true to indicate successful login
             return true;
@@ -75,7 +74,7 @@ export class AuthenticationService {
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post('http://localhost:3000/api/register', JSON.stringify(userData), options)
-      .map((response: Response) => response.json().data)
+      .map((response: Response) => response.json())
       .catch(this.handleError)
   }
 }
