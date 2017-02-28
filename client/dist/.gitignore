@@ -1,0 +1,11 @@
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore
+!assets/fonts
+!assets/images
+!assets/js
+
+*.js
+*.js.map
+*.css
