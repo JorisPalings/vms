@@ -9,11 +9,13 @@ var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms");
 var http_1 = require("@angular/http");
-var cookies_service_1 = require("angular2-cookie/services/cookies.service");
 var app_component_1 = require("./app.component");
 // Validators
 var equal_validator_directive_1 = require("./directives/equal-validator.directive");
 // Services
+var cookies_service_1 = require("angular2-cookie/services/cookies.service");
+var authentication_service_1 = require("./shared/services/authentication.service");
+var meeting_service_1 = require("./shared/services/meeting.service");
 // Components
 var app_routing_1 = require("./app.routing");
 var landing_component_1 = require("./landing/landing.component");
@@ -69,7 +71,7 @@ AppModule = __decorate([
             calendar_list_component_1.CalendarListComponent
         ],
         bootstrap: [app_component_1.AppComponent],
-        providers: [cookies_service_1.CookieService]
+        providers: [cookies_service_1.CookieService, authentication_service_1.AuthenticationService, meeting_service_1.MeetingService]
     })
 ], AppModule);
 exports.AppModule = AppModule;

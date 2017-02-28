@@ -1,7 +1,8 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import { MeetingComponent } from './meeting.component';
+import { MeetingService } from './services/meeting.service';
 
 @Component({
   selector: 'timeline',
@@ -28,4 +29,10 @@ import { MeetingComponent } from './meeting.component';
   styleUrls: ['../dist/assets/css/timeline.css']
 })
 
-export class TimelineComponent {}
+export class TimelineComponent implements OnInit {
+    constructor(private meetingService: MeetingService){}
+
+    ngOnInit() {
+        this.meetingService.getAllMeetings().subscribe(data => console.log(data));
+    }
+}
