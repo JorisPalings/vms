@@ -29,6 +29,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './landing/login.component';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
+import { ParticipantComponent } from './meeting-details/participant.component';
 import { TimelineComponent } from './shared/timeline.component';
 import { MeetingComponent } from './shared/meeting.component';
 import { DropdownComponent } from './shared/dropdown.component';
@@ -60,6 +61,7 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     BrandingComponent,
     MeetingComponent,
     MeetingDetailsComponent,
+    ParticipantComponent,
     TimelineComponent,
     DropdownComponent,
     ProfileComponent,

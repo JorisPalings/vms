@@ -5,14 +5,17 @@
 @import "components/util";
 @import "components/heading";
 
-
-
 html, body {
     color: $faded-black;
     font-family: 'Montserrat', sans-serif;
     background-color: $off-white;
+    line-height: 1.5;
 }
 
 a {
     color: $cw-blue;
+}
+
+p {
+    margin: 1rem 0;
 }
