@@ -40,6 +40,11 @@ export class AuthenticationService {
     return currentUser.email;
   }
 
+  getId() {
+    var currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    return currentUser.id;
+  }
+
   login(credentials: any): Observable<boolean> {
 
     let headers = new Headers();

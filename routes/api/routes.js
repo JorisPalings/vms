@@ -19,6 +19,9 @@ router.post('/google-calendars', user.googlecalendars);
 // 2. Link the calendars to a user
 router.post('/link-calendars', user.linkcals);
 
+// 3. Get user calendars
+router.post('/calendars', user.calendars);
+
 // Meeting service
 //1. Get all meetings
 router.post('/meetings', meeting.getAll);
