@@ -34,7 +34,8 @@ function toMeeting(r: any): Meeting {
         end: r.end,
         summary: r.summary,
         room: r.room,
-        externals: r.externals
+        externals: r.externals,
+        meetees: r.meetees
     });
     console.log('Parsed meeting: ' + meeting);
     return meeting;

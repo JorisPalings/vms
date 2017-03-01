@@ -5,4 +5,5 @@ export interface Meeting {
     start: Date;
     end: Date;
     externals: any[];
+    meetees: any[];
 }
