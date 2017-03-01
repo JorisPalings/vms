@@ -7,14 +7,15 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class MeetingService {
-    constructor(private http: Http) { }
+    constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
     getAllMeetings(): Observable<Meeting[]> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        let data = { access_token: 'nc8LJga6pmhYHWIIQKtF7R6Hzox9goRFSCcrFyncl0pfneKPvCmFVGUkM2Sr5YPP' };
+        let data = { access_token: this.authenticationService.token,
+                     name: this.authenticationService.email};
 
         return this.http
             .post('http://localhost:3000/api/meetings', data, options)

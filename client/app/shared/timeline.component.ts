@@ -22,7 +22,7 @@ import { Meeting } from '../_models/meeting';
 
 export class TimelineComponent implements OnInit {
     private meetings: any[];
-    private past: any[];
+    private past: any[] = [];
 
     constructor(private meetingService: MeetingService){}
 
