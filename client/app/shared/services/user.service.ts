@@ -47,6 +47,20 @@ export class UserService {
       .catch(this.handleError)
   }
 
+  getCurrentCalendars(): Observable<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+    let id = this.authenticationService.getId();
+
+    var json = JSON.stringify({id: id, access_token: this.authenticationService.token});
+
+    return this.http.post('http://localhost:3000/api/calendars', json, options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
+
   linkCalendars(cals: any){
 
     let headers = new Headers();

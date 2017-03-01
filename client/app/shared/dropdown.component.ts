@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   selector: 'profile-dropdown',
   template: `
   <div id="profileDropdown" class="dropdown-content">
-    <a href="#"><i class="fa fa-cog fa-lg"></i>Settings</a>
+    <a href="/settings"><i class="fa fa-cog fa-lg"></i>Settings</a>
     <a (click)="logout()"><i class="fa fa-sign-out fa-lg"></i>Log out</a>
   </div>
   `,
