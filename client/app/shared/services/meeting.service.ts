@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Meeting } from '../../_models/meeting';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from './authentication.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -13,7 +14,7 @@ export class MeetingService {
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        let data = { access_token:'nc8LJga6pmhYHWIIQKtF7R6Hzox9goRFSCcrFyncl0pfneKPvCmFVGUkM2Sr5YPP' };
+        let data = { access_token: 'nc8LJga6pmhYHWIIQKtF7R6Hzox9goRFSCcrFyncl0pfneKPvCmFVGUkM2Sr5YPP' };
 
         return this.http
             .post('http://localhost:3000/api/meetings', data, options)

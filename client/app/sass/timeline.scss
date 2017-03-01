@@ -1,5 +1,10 @@
 @import "vars";
 
+.vertical {
+    display: flex;
+    flex-direction: column;
+}
+
 .timerow {
   align-items: center;
   display: flex;
@@ -7,7 +12,8 @@
   margin: 20px 0;
 
   .date {
-    margin-right: 40px;
+    align-self: flex-start;
+    margin: 60px 48px 0 0;
     min-width: 10vw;
     text-align: right;
   }

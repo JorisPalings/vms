@@ -11,7 +11,9 @@ import { Meeting } from '../_models/meeting';
   <section>
     <div class="timerow" *ngFor="let day of meetings">
       <div class="date">{{day[0].start | date:'EEE, d MMM, y'}}</div>
-      <meeting *ngFor="let meeting of day" [meeting]="meeting"></meeting>
+      <div class="vertical">
+        <meeting *ngFor="let meeting of day" [meeting]="meeting"></meeting>
+      </div>
     </div>
   </section>
   `,
@@ -20,6 +22,7 @@ import { Meeting } from '../_models/meeting';
 
 export class TimelineComponent implements OnInit {
     private meetings: any[];
+    private past: any[];
 
     constructor(private meetingService: MeetingService){}
 
@@ -33,12 +36,12 @@ export class TimelineComponent implements OnInit {
             return +new Date(a.start) - +new Date(b.start);
         });
         for(let index in meetings){
-            let start = new Date(meetings[index].start);
+            let start = new Date(meetings[index].end);
             if(start < new Date(Date.now())){
                 number = +index;
             }
         }
-        meetings.splice(0, number+1);
+        this.past.push(meetings.splice(0, number+1));
 
         let meetingsJson = [];
         let date;
