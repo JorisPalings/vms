@@ -1,14 +1,16 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
+import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile',
   template: `
   <div class="profile">
-    <span>Firstname Lastname</span>
+    <span>{{name}}</span>
     <div class="profile-image dropdown">
-      <img class="img-profile" onclick="triggerProfileDropdown()" src="https://s-media-cache-ak0.pinimg.com/originals/36/06/ce/3606cebe8d048b71aaea38b52c4eb4bd.jpg">
+      <img class="img-profile" onclick="triggerProfileDropdown()" src="{{picture}}">
       <profile-dropdown></profile-dropdown>
     </div>
   </div>
@@ -16,4 +18,21 @@ import { DropdownComponent } from './dropdown.component';
   styleUrls: ['../dist/assets/css/profile.css']
 })
 
-export class ProfileComponent {}
+export class ProfileComponent implements OnInit {
+
+  public name;
+  public picture;
+
+  constructor(private authenticationService: AuthenticationService, private router: Router){}
+
+  ngOnInit(){
+    this.authenticationService.requestUserData()
+    .subscribe(data => {
+      console.log(data);
+      this.name = data.fname + " " + data.lname;
+      this.picture = data.pictureURL;
+    })
+  }
+
+
+}

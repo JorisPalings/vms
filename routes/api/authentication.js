@@ -67,9 +67,33 @@ var register = function(req, res, next){
   })
 }
 
+var logout = function(req, res, next) {
+  var data = req.body;
+
+  request({
+    uri: "http://localhost:4000/api/employees/logout?access_token=" + data.token,
+    method: "POST"
+  },function(error, response, body){
+    if (!error && response.statusCode === 204){
+      //Do something with the response json and go to the next step
+      console.log("Response", response.body);
+      res.status(204).send(response.body);
+    }
+    else {
+      console.log("body", response.body);
+      var error = JSON.parse(response.body).error;
+
+      //Throw error to the Angular request
+      res.status(error.statusCode).send({error: error.message});
+    }
+  })
+
+}
+
 var auth = {
   login: login,
-  register: register
+  register: register,
+  logout: logout
 }
 
 module.exports = auth;

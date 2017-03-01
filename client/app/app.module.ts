@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
@@ -29,13 +28,13 @@ import { CalendarsComponent } from './calendars/calendars.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './landing/login.component';
+import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
 import { TimelineComponent } from './shared/timeline.component';
 import { MeetingComponent } from './shared/meeting.component';
 import { DropdownComponent } from './shared/dropdown.component';
 import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
 import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
-
 
 @NgModule ({
   imports: [
@@ -60,6 +59,7 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     LoginComponent,
     BrandingComponent,
     MeetingComponent,
+    MeetingDetailsComponent,
     TimelineComponent,
     DropdownComponent,
     ProfileComponent,
