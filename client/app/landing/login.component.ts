@@ -25,19 +25,15 @@ export class Credentials {
       <p>Your form has been submitted.</p>
     </div>
     <form *ngIf="!submitted" #login="ngForm" novalidate (ngSubmit)="doLogin(login.value, login.valid)">
-    <!--show error only when field is not valid & it's dirty or form submited-->
         <small *ngIf="mail.invalid || (!mail.pristine && login.submitted)">
             E-mail is required.
         </small>
-
-        <input type="email" name="mail" [(ngModel)]="loginUser.mail" #mail="ngModel" required placeholder="EMAIL" autofocus />
+        <input type="email" name="mail" [(ngModel)]="loginUser.mail" #mail="ngModel" required placeholder="Email" autofocus />
 
         <small [hidden]="password.valid || (password.pristine && !login.submitted)">
             Password is required.
         </small>
-
-        <input type="password" placeholder="PASSWORD" name="password" [(ngModel)]="loginUser.password" #password="ngModel" required />
-
+        <input type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password" #password="ngModel" required />
         <span class="form-instruction"><a href="#">Forgot your password?</a></span>
 
         <button type="submit" [disabled]="!login.valid">Log in</button>
