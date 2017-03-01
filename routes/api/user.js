@@ -40,7 +40,7 @@ var linkcals = function(req, res, next){
   let token = data.token;
 
   console.log(id);
-  
+
   request({
     uri: "http://localhost:4000/api/employees/" + id +"?access_token=" + token,
     method: "PATCH",
@@ -61,10 +61,35 @@ var linkcals = function(req, res, next){
   })
 }
 
+var user = function(req, res, next){
+  let data = req.body;
+
+  let id = data.id;
+  let token = data.token;
+
+  request("http://localhost:4000/api/employees/" + id +  "?access_token=" + token , function(error, response, body){
+    if (!error && response.statusCode === 200){
+      //Do something with the response json and go to the next step
+      console.log("Response no error", response.body);
+      res.status(200).send(response.body);
+    }
+    else {
+      console.log(response);
+      console.log("body with error", response.body);
+      var error = JSON.parse(response.body).error;
+
+      //Throw error to the Angular request
+      res.status(error.statusCode).send({error: error.message});
+    }
+  })
+
+}
+
 
 var userData = {
   googlecalendars: googlecalendars,
-  linkcals: linkcals
+  linkcals: linkcals,
+  user: user
 }
 
 module.exports = userData;

@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import {CookieService} from 'angular2-cookie/core';
+import { CookieService } from 'angular2-cookie/core';
 import 'rxjs/add/operator/map';
+import { Employee } from '../../_models/employee';
 
 @Injectable()
 export class AuthenticationService {
   public token: string;
   public employee: string;
   public email: string;
+  public currentUser: Employee = <Employee>({
+    fname: "",
+    lname: "",
+    email: "",
+    pictureURL: ""
+  });
 
 
   private handleError(err) {
@@ -32,6 +39,8 @@ export class AuthenticationService {
         this.token = currentUser && currentUser.token;
         this.employee = currentUser && currentUser.id;
         this.email = currentUser && currentUser.email;
+
+
       }
   }
 
@@ -49,20 +58,22 @@ export class AuthenticationService {
     return this.http.post('http://localhost:3000/api/login', JSON.stringify(credentials), options)
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
+        console.log(response.json());
+
         let token = response.json() && response.json().id;
         if (token) {
             // set token property
             this.token = token;
-            console.log(token);
-
             this.email = credentials.mail;
             this.employee = response.json().userId;
-            console.log(this.employee);
-            // store username and jwt token as cookie to keep user logged in between page refreshes
 
+
+
+
+            // store username and jwt token as cookie to keep user logged in between page refreshes
             this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token, id: response.json().userId }));
 
-            // return true to indicate successful login
+
             return true;
         }
         else {
@@ -72,6 +83,23 @@ export class AuthenticationService {
       })
       .catch(this.handleError)
 
+  }
+
+  requestUserData(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+
+    // Request additional data of logged in user
+    var data = {
+      token: this.token,
+      id: this.employee
+    }
+
+    return this.http.post('http://localhost:3000/api/user', JSON.stringify(data), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
   }
 
   register(userData: any): Observable<boolean> {
