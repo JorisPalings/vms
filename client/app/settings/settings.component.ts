@@ -41,7 +41,7 @@ import { UserService } from '../shared/services/user.service';
                         <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" checked="{{cal.checked}}" (change)="checkboxClicked(cal)"/>
                         <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                     </fieldset>
-                    <button type="submit">FINISH</button>
+                    <button type="submit">Finish</button>
                   </form>
               </div>
           </div>

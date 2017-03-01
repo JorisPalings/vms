@@ -44,7 +44,7 @@ import 'rxjs/add/observable/throw';
       <small [hidden]="form.controls['repeatpassword'].valid ||  (form.controls['repeatpassword'].pristine && !form.submitted)">
         Password mismatch
       </small>
-      <button type="submit" [disabled]="!form.valid">NEXT</button>
+      <button type="submit" [disabled]="!form.valid">Next</button>
   </form>
   `,
   styleUrls: ['../dist/assets/css/registration-form.css']
