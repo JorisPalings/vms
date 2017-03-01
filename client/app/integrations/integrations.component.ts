@@ -23,7 +23,7 @@ import { IntegrationButtonsComponent } from '../shared/integration-buttons.compo
               <div class="step"></div>
               <h2 class="form-subtitle">Step 2 - Integrations</h2>
               <p class="successful align-left"><i class="fa fa-check"></i> Your account has been created!</p>
-              <p class="align-left">Link your account with Google and LinkedIn below:</p>
+              <p class="align-left">Import your calendars automatically by connecting your Google and LinkedIn accounts below:</p>
               <form>
                   <integration-buttons></integration-buttons>
                   <button type="submit" routerLink="/calendars">Next</button>

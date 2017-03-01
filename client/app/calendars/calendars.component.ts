@@ -24,6 +24,7 @@ import { UserService } from '../shared/services/user.service';
               <div class="step"></div>
               <div class="step current-step"></div>
               <h2 class="form-subtitle">Step 3 - Calendars</h2>
+              <p class="align-left">Choose which calendars you would like to import meetings from:</p>
               <form #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
                 <fieldset *ngFor="let cal of checkboxes">
                     <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" [(ngModel)]="cal.checked"/>
