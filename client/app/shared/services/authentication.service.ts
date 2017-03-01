@@ -68,6 +68,11 @@ export class AuthenticationService {
     return currentUser.email;
   }
 
+  getId() {
+    var currentUser = JSON.parse(this.cookieService.get('currentUser'));
+    return currentUser.id;
+  }
+
   logout(){
     // Send the logout request to express --> loopback
     let headers = new Headers();

@@ -1,0 +1,16 @@
+@import "vars";
+
+.participant {
+    box-shadow: $shadow-1;
+    box-sizing: border-box;
+    margin-top: 32px;
+    padding: 16px;
+    width: 100%;
+
+    img {
+      border-radius: 100%;
+      margin-right: 16px;
+      vertical-align: middle;
+      width: 72px;
+    }
+}
