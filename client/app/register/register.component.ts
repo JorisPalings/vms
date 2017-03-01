@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'register-page',
@@ -24,4 +26,14 @@ import { Component } from '@angular/core';
    styleUrls: ['../dist/assets/css/landing-header.css']
 })
 
-export class RegisterComponent {}
+export class RegisterComponent implements OnInit {
+
+  constructor(private authenticationService: AuthenticationService, private router: Router){}
+
+  ngOnInit(){
+    if (this.authenticationService.isAuthenticated()){
+      this.router.navigate(['/private-dashboard']);
+    }
+  }
+
+}
