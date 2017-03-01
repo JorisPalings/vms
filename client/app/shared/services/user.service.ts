@@ -31,6 +31,10 @@ export class UserService {
 
     let email = this.authenticationService.getEmail();
 
+    console.log(email);
+
+    console.log(this.authenticationService.token);
+
     var json = JSON.stringify({email: email, access_token: this.authenticationService.token});
 
     console.log('Access', this.authenticationService.token);
@@ -39,6 +43,27 @@ export class UserService {
     console.log('3 - userService');
 
     return this.http.post('http://localhost:3000/api/google-calendars', json, options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
+
+  linkCalendars(cals: any){
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+    console.log("Linkcals employee userid", this.authenticationService.employee);
+
+    let data = {
+      "calendars" : {
+        "calendars": cals
+      },
+      "id": this.authenticationService.employee,
+      "token": this.authenticationService.token
+    }
+
+    return this.http.post('http://localhost:3000/api/link-calendars', JSON.stringify(data), options)
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }

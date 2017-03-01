@@ -1,3 +1,5 @@
+'use strict';
+
 var router = require('express').Router();
 var request = require('request');
 
@@ -17,6 +19,7 @@ var googlecalendars = function(req, res, next){
       res.status(200).send(response.body);
     }
     else {
+      console.log(response);
       console.log("body with error", response.body);
       var error = JSON.parse(response.body).error;
 
@@ -27,9 +30,41 @@ var googlecalendars = function(req, res, next){
 
 }
 
+var linkcals = function(req, res, next){
+  // Send patch request to Loopback API
+
+  let data = req.body;
+
+  let calendars = data.calendars;
+  let id = data.id;
+  let token = data.token;
+
+  console.log(id);
+  
+  request({
+    uri: "http://localhost:4000/api/employees/" + id +"?access_token=" + token,
+    method: "PATCH",
+    form: calendars
+  },function(error, response, body){
+    if (!error && response.statusCode === 200){
+      //Do something with the response json and go to the next step
+      console.log("Response", response.body);
+      res.status(200).send(response.body);
+    }
+    else {
+      console.log("body", response.body);
+      var error = JSON.parse(response.body).error;
+
+      //Throw error to the Angular request
+      res.status(error.statusCode).send({error: error.message});
+    }
+  })
+}
+
 
 var userData = {
-  googlecalendars: googlecalendars
+  googlecalendars: googlecalendars,
+  linkcals: linkcals
 }
 
 module.exports = userData;

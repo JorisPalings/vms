@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class AuthenticationService {
   public token: string;
-
+  public employee: string;
+  public email: string;
 
 
   private handleError(err) {
@@ -29,6 +30,8 @@ export class AuthenticationService {
       if (cookie){
         var currentUser = JSON.parse(cookieService.get('currentUser'));
         this.token = currentUser && currentUser.token;
+        this.employee = currentUser && currentUser.id;
+        this.email = currentUser && currentUser.email;
       }
   }
 
@@ -51,6 +54,10 @@ export class AuthenticationService {
             // set token property
             this.token = token;
             console.log(token);
+
+            this.email = credentials.mail;
+            this.employee = response.json().userId;
+            console.log(this.employee);
             // store username and jwt token as cookie to keep user logged in between page refreshes
 
             this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token, id: response.json().userId }));

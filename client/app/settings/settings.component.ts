@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CalendarListComponent } from '../shared/calendar-list.component';
 
 @Component({
   selector: 'settings-page',

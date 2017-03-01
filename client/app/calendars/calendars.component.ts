@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CalendarListComponent } from '../shared/calendar-list.component';
 
 import { Router } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
@@ -25,10 +24,10 @@ import { UserService } from '../shared/services/user.service';
               <div class="step"></div>
               <div class="step current-step"></div>
               <h2 class="form-subtitle">Step 3 - Calendars</h2>
-              <form class="zebra-form">
-                <fieldset *ngFor="let cal of calendars">
-                    <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" />
-                    <label for="cal-{{cal.id}}">{{cal.summaryOverride || cal.summary }}</label>
+              <form #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
+                <fieldset *ngFor="let cal of checkboxes">
+                    <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" [(ngModel)]="cal.checked"/>
+                    <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                 </fieldset>
                 <button type="submit">FINISH</button>
               </form>
@@ -43,6 +42,7 @@ export class CalendarsComponent{
 
 
   private calendars;
+  public checkboxes = [];
 
   constructor(private userService: UserService, private router: Router){}
 
@@ -52,8 +52,40 @@ export class CalendarsComponent{
         console.log("Data", data);
         this.calendars = data.calendars;
         console.log("Calendars", this.calendars);
+
+        for (let cal of this.calendars){
+          this.checkboxes.push(
+            {
+              display: cal.summary,
+              displayOverride: cal.summaryOverride,
+              id: cal.id,
+              checked: false
+            }
+          )
+        }
+
       },
       error => console.log(error));
   }
+
+  linkCals(){
+    this.userService.linkCalendars(this.getSelectedOptions())
+      .subscribe(data => {
+        // successful
+        console.log("successful data", data);
+
+        // Route to private dashboard
+        this.router.navigate(['/private-dashboard']);
+      },
+      error => console.error(error));
+  }
+
+  getSelectedOptions() {
+    return this.checkboxes
+              .filter(cal => cal.checked)
+              .map(cal => cal.id)
+  }
+
+
 
 }
