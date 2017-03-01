@@ -44,9 +44,35 @@ export class AuthenticationService {
       }
   }
 
+  emptyServiceData(){
+    console.log("Emptying cookie");
+    // Delete currentUser cookie
+    this.cookieService.remove('currentUser');
+
+    // Empty the authentication service data
+    console.log("Emptying service data");
+    this.token = null;
+    this.email = null;
+    this.employee = null;
+  }
+
   getEmail() {
     var currentUser = JSON.parse(this.cookieService.get('currentUser'));
     return currentUser.email;
+  }
+
+  logout(){
+    // Send the logout request to express --> loopback
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+    let data = { token: this.token};
+
+
+    return this.http.post('http://localhost:3000/api/logout', JSON.stringify(data), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 
   login(credentials: any): Observable<boolean> {

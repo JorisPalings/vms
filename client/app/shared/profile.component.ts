@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import { AuthenticationService } from './services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'profile',
@@ -22,18 +23,16 @@ export class ProfileComponent implements OnInit {
   public name;
   public picture;
 
-  constructor(private authenticationService: AuthenticationService){}
+  constructor(private authenticationService: AuthenticationService, private router: Router){}
 
   ngOnInit(){
-
-
     this.authenticationService.requestUserData()
     .subscribe(data => {
       console.log(data);
       this.name = data.fname + " " + data.lname;
       this.picture = data.pictureURL;
     })
-
-
   }
+
+
 }
