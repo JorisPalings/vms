@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LoginComponent } from './login.component';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'landing-page',
@@ -27,4 +29,13 @@ import { LoginComponent } from './login.component';
   styleUrls: ['../dist/assets/css/landing-header.css']
 })
 
-export class LandingComponent {}
+export class LandingComponent implements OnInit {
+
+  constructor(private authenticationService: AuthenticationService, private router: Router){}
+
+  ngOnInit(){
+    if (this.authenticationService.isAuthenticated()){
+      this.router.navigate(['/private-dashboard']);
+    }
+  }
+}

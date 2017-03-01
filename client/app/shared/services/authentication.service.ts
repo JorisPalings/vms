@@ -17,6 +17,13 @@ export class AuthenticationService {
     pictureURL: ""
   });
 
+  isAuthenticated(){
+    console.log("Token set? ", this.token)
+    if (this.token){
+      return true;
+    }
+    return false;
+  }
 
   private handleError(err) {
     let errorMessage: string;
