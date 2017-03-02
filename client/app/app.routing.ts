@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './landing/landing.component';
 import { PrivateDashboardComponent } from './private_dashboard/private_dashboard.component';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
+import { NotesComponent } from './notes/notes.component';
 import { PublicDashboardComponent } from './public_dashboard/public_dashboard.component';
 import { RegisterComponent } from './register/register.component';
 import { IntegrationsComponent } from './integrations/integrations.component';
@@ -34,6 +35,10 @@ const appRoutes : Routes = [
   {
     path: 'meeting',
     component: MeetingDetailsComponent
+  },
+  {
+    path: 'notes',
+    component: NotesComponent
   },
   {
     path: 'settings',
