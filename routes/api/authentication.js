@@ -20,7 +20,9 @@ var login = function(req, res, next) {
     else {
       var error = JSON.parse(response.body).error;
       //Throw error to the Angular request
-      res.status(error.statusCode).send({error: error.message});
+      console.log(error);
+
+      res.status(error.statusCode).send(error);
     }
   })
 }

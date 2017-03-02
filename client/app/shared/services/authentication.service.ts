@@ -92,6 +92,7 @@ export class AuthenticationService {
             this.token = token;
             this.email = credentials.mail;
             this.employee = response.json().userId;
+
             // store username and jwt token as cookie to keep user logged in between page refreshes
             this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token, id: response.json().userId }));
             return true;
@@ -101,7 +102,17 @@ export class AuthenticationService {
             return false;
         }
       })
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 401){
+          console.log('ERROR 401');
+          return Observable.throw("This email and password combination is incorrect");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
+
+      });
   }
 
   requestUserData(){

@@ -16,6 +16,8 @@ var googlecalendars = function(req, res, next) {
     else {
       var error = JSON.parse(response.body).error;
       //Throw error to the Angular request
+      console.log(error);
+
       res.status(error.statusCode).send({error: error.message});
     }
   })
