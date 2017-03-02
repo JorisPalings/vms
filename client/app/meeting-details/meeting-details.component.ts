@@ -59,15 +59,7 @@ export class MeetingDetailsComponent {
 
           //TODO: Use the data containing the meeting
 
-          // this.meeting = <Meeting>({
-          //   externalID: data.externalID,
-          //   summary: data.summary,
-          //   room: data.room,
-          //   start: data.start,
-          //   end: data.end,
-          //   externals: data.externals,
-          //   meetees: data.meetees
-          // })
+          this.meeting = data;
 
         },
         error => console.log(error));
