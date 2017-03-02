@@ -3,7 +3,7 @@ import { Http, Response, Headers, RequestOptions} from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
-
+import { EmailValidator } from '../directives/mail-validator';
 import { Router } from '@angular/router';
 
 //Authentication Service
@@ -34,6 +34,7 @@ import 'rxjs/add/observable/throw';
       <div *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].dirty" class="alert alert-danger">You must include a last name.</div>
       <input type="text" name="lastname" id="lastname" placeholder="Last name" autofocus required [formControl]="form.controls['lastname']"/>
 
+      <div *ngIf="form.controls['mail'].hasError('invalidEmailAddress') && form.controls['mail'].touched" class="alert alert-danger">Your email address must be of pattern \"john@doe.com\".</div>
       <div *ngIf="form.controls['mail'].hasError('required') && form.controls['mail'].dirty" class="alert alert-danger">You must include an email.</div>
       <input type="text" name="mail" id="email" placeholder="Email" autofocus required [formControl]="form.controls['mail']"/>
 
@@ -42,9 +43,9 @@ import 'rxjs/add/observable/throw';
 
       <div *ngIf="form.controls['repeatpassword'].hasError('required') && form.controls['repeatpassword'].dirty" class="alert alert-danger">You must include a password.</div>
       <input type="password" id="repeatpassword" placeholder="Repeat password" [formControl]="form.controls['repeatpassword']" validateEqual="password" #repeatpassword />
-      <small [hidden]="form.controls['repeatpassword'].valid ||  (form.controls['repeatpassword'].pristine && !form.submitted)">
+      <div class="alert alert-danger" [hidden]="form.controls['repeatpassword'].valid ||  (form.controls['repeatpassword'].pristine && !form.submitted)">
         Password mismatch
-      </small>
+      </div>
       <button type="submit" [disabled]="!form.valid">Next</button>
   </form>
   `,
@@ -64,7 +65,7 @@ export class RegistrationComponent implements OnInit {
     this.form = this.fb.group({
       firstname: [null, Validators.required],
       lastname: [null, Validators.required],
-      mail: [null, Validators.required],
+      mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
       password: [null, Validators.required],
       repeatpassword: [null, Validators.required]
     })
