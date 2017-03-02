@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'branding',
   template: `
-  <div class="branding equal-box">
+  <div class="branding equal-box" routerLink="/">
     <div class="branding-logo">
       <img src="../dist/assets/images/craftworkz.svg">
     </div>

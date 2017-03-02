@@ -4,38 +4,27 @@
   position: absolute;
   right: 2.5vw;
   top: 30px;
-  .text-branding {
-    font-size: $font-size-large;
-  }
 
   .logo {
     img {
       width: 310px;
     }
+  }
+
+  .text-branding {
+    font-size: $font-size-large;
   }
 }
 
 .branding {
+  cursor: pointer;
   text-align: left;
 
   .branding-logo {
+    cursor: pointer;
+
     img {
       width: 200px;
-    }
-  }
-}
-
-.front-branding {
-  position: absolute;
-  right: 2.5vw;
-  top: 30px;
-  .text-branding {
-    font-size: $font-size-large;
-  }
-
-  .logo {
-    img {
-      width: 310px;
     }
   }
 }
