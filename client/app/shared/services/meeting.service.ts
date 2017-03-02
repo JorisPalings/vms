@@ -44,6 +44,7 @@ function mapMeetings(response: Response): Meeting[] {
 
 function toMeeting(r: any): Meeting {
     let meeting = <Meeting>({
+        id: r.id,
         externalID: r.externalId,
         start: r.start,
         end: r.end,
