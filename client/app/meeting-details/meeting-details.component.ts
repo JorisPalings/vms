@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Meeting } from '../_models/meeting';
+import { ActivatedRoute } from '@angular/router';
+import { MeetingService } from '../shared/services/meeting.service';
 
 @Component({
   selector: 'meeting-details',
@@ -37,6 +39,44 @@ import { Meeting } from '../_models/meeting';
 })
 
 export class MeetingDetailsComponent {
+
     @Input()
     private meeting: Meeting;
+    private meetingId: string;
+    private sub: any;
+
+    constructor(private route: ActivatedRoute, private meetingService: MeetingService){}
+
+    ngOnInit(){
+      this.sub = this.route.params.subscribe(params => {
+      this.meetingId = params['id']; // (+) converts string 'id' to a number
+
+       //TODO: Load the meeting detail using MeetingService
+
+       this.meetingService.getMeeting(this.meetingId)
+        .subscribe(data => {
+          console.log("Meeting Details: ", data);
+
+          //TODO: Use the data containing the meeting
+
+          // this.meeting = <Meeting>({
+          //   externalID: data.externalID,
+          //   summary: data.summary,
+          //   room: data.room,
+          //   start: data.start,
+          //   end: data.end,
+          //   externals: data.externals,
+          //   meetees: data.meetees
+          // })
+
+        },
+        error => console.log(error));
+
+     });
+    }
+
+    ngOnDestroy() {
+      this.sub.unsubscribe();
+    }
+
 }

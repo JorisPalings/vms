@@ -22,7 +22,8 @@ export class MeetingService {
             .map((result: Response) => mapMeetings(result));
     }
 
-    getMeeting(id: number): Observable<Meeting> {
+    getMeeting(id: string): Observable<Meeting> {
+        console.log("ID:", id);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
