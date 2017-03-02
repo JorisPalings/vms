@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Meeting } from '../_models/meeting';
 
 @Component({
   selector: 'meeting-details',
@@ -11,9 +12,9 @@ import { Component } from '@angular/core';
   <main>
     <div class="container">
       <div class="row">
-        <h2>Virtual Meeting Secretary</h2>
-        <h3>Today 10:00 - 12:00</h3>
-        <h3>Everest</h3>
+        <h2>{{meeting.summary}}</h2>
+        <h3>{{meeting.start}} {{meeting.end}}</h3>
+        <h3>{{meeting.room}}</h3>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem quasi sunt ipsum magni, doloribus commodi, quas, iure soluta possimus illo dignissimos. Perferendis autem corrupti, minima quidem expedita natus qui assumenda.</p>
         <div class="one-half column offset-by-three">
           <form>
@@ -35,4 +36,7 @@ import { Component } from '@angular/core';
   styleUrls: ['../dist/assets/css/meeting-details.css']
 })
 
-export class MeetingDetailsComponent {}
+export class MeetingDetailsComponent {
+    @Input()
+    private meeting: Meeting;
+}
