@@ -23,8 +23,8 @@ import { UserService } from '../shared/services/user.service';
                       <input type="email" id="email" placeholder="Email"/>
                       <input type="tel" id="phone" placeholder="Telephone number" />
                       <button><i class="fa fa-floppy-o"></i> Save changes</button>
-                      <a href="#" class="float-left">Change password</a>
-                      <a href="#" class="float-right dangerous">Delete account</a>
+                      <a href="#" class="form-instruction float-left">Change password</a>
+                      <a href="#" class="form-instruction float-right dangerous">Delete account</a>
                   </form>
               </div>
               <div class="form six columns offset-by-one">
