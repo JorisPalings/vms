@@ -31,7 +31,7 @@ export class MeetingService {
                      id: id};
 
         return this.http
-            .post('http://localhost:3000/api/meeting', data, options)
+            .post('http://localhost:3000/api/meeting', JSON.stringify(data), options)
             .map((result: Response) => toMeeting(result));
     }
 }
