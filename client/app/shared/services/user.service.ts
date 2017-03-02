@@ -18,7 +18,6 @@ export class UserService {
       errorMessage = err.message ? err.message : err.toString();
     }
     return Observable.throw(errorMessage);
-    //return Observable.throw(err.json().data || 'Server error.');
   }
 
   constructor(private http: Http, private authenticationService: AuthenticationService){}
@@ -28,17 +27,8 @@ export class UserService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-
     let email = this.authenticationService.getEmail();
-
-    console.log(email);
-
-    console.log(this.authenticationService.token);
-
     var json = JSON.stringify({email: email, access_token: this.authenticationService.token});
-
-    console.log('Access', this.authenticationService.token);
-    console.log('Email', email);
 
     console.log('3 - userService');
 
@@ -62,12 +52,9 @@ export class UserService {
   }
 
   linkCalendars(cals: any){
-
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-
-    console.log("Linkcals employee userid", this.authenticationService.employee);
 
     let data = {
       "calendars" : {

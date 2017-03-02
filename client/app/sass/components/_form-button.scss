@@ -15,10 +15,6 @@ form button {
     transition: all .125s ease-in-out;
     width: 100%;
 
-    &[type="submit"] {
-        margin-top: 64px;
-    }
-
     &[type="submit"]:focus {
         outline: none;
     }
