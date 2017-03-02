@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
 
@@ -19,14 +18,10 @@ import { UserService } from '../shared/services/user.service';
               <div class="form five columns">
                   <h2>Profile information</h2>
                   <form>
-                      <label for="first-name">First name:</label>
-                      <input type="text" id="first-name" />
-                      <label for="last-name">Last name:</label>
-                      <input type="text" id="last-name" />
-                      <label for="email">Email:</label>
-                      <input type="email" id="email" />
-                      <label for="phone">Telephone number:</label>
-                      <input type="tel" id="phone" />
+                      <input type="text" id="first-name" placeholder="First name" />
+                      <input type="text" id="last-name" placeholder="Last name"/>
+                      <input type="email" id="email" placeholder="Email"/>
+                      <input type="tel" id="phone" placeholder="Telephone number" />
                       <button><i class="fa fa-floppy-o"></i> Save changes</button>
                       <a href="#" class="float-left">Change password</a>
                       <a href="#" class="float-right dangerous">Delete account</a>
