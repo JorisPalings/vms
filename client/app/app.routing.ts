@@ -44,6 +44,10 @@ const appRoutes : Routes = [
     component: PublicDashboardComponent
   },
   {
+    path: 'meeting/:id',
+    component: MeetingDetailsComponent
+  },
+  {
     path: '**',
     component: NotFoundComponent
   }

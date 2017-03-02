@@ -4,7 +4,7 @@ import { Meeting } from '../_models/meeting';
 @Component({
   selector: 'meeting',
   template: `
-  <div class="card-wrapper">
+  <div class="card-wrapper" [routerLink]="['/meeting', meeting.id]">
     <div class="meeting-card">
       <span class="time-box">
             <div class="time-box-container">

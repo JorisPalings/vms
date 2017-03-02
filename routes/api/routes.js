@@ -15,6 +15,9 @@ router.post('/register', auth.register);
 // 3. Log out
 router.post('/logout', auth.logout);
 
+// 4. Update
+router.post('/update', auth.update);
+
 // User data
 // 1. Get google calendars
 router.post('/google-calendars', user.googlecalendars);
