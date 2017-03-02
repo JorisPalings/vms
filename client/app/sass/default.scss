@@ -26,3 +26,14 @@ p {
 section {
     margin-bottom: 32px;
 }
+
+.has-errors {
+  background-color: $google-red;
+  padding: 15px;
+  text-align: left;
+
+  .error {
+    list-style: none;
+    color: $off-white;
+  }
+}

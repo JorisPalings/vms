@@ -138,7 +138,16 @@ export class AuthenticationService {
 
     return this.http.post('http://localhost:3000/api/register', JSON.stringify(userData), options)
       .map((response: Response) => response.json())
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 422){
+          return Observable.throw("An account has already been created with this email address");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
+
+      })
   }
 
   updateUserData(userData: any): Observable<boolean> {
