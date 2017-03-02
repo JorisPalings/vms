@@ -32,5 +32,8 @@ router.post('/user', user.user);
 //1. Get all meetings
 router.post('/meetings', meeting.getAll);
 
+//2. Get meeting
+router.post('/meeting', meeting.getMeeting);
+
 
 module.exports = router;
