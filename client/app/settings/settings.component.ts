@@ -42,7 +42,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
                         <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" checked="{{cal.checked}}" (change)="checkboxClicked(cal)"/>
                         <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                     </fieldset>
-                    <button><i class="fa fa-floppy-o"></i> Save changes</button>
+                    <button><i class="fa fa-floppy-o"></i> Save calendars</button>
                   </form>
                 </section>
               </div>
