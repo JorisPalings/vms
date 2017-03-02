@@ -9,8 +9,9 @@ import { AuthenticationService } from '../shared/services/authentication.service
   template: `
   <header class="private-dash-header">
       <branding></branding>
-      <div>
-          <h1>Settings</h1>
+      <div class="title">
+        <a routerLink="/private-dashboard"><i class="fa fa-chevron-left"></i></a>
+        <h1>Settings</h1>
       </div>
       <profile></profile>
   </header>

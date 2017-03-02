@@ -8,7 +8,10 @@ import { MeetingService } from '../shared/services/meeting.service';
   template: `
   <header class="private-dash-header">
 	  <branding></branding>
-    <h1>Meeting</h1>
+    <div class="title">
+      <a routerLink="/private-dashboard"><i class="fa fa-chevron-left"></i></a>
+      <h1>Meeting</h1>
+    </div>
     <profile></profile>
   </header>
   <main>
@@ -30,7 +33,6 @@ import { MeetingService } from '../shared/services/meeting.service';
           <participant class="one-half column participant-row"></participant>
           <participant class="one-half column participant-row"></participant>
         </div>
-
       </div>
     </div>
   </main>
@@ -39,7 +41,6 @@ import { MeetingService } from '../shared/services/meeting.service';
 })
 
 export class MeetingDetailsComponent {
-
 
     private meeting: any = {};
     private meetingId: string;
@@ -57,14 +58,11 @@ export class MeetingDetailsComponent {
         .subscribe(data => {
           console.log("Meeting Details: ", data);
           this.meeting = data;
-
         },
         error => console.log(error));
-
     }
 
     ngOnDestroy() {
       this.sub.unsubscribe();
     }
-
 }

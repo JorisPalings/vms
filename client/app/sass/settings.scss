@@ -1,5 +1,6 @@
 @import "vars";
 @import "calendars";
+@import "private-dash";
 @import "components/form";
 @import "components/form-button";
 @import "components/form-text-input";
@@ -10,6 +11,17 @@
     justify-content: space-between;
     margin: 30px 2.5vw;
     align-items: center;
+
+    .title {
+        position: relative;
+
+        i {
+            padding: 8px;
+            position: absolute;
+            left: -40px;
+            top: 3px;
+        }
+    }
 
     .equal-box {
         flex-grow: 1;
