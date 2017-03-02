@@ -58,8 +58,6 @@ export class TimelineComponent implements OnInit {
             meetingsJson[meetingsJson.length - 1].push(meeting);
         }
 
-        console.log(meetingsJson);
-
         this.meetings = meetingsJson;
     }
 

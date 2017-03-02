@@ -69,14 +69,10 @@ export class SettingsComponent {
     });
     this.userService.getCalendars()
       .subscribe(data => {
-        console.log("Data", data);
         this.calendars = data.calendars;
-        console.log("Calendars", this.calendars);
 
         this.userService.getCurrentCalendars()
           .subscribe(data => {
-            console.log("DATA", data.calendars);
-
             for (let cal of this.calendars) {
               let isChecked = "";
               if(data.calendars.includes(cal.id)) {
@@ -99,9 +95,6 @@ export class SettingsComponent {
   linkCals() {
     this.userService.linkCalendars(this.getSelectedOptions())
       .subscribe(data => {
-        // successful
-        console.log("successful data", data);
-
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
@@ -131,9 +124,6 @@ export class SettingsComponent {
     }
     this.authenticationService.updateUserData(this.userData)
       .subscribe(data => {
-        // successful
-        console.log("successful data", data);
-
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },

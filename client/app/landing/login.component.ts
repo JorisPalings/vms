@@ -67,7 +67,6 @@ export class LoginComponent implements OnInit {
     //Check if the credentials entered are valid
     if (isValid) {
       this.errors = [];
-      console.log(credentials)
 
       this.authenticationService.login(credentials)
         .subscribe(

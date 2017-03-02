@@ -68,7 +68,6 @@ export class RegistrationComponent implements OnInit {
 
   doRegister(isValid: boolean){
     this.errors = [];
-    console.log(this.form.value);
 
     this.authenticationService.register(this.form.value)
       .subscribe(
@@ -82,8 +81,6 @@ export class RegistrationComponent implements OnInit {
             password: this.form.value.password
           }
 
-          console.log(credentials);
-
           // Send the login request using the authentication service
           this.authenticationService.login(credentials)
             .subscribe(data => {
@@ -96,13 +93,13 @@ export class RegistrationComponent implements OnInit {
         },
         err => {
           console.log(err);
-          // show an error message
+          // Show an error message
           this.errors.push(err);
         }
       );
   }
 
-    //Password strength
+    // Password strength
     // TODO: Remove from borders and text, make a seperate text block to indicate strength
 
     @ViewChild('password') input:ElementRef;
