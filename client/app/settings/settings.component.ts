@@ -28,7 +28,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
                         <input type="email" id="email" placeholder="Email" [value]="userData.email" name="email" ngModel/>
                         <button><i class="fa fa-floppy-o"></i> Save changes</button>
                         <a href="#" class="form-instruction float-left">Change password</a>
-                        <a href="#" class="form-instruction float-right dangerous">Delete account</a>
+                        <a href="#" class="form-instruction float-right dangerous" (click)="deleteAccount()">Delete account</a>
                     </form>
                   </section>
               </div>
@@ -62,7 +62,7 @@ export class SettingsComponent {
   public userData = {fname:"", lname: "", email:""};
   public checkboxes = [];
 
-  constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService ) { }
+  constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService ) { }
 
   ngOnInit() {
     this.authenticationService.requestUserData()
@@ -130,6 +130,16 @@ export class SettingsComponent {
         this.router.navigate(['/settings']);
       },
       error => console.error(error));
+  }
+
+  deleteAccount() {
+    if(confirm("Are you sure you want to delete your account?") && confirm("100%?") && confirm("It will be gone forever, sure you wanna do it?")) {
+      this.authenticationService.deleteAccount()
+      .subscribe(data => {
+        // Router back to landing page
+        this.router.navigate(['/']);
+      });
+    }
   }
 
 }

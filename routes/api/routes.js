@@ -18,6 +18,9 @@ router.post('/logout', auth.logout);
 // 4. Update
 router.post('/update', auth.update);
 
+// 5. Delete account
+router.post('/deleteAccount', auth.deleteAccount);
+
 // User data
 // 1. Get google calendars
 router.post('/google-calendars', user.googlecalendars);

@@ -138,7 +138,16 @@ export class AuthenticationService {
 
     return this.http.post('http://localhost:3000/api/register', JSON.stringify(userData), options)
       .map((response: Response) => response.json())
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 422){
+          return Observable.throw("An account has already been created with this email address");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
+
+      })
   }
 
   updateUserData(userData: any): Observable<boolean> {
@@ -150,5 +159,22 @@ export class AuthenticationService {
     return this.http.post('http://localhost:3000/api/update', JSON.stringify(userData), options)
       .map((response: Response) => response.json())
       .catch(this.handleError)
+  }
+
+  deleteAccount() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    let data = { token: this.token, id: this.getId()};
+
+    this.token = null;
+    this.email = null;
+    this.employee = null;
+
+    this.cookieService.removeAll();
+
+    return this.http.post('http://localhost:3000/api/deleteAccount', JSON.stringify(data), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 }

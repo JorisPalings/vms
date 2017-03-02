@@ -1,6 +1,7 @@
 import { Input, OnInit, OnDestroy, Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {CookieService} from 'angular2-cookie/core';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
     selector: 'integration-buttons',
@@ -21,7 +22,7 @@ export class IntegrationButtonsComponent implements OnInit {
     private googleURL = 'http://localhost:4000/auth/google';
     private linkedinURL = 'http://localhost:4000/auth/linkedin';
 
-    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService, private router:Router) {
+    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService, private router:Router, private authenticationService:AuthenticationService) {
         if(this.cookieService.get('LinkedInAuthenticated') === 'true'){
             this.linkedInAuthenticated = true;
         }
@@ -55,12 +56,12 @@ export class IntegrationButtonsComponent implements OnInit {
     authenticateWithGoogle(event) {
         //Prevents button from submitting form
         event.preventDefault();
-        window.location.href = this.googleURL + '?callback=' + this.callback;
+        window.location.href = this.googleURL + '?callback=' + this.callback + "&id=" + this.authenticationService.getId();
     }
 
     authenticateWithLinkedin(event) {
         //Prevents button from submitting form
         event.preventDefault();
-        window.location.href = this.linkedinURL + '?callback=' + this.callback;
+        window.location.href = this.linkedinURL + '?callback=' + this.callback + "&id=" + this.authenticationService.getId();
     }
 }
