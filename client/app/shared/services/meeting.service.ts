@@ -22,7 +22,7 @@ export class MeetingService {
             .map((result: Response) => mapMeetings(result));
     }
 
-    getMeeting(id: string): Observable<Meeting> {
+    getMeeting(id: string): Observable<any> {
         console.log("ID:", id);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -33,7 +33,7 @@ export class MeetingService {
 
         return this.http
             .post('http://localhost:3000/api/meeting', JSON.stringify(data), options)
-            .map((result: Response) => toMeeting(result));
+            .map((result: Response) => result.json());
     }
 }
 
@@ -43,6 +43,7 @@ function mapMeetings(response: Response): Meeting[] {
 }
 
 function toMeeting(r: any): Meeting {
+  console.log(r);
     let meeting = <Meeting>({
         id: r.id,
         externalID: r.externalId,

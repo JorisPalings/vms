@@ -20,7 +20,7 @@ var googlecalendars = function(req, res, next){
     }
     else {
       console.log(response);
-      console.log("body with error", response.body);
+      console.log("body with error", response);
       var error = JSON.parse(response.body).error;
 
       //Throw error to the Angular request
