@@ -52,8 +52,3 @@ function toMeeting(r: any): Meeting {
     });
     return meeting;
 }
-
-function handleError(error: any) {
-    console.error(error.message);
-    return Observable.throw(errorMsg);
-}
