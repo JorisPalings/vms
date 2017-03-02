@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import { MeetingComponent } from './meeting.component';
@@ -6,55 +5,76 @@ import { MeetingService } from './services/meeting.service';
 import { Meeting } from '../_models/meeting';
 
 @Component({
-  selector: 'timeline',
-  template: `
+    selector: 'timeline',
+    template: `
   <section>
     <div class="timerow" *ngFor="let day of meetings">
-      <div class="date">{{day[0].start | date:'EEE, d MMM, y'}}</div>
+      <div class="date">{{processDate(day[0].start)}}</div>
       <div class="vertical">
         <meeting *ngFor="let meeting of day" [meeting]="meeting"></meeting>
       </div>
     </div>
   </section>
   `,
-  styleUrls: ['../dist/assets/css/timeline.css']
+    styleUrls: ['../dist/assets/css/timeline.css']
 })
 
 export class TimelineComponent implements OnInit {
     private meetings: any[];
     private past: any[] = [];
+    private now: Date;
+    private tomorrow: Date;
 
-    constructor(private meetingService: MeetingService){}
+    constructor(private meetingService: MeetingService) { }
 
     ngOnInit() {
         this.meetingService.getAllMeetings().subscribe(data => this.processMeetings(data));
+        this.now = new Date();
+        this.tomorrow = new Date();
+        this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     }
 
     processMeetings(meetings: Meeting[]) {
         let number = 0;
-        meetings.sort(function(a,b){
+        meetings.sort(function(a, b) {
             return +new Date(a.start) - +new Date(b.start);
         });
-        for(let index in meetings){
+        for (let index in meetings) {
             let start = new Date(meetings[index].end);
-            if(start < new Date(Date.now())){
+            if (start < new Date(Date.now())) {
                 number = +index;
             }
         }
-        this.past.push(meetings.splice(0, number+1));
+
+        this.past.push(meetings.splice(0, number + 1));
 
         let meetingsJson = [];
         let date;
-        for(let meeting of meetings) {
-            if(date !== new Date(meeting.start).toLocaleDateString()) {
+        for (let meeting of meetings) {
+            if (date !== new Date(meeting.start).toLocaleDateString()) {
                 date = new Date(meeting.start).toLocaleDateString();
                 meetingsJson.push([]);
             }
-            meetingsJson[meetingsJson.length-1].push(meeting);
+            meetingsJson[meetingsJson.length - 1].push(meeting);
         }
 
         console.log(meetingsJson);
 
         this.meetings = meetingsJson;
+    }
+
+    processDate(date: string) {
+        let dateString;
+        let now = this.now.toDateString();
+        let tomorrow = this.tomorrow.toDateString();
+        if (new Date(date).toDateString() == now) {
+            dateString = 'Today';
+        } else if (new Date(date).toDateString() == tomorrow) {
+            dateString = 'Tomorrow';
+        }
+        else {
+            dateString = new Date(date).toDateString();
+        }
+        return dateString;
     }
 }
