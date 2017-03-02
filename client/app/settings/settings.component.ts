@@ -7,10 +7,12 @@ import { AuthenticationService } from '../shared/services/authentication.service
 @Component({
   selector: 'settings-page',
   template: `
+  <feedback></feedback>
   <header class="private-dash-header">
       <branding></branding>
-      <div>
-          <h1>Settings</h1>
+      <div class="title">
+        <a routerLink="/private-dashboard"><i class="fa fa-chevron-left"></i></a>
+        <h1>Settings</h1>
       </div>
       <profile></profile>
   </header>
@@ -42,7 +44,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
                         <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" checked="{{cal.checked}}" (change)="checkboxClicked(cal)"/>
                         <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                     </fieldset>
-                    <button><i class="fa fa-floppy-o"></i> Save changes</button>
+                    <button><i class="fa fa-floppy-o"></i> Save calendars</button>
                   </form>
                 </section>
               </div>
@@ -69,14 +71,10 @@ export class SettingsComponent {
     });
     this.userService.getCalendars()
       .subscribe(data => {
-        console.log("Data", data);
         this.calendars = data.calendars;
-        console.log("Calendars", this.calendars);
 
         this.userService.getCurrentCalendars()
           .subscribe(data => {
-            console.log("DATA", data.calendars);
-
             for (let cal of this.calendars) {
               let isChecked = "";
               if(data.calendars.includes(cal.id)) {
@@ -99,9 +97,6 @@ export class SettingsComponent {
   linkCals() {
     this.userService.linkCalendars(this.getSelectedOptions())
       .subscribe(data => {
-        // successful
-        console.log("successful data", data);
-
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
@@ -131,9 +126,6 @@ export class SettingsComponent {
     }
     this.authenticationService.updateUserData(this.userData)
       .subscribe(data => {
-        // successful
-        console.log("successful data", data);
-
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },

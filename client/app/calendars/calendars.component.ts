@@ -72,9 +72,6 @@ export class CalendarsComponent{
   linkCals(){
     this.userService.linkCalendars(this.getSelectedOptions())
       .subscribe(data => {
-        // successful
-        console.log("successful data", data);
-
         // Route to private dashboard
         this.router.navigate(['/private-dashboard']);
       },

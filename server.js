@@ -22,6 +22,12 @@ app.use('/api', require('./routes/api/routes'));
 
 app.use(cors());
 
+app.use(function(err, req, res, next) {
+  // Only handles `next(err)` calls
+  res.status(err.status || 500);
+  res.send({message: err.message});
+});
+
 app.listen(port, function(){
     console.log('Server started on port ' + port);
 });

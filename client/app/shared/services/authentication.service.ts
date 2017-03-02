@@ -17,8 +17,7 @@ export class AuthenticationService {
     pictureURL: ""
   });
 
-  isAuthenticated(){
-    console.log("Token set? ", this.token)
+  isAuthenticated() {
     if (this.token){
       return true;
     }
@@ -36,7 +35,6 @@ export class AuthenticationService {
       errorMessage = err.message ? err.message : err.toString();
     }
     return Observable.throw(errorMessage);
-    //return Observable.throw(err.json().data || 'Server error.');
   }
 
   constructor(private http: Http, private cookieService: CookieService){
@@ -46,18 +44,13 @@ export class AuthenticationService {
         this.token = currentUser && currentUser.token;
         this.employee = currentUser && currentUser.id;
         this.email = currentUser && currentUser.email;
-
-
       }
   }
 
   emptyServiceData(){
-    console.log("Emptying cookie");
     // Delete currentUser cookie
     this.cookieService.remove('currentUser');
-
     // Empty the authentication service data
-    console.log("Emptying service data");
     this.token = null;
     this.email = null;
     this.employee = null;
@@ -78,9 +71,7 @@ export class AuthenticationService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-
-    let data = { token: this.token};
-
+    let data = { token: this.token };
 
     return this.http.post('http://localhost:3000/api/logout', JSON.stringify(data), options)
       .map((response: Response) => response.json())
@@ -88,7 +79,6 @@ export class AuthenticationService {
   }
 
   login(credentials: any): Observable<boolean> {
-
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
@@ -96,8 +86,6 @@ export class AuthenticationService {
     return this.http.post('http://localhost:3000/api/login', JSON.stringify(credentials), options)
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        console.log(response.json());
-
         let token = response.json() && response.json().id;
         if (token) {
             // set token property
@@ -105,13 +93,8 @@ export class AuthenticationService {
             this.email = credentials.mail;
             this.employee = response.json().userId;
 
-
-
-
             // store username and jwt token as cookie to keep user logged in between page refreshes
             this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token, id: response.json().userId }));
-
-
             return true;
         }
         else {
@@ -119,15 +102,23 @@ export class AuthenticationService {
             return false;
         }
       })
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 401){
+          console.log('ERROR 401');
+          return Observable.throw("This email and password combination is incorrect");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
 
+      });
   }
 
   requestUserData(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-
 
     // Request additional data of logged in user
     var data = {
@@ -141,24 +132,29 @@ export class AuthenticationService {
   }
 
   register(userData: any): Observable<boolean> {
-
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post('http://localhost:3000/api/register', JSON.stringify(userData), options)
       .map((response: Response) => response.json())
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 422){
+          return Observable.throw("An account has already been created with this email address");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
+
+      })
   }
 
   updateUserData(userData: any): Observable<boolean> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
-
     userData.token = this.token;
-
-    console.log(userData);
 
     return this.http.post('http://localhost:3000/api/update', JSON.stringify(userData), options)
       .map((response: Response) => response.json())

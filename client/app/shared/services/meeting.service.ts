@@ -22,14 +22,13 @@ export class MeetingService {
             .map((result: Response) => mapMeetings(result));
     }
 
-    getMeeting(id: string): Observable<Meeting> {
+    getMeeting(id: string): Observable<any> {
         console.log("ID:", id);
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
-        let data = { access_token: this.authenticationService.token,
-                     id: id};
+        let data = { access_token: this.authenticationService.token, id: id};
 
         return this.http
             .post('http://localhost:3000/api/meeting', JSON.stringify(data), options)
@@ -38,12 +37,11 @@ export class MeetingService {
 }
 
 function mapMeetings(response: Response): Meeting[] {
-    console.log('Mapping meetings');
     return response.json().meetings.map(toMeeting);
 }
 
 function toMeeting(r: any): Meeting {
-    console.log(r);
+  console.log(r);
     let meeting = <Meeting>({
         id: r.id,
         externalID: r.externalId,
@@ -54,16 +52,5 @@ function toMeeting(r: any): Meeting {
         externals: r.externals,
         meetees: r.meetees
     });
-    console.log('Parsed meeting: ' + meeting);
     return meeting;
-}
-
-function handleError(error: any) {
-    // log error
-    // could be something more sofisticated
-    let errorMsg = error.message || `Yikes! There was was a problem with our hyperdrive device and we couldn't retrieve your data!`
-    console.error(errorMsg);
-
-    // throw an application level error
-    return Observable.throw(errorMsg);
 }

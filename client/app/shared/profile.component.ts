@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(){
     this.authenticationService.requestUserData()
     .subscribe(data => {
-      console.log(data);
       this.name = data.fname + " " + data.lname;
       this.picture = data.pictureURL;
     })
