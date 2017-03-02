@@ -67,6 +67,37 @@ var register = function(req, res, next){
   })
 }
 
+var update = function(req, res, next) {
+  var data = req.body;
+
+  //Transform the json to the right format
+  var user = {
+    "fname": data.fname,
+    "lname": data.lname,
+    "email": data.email
+  }
+
+  // Send the data to the loopback API
+  request({
+    uri: "http://localhost:4000/api/employees/" + data.id + "?access_token=" + data.token,
+    method: "PATCH",
+    form: user
+  },function(error, response, body){
+    if (!error && response.statusCode == 200){
+      //console.log('Register response: ', response);
+      //TODO: Do something with the response json and go to the next step
+      res.status(200).send({success: "Your account has been updated"});
+    }
+    else {
+      console.log(response.body);
+      var error = JSON.parse(response.body).error;
+
+      //Throw error to the Angular request
+      res.status(error.statusCode).send({error: error.message});
+    }
+  })
+}
+
 var logout = function(req, res, next) {
   var data = req.body;
 
@@ -93,7 +124,8 @@ var logout = function(req, res, next) {
 var auth = {
   login: login,
   register: register,
-  logout: logout
+  logout: logout,
+  update: update
 }
 
 module.exports = auth;

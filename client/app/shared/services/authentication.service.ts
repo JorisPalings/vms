@@ -150,4 +150,18 @@ export class AuthenticationService {
       .map((response: Response) => response.json())
       .catch(this.handleError)
   }
+
+  updateUserData(userData: any): Observable<boolean> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+    userData.token = this.token;
+
+    console.log(userData);
+
+    return this.http.post('http://localhost:3000/api/update', JSON.stringify(userData), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+  }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms'
 import { UserService } from '../shared/services/user.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'settings-page',
@@ -17,11 +19,10 @@ import { UserService } from '../shared/services/user.service';
           <div class="row">
               <div class="form five columns">
                   <h2>Profile information</h2>
-                  <form>
-                      <input type="text" id="first-name" placeholder="First name" />
-                      <input type="text" id="last-name" placeholder="Last name"/>
-                      <input type="email" id="email" placeholder="Email"/>
-                      <input type="tel" id="phone" placeholder="Telephone number" />
+                  <form #user="ngForm" (ngSubmit)="saveUserData(user.value)">
+                      <input type="text" id="first-name" placeholder="First name" [value]="userData.fname" name="fname" ngModel/>
+                      <input type="text" id="last-name" placeholder="Last name" [value]="userData.lname" name="lname" ngModel/>
+                      <input type="email" id="email" placeholder="Email" [value]="userData.email" name="email" ngModel/>
                       <button><i class="fa fa-floppy-o"></i> Save changes</button>
                       <a href="#" class="float-left">Change password</a>
                       <a href="#" class="float-right dangerous">Delete account</a>
@@ -50,11 +51,16 @@ export class SettingsComponent {
 
   integrationsCallback = "settings";
   private calendars;
+  public userData = {fname:"", lname: "", email:""};
   public checkboxes = [];
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService ) { }
 
   ngOnInit() {
+    this.authenticationService.requestUserData()
+        .subscribe(data => {
+          this.userData = data;
+    });
     this.userService.getCalendars()
       .subscribe(data => {
         console.log("Data", data);
@@ -79,7 +85,6 @@ export class SettingsComponent {
                 }
               )
             }
-            console.log(this.checkboxes);
           });
       },
       error => console.log(error));
@@ -92,7 +97,7 @@ export class SettingsComponent {
         console.log("successful data", data);
 
         // Route to private dashboard
-        this.router.navigate(['/private-dashboard']);
+        this.router.navigate(['/settings']);
       },
       error => console.error(error));
   }
@@ -106,6 +111,27 @@ export class SettingsComponent {
   checkboxClicked(cal) {
     cal.checked = (cal.checked === "checked") ? "" : "checked";
     this.checkboxes[this.checkboxes.indexOf(cal)] = cal;
+  }
+
+  saveUserData(user) {
+    if(user.fname.trim().length > 0) {
+      this.userData.fname = user.fname;
+    }
+    if(user.lname.trim().length > 0) {
+      this.userData.lname = user.lname;
+    }
+    if(user.email.trim().length > 0) {
+      this.userData.email = user.email;
+    }
+    this.authenticationService.updateUserData(this.userData)
+      .subscribe(data => {
+        // successful
+        console.log("successful data", data);
+
+        // Route to private dashboard
+        this.router.navigate(['/settings']);
+      },
+      error => console.error(error));
   }
 
 }
