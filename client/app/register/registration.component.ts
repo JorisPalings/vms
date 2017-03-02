@@ -43,6 +43,7 @@ import 'rxjs/add/observable/throw';
         Password mismatch
       </small>
       <button type="submit" [disabled]="!form.valid">Next</button>
+      <span class="form-instruction float-right">Already have an account? <a routerLink="/">Log in</a></span>
   </form>
   `,
   styleUrls: ['../dist/assets/css/registration-form.css']
