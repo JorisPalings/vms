@@ -5,10 +5,14 @@
 @import "components/heading";
 
 html, body {
+    background-color: $off-white;
     color: $faded-black;
     font-family: 'Montserrat', sans-serif;
-    background-color: $off-white;
     line-height: 1.5;
+}
+
+html {
+    overflow-y: scroll;
 }
 
 a {

@@ -1,4 +1,5 @@
 export interface Meeting {
+    id: string;
     externalID: string;
     summary: string;
     room: string;
