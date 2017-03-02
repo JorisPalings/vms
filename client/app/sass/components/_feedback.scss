@@ -1,0 +1,12 @@
+@import "vars";
+
+.feedback {
+    background: $success;
+    color: $white;
+    line-height: 2;
+    text-align: center;
+
+    i {
+        margin-right: 8px;
+    }
+}

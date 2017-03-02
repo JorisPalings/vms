@@ -7,6 +7,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
 @Component({
   selector: 'settings-page',
   template: `
+  <feedback></feedback>
   <header class="private-dash-header">
       <branding></branding>
       <div class="title">
