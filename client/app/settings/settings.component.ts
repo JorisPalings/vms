@@ -16,28 +16,34 @@ import { UserService } from '../shared/services/user.service';
       <div class="container">
           <div class="row">
               <div class="form five columns">
-                  <h2>Profile information</h2>
-                  <form>
-                      <input type="text" id="first-name" placeholder="First name" />
-                      <input type="text" id="last-name" placeholder="Last name"/>
-                      <input type="email" id="email" placeholder="Email"/>
-                      <input type="tel" id="phone" placeholder="Telephone number" />
-                      <button><i class="fa fa-floppy-o"></i> Save changes</button>
-                      <a href="#" class="form-instruction float-left">Change password</a>
-                      <a href="#" class="form-instruction float-right dangerous">Delete account</a>
-                  </form>
+                  <section>
+                      <h2>Profile information</h2>
+                      <form>
+                          <input type="text" id="first-name" placeholder="First name" />
+                          <input type="text" id="last-name" placeholder="Last name"/>
+                          <input type="email" id="email" placeholder="Email"/>
+                          <input type="tel" id="phone" placeholder="Telephone number" />
+                          <button><i class="fa fa-floppy-o"></i> Save changes</button>
+                          <a href="#" class="form-instruction float-left">Change password</a>
+                          <a href="#" class="form-instruction float-right dangerous">Delete account</a>
+                      </form>
+                  </section>
               </div>
               <div class="form six columns offset-by-one">
+                <section>
                   <h2>Integrations</h2>
                   <integration-buttons [callback]="integrationsCallback"></integration-buttons>
+                </section>
+                <section>
                   <h2>Calendars</h2>
                   <form #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
                     <fieldset *ngFor="let cal of checkboxes">
                         <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" checked="{{cal.checked}}" (change)="checkboxClicked(cal)"/>
                         <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                     </fieldset>
-                    <button type="submit">Save</button>
+                    <button><i class="fa fa-floppy-o"></i> Save changes</button>
                   </form>
+                </section>
               </div>
           </div>
       </div>
