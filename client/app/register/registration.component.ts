@@ -28,19 +28,17 @@ import 'rxjs/add/observable/throw';
     </li>
   </div>
   <form (ngSubmit)="doRegister()" [formGroup]="form">
-
       <div *ngIf="form.controls['firstname'].hasError('required') && form.controls['firstname'].touched" class="alert alert-danger">You must include a first name.</div>
-      <input type="text" name="firstname" id="firstname" placeholder="FIRSTNAME" autofocus required [formControl]="form.controls['firstname']"/>
-
+      <input type="text" name="firstname" id="firstname" placeholder="First name" autofocus required [formControl]="form.controls['firstname']"/>
 
       <div *ngIf="form.controls['lastname'].hasError('required') && form.controls['lastname'].dirt" class="alert alert-danger">You must include a last name.</div>
-      <input type="text" name="lastname" id="lastname" placeholder="LASTNAME" autofocus required [formControl]="form.controls['lastname']"/>
+      <input type="text" name="lastname" id="lastname" placeholder="Last name" autofocus required [formControl]="form.controls['lastname']"/>
 
-      <input type="text" name="mail" id="email" placeholder="EMAIL" autofocus required [formControl]="form.controls['mail']"/>
-      <input type="password" #password id="password" placeholder="PASSWORD" [formControl]="form.controls['password']" />
-      <div id="rating"></div>
+      <input type="text" name="mail" id="email" placeholder="Email" autofocus required [formControl]="form.controls['mail']"/>
 
-      <input type="password" id="repeatpassword" placeholder="REPEAT PASSWORD" [formControl]="form.controls['repeatpassword']" validateEqual="password" #repeatpassword />
+      <input type="password" #password id="password" placeholder="Password" [formControl]="form.controls['password']" />
+
+      <input type="password" id="repeatpassword" placeholder="Repeat password" [formControl]="form.controls['repeatpassword']" validateEqual="password" #repeatpassword />
       <small [hidden]="form.controls['repeatpassword'].valid ||  (form.controls['repeatpassword'].pristine && !form.submitted)">
         Password mismatch
       </small>
