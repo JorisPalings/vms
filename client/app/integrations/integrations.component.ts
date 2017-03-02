@@ -25,7 +25,7 @@ import { IntegrationButtonsComponent } from '../shared/integration-buttons.compo
               <p class="successful align-left"><i class="fa fa-check"></i> Your account has been created!</p>
               <p class="align-left">Import your calendars automatically by connecting your Google and LinkedIn accounts below:</p>
               <form>
-                  <integration-buttons></integration-buttons>
+                  <integration-buttons [callback]="integrationsCallback"></integration-buttons>
                   <button type="submit" routerLink="/calendars">Next</button>
               </form>
           </div>
@@ -35,4 +35,6 @@ import { IntegrationButtonsComponent } from '../shared/integration-buttons.compo
    styleUrls: ['../dist/assets/css/landing-header.css', '../dist/assets/css/integrations.css']
 })
 
-export class IntegrationsComponent {}
+export class IntegrationsComponent {
+    integrationsCallback = "registration";
+}

@@ -21,6 +21,19 @@ export class MeetingService {
             .post('http://localhost:3000/api/meetings', data, options)
             .map((result: Response) => mapMeetings(result));
     }
+
+    getMeeting(id: number): Observable<Meeting> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        let data = { access_token: this.authenticationService.token,
+                     id: id};
+
+        return this.http
+            .post('http://localhost:3000/api/meeting', data, options)
+            .map((result: Response) => toMeeting(result));
+    }
 }
 
 function mapMeetings(response: Response): Meeting[] {

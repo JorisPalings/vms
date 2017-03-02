@@ -1,4 +1,4 @@
-import { OnInit, OnDestroy, Component } from '@angular/core';
+import { Input, OnInit, OnDestroy, Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {CookieService} from 'angular2-cookie/core';
 
@@ -13,13 +13,15 @@ import {CookieService} from 'angular2-cookie/core';
 })
 
 export class IntegrationButtonsComponent implements OnInit {
+    @Input('callback')
+    callback: string;
     googleAuthenticated: boolean;
     linkedInAuthenticated: boolean;
 
     private googleURL = 'http://localhost:4000/auth/google';
     private linkedinURL = 'http://localhost:4000/auth/linkedin';
 
-    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService) {
+    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService, private router:Router) {
         if(this.cookieService.get('LinkedInAuthenticated') === 'true'){
             this.linkedInAuthenticated = true;
         }
@@ -32,6 +34,7 @@ export class IntegrationButtonsComponent implements OnInit {
         // subscribe to router event
         this.activatedRoute.queryParams.subscribe((params: Params) => {
             let success = params['success'];
+            let callbackParam = params['callback'];
             if(success){
                 if(success == 'linkedin'){
                     this.cookieService.put('LinkedInAuthenticated', 'true');
@@ -41,18 +44,23 @@ export class IntegrationButtonsComponent implements OnInit {
                     this.googleAuthenticated = true;
                 }
             }
+            if(callbackParam) {
+                if(callbackParam === 'settings') {
+                    this.router.navigate(['/settings']);
+                }
+            }
         });
     }
 
     authenticateWithGoogle(event) {
         //Prevents button from submitting form
         event.preventDefault();
-        window.location.href = this.googleURL;
+        window.location.href = this.googleURL + '?callback=' + this.callback;
     }
 
     authenticateWithLinkedin(event) {
         //Prevents button from submitting form
         event.preventDefault();
-        window.location.href = this.linkedinURL;
+        window.location.href = this.linkedinURL + '?callback=' + this.callback;
     }
 }

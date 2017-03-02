@@ -29,7 +29,7 @@ import { UserService } from '../shared/services/user.service';
               </div>
               <div class="form six columns offset-by-one">
                   <h2>Integrations</h2>
-                  <integration-buttons></integration-buttons>
+                  <integration-buttons [callback]="integrationsCallback"></integration-buttons>
                   <h2>Calendars</h2>
                   <form #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
                     <fieldset *ngFor="let cal of checkboxes">
@@ -48,6 +48,7 @@ import { UserService } from '../shared/services/user.service';
 
 export class SettingsComponent {
 
+  integrationsCallback = "settings";
   private calendars;
   public checkboxes = [];
 
