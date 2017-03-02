@@ -19,7 +19,7 @@ import { Meeting } from '../_models/meeting';
             <p>{{meeting.room === undefined ? 'Room is not set for meeting' : meeting.room}}</p>
           </span>
     <span class="profile-image">
-            <img src="{{meeting.externals[0] === undefined ? (meeting.meetees[0] === undefined ? 'https://s-media-cache-ak0.pinimg.com/originals/36/06/ce/3606cebe8d048b71aaea38b52c4eb4bd.jpg' : meeting.meetees[0].pictureURL ) : meeting.externals[0].pictureURL}}">
+            <img src="{{meeting.externals[0] === undefined ? (meeting.meetees[0] === undefined ? 'https://cdn-images-1.medium.com/max/800/0*9BYGa20RkF4rTpJU.png' : meeting.meetees[0].pictureURL ) : meeting.externals[0].pictureURL}}">
           </span>
   </div>
   <div class="bell">
