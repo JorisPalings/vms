@@ -34,10 +34,10 @@ export class Credentials {
             Password is required.
         </small>
         <input type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password" #password="ngModel" required />
-        <span class="form-instruction"><a href="#">Forgot your password?</a></span>
+        <span class="form-instruction float-right"><a href="#">Forgot your password?</a></span>
 
         <button type="submit" [disabled]="!login.valid">Log in</button>
-        <span class="form-instruction">Need an account? <a href="/register">Register</a></span>
+        <span class="form-instruction float-right">Need an account? <a routerLink="/register">Register</a></span>
     </form>
   </div>
   `,
