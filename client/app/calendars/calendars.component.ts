@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { UserService } from '../shared/services/user.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
   selector: 'calendars-page',
@@ -42,43 +43,47 @@ import { UserService } from '../shared/services/user.service';
       </div>
   </div>
   `,
-   styleUrls: ['../dist/assets/css/landing-header.css', '../dist/assets/css/calendars.css']
+  styleUrls: ['../dist/assets/css/landing-header.css', '../dist/assets/css/calendars.css']
 })
 
-export class CalendarsComponent{
+export class CalendarsComponent {
 
 
   private calendars;
   public checkboxes = [];
   private calendarError;
 
-  constructor(private userService: UserService, private router: Router){}
+  constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService) { }
 
-  ngOnInit(){
-    this.userService.getCalendars()
-      .subscribe(data => {
-        console.log("Data", data);
-        this.calendars = data.calendars;
-        console.log("Calendars", this.calendars);
+  ngOnInit() {
+    if (!this.authenticationService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    } else {
+      this.userService.getCalendars()
+        .subscribe(data => {
+          console.log("Data", data);
+          this.calendars = data.calendars;
+          console.log("Calendars", this.calendars);
 
-        for (let cal of this.calendars){
-          this.checkboxes.push(
-            {
-              display: cal.summary,
-              displayOverride: cal.summaryOverride,
-              id: cal.id,
-              checked: false
-            }
-          )
-        }
+          for (let cal of this.calendars) {
+            this.checkboxes.push(
+              {
+                display: cal.summary,
+                displayOverride: cal.summaryOverride,
+                id: cal.id,
+                checked: false
+              }
+            )
+          }
 
-      },
-      error => {
-        this.calendarError = error;
-      });
+        },
+        error => {
+          this.calendarError = error;
+        });
+    }
   }
 
-  linkCals(){
+  linkCals() {
     this.userService.linkCalendars(this.getSelectedOptions())
       .subscribe(data => {
         // Route to private dashboard
@@ -89,8 +94,8 @@ export class CalendarsComponent{
 
   getSelectedOptions() {
     return this.checkboxes
-              .filter(cal => cal.checked)
-              .map(cal => cal.id)
+      .filter(cal => cal.checked)
+      .map(cal => cal.id)
   }
 
 
