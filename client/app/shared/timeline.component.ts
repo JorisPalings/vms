@@ -8,6 +8,11 @@ import { Meeting } from '../_models/meeting';
     selector: 'timeline',
     template: `
   <section>
+    <div *ngIf="errorMessage" class="has-errors container">
+      <li class="error">
+        {{errorMessage}}
+      </li>
+    </div>
     <div class="timerow" *ngFor="let day of meetings">
       <div class="date">{{processDate(day[0].start)}}</div>
       <div class="vertical">
@@ -24,11 +29,18 @@ export class TimelineComponent implements OnInit {
     private past: any[] = [];
     private now: Date;
     private tomorrow: Date;
+    private errorMessage:string;
 
     constructor(private meetingService: MeetingService) { }
 
     ngOnInit() {
-        this.meetingService.getAllMeetings().subscribe(data => this.processMeetings(data));
+        this.meetingService.getAllMeetings()
+          .subscribe(data =>  {
+            this.processMeetings(data)
+          },
+          error => {
+            this.errorMessage = error;
+          });
         this.now = new Date();
         this.tomorrow = new Date();
         this.tomorrow.setDate(this.tomorrow.getDate() + 1);
