@@ -19,13 +19,13 @@ import { ModalModule } from 'ngx-modal';
     <div class="container">
       <div class="row">
         <h2>{{meeting.summary}}</h2>
-        <h3>{{meeting.start}} {{meeting.end}}</h3>
+        <h3>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</h3>
         <h3>{{meeting.room}}</h3>
         <p >{{meeting.description || 'No description has been set for this meeting.'}}</p>
 
         <div class="one-half column offset-by-three">
           <form>
-            <button type="submit"><i class="fa fa-pencil-square-o"></i> View previous notes</button>
+            <button type="submit" routerLink="/projects"><i class="fa fa-pencil-square-o"></i> View previous notes</button>
           </form>
         </div>
         <div class="row">
@@ -64,6 +64,8 @@ export class MeetingDetailsComponent {
     private meeting: any = {};
     private meetingId: string;
     private sub: any;
+    private now: Date;
+    private tomorrow: Date;
 
     constructor(private route: ActivatedRoute, private meetingService: MeetingService) { }
 
@@ -74,13 +76,29 @@ export class MeetingDetailsComponent {
 
         //TODO: Load the meeting detail using MeetingService
         this.meeting = this.meetingService.getMeeting(this.meetingId);
-    }
 
-    showParticipant(external: any) {
-
+        this.now = new Date();
+        this.tomorrow = new Date();
+        this.tomorrow.setDate(this.tomorrow.getDate() + 1);
     }
 
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
+
+    processDate(date: string) {
+        let dateString;
+        let now = this.now.toDateString();
+        let tomorrow = this.tomorrow.toDateString();
+        if (new Date(date).toDateString() == now) {
+            dateString = 'Today';
+        } else if (new Date(date).toDateString() == tomorrow) {
+            dateString = 'Tomorrow';
+        }
+        else {
+            dateString = new Date(date).toDateString();
+        }
+        return dateString;
+    }
+
 }
