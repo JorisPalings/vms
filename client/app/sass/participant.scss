@@ -3,9 +3,15 @@
 .participant {
     box-shadow: $shadow-1;
     box-sizing: border-box;
+    cursor: pointer;
     margin-top: 32px;
     padding: 16px;
+    transition: .125s ease-in-out;
     width: 100%;
+
+    &:hover {
+        box-shadow: $shadow-2;
+    }
 
     img {
       border-radius: 100%;
