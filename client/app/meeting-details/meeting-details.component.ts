@@ -17,15 +17,20 @@ import { ModalModule } from 'ngx-modal';
   </header>
   <main>
     <div class="container">
-      <div class="row">
         <h2>{{meeting.summary}}</h2>
         <h3>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</h3>
         <h3>{{meeting.room}}</h3>
         <p >{{meeting.description || 'No description has been set for this meeting.'}}</p>
 
-        <div class="one-half column offset-by-three">
+      <div class="row">
+        <div class="one-half column">
           <form>
-            <button type="submit" routerLink="/projects"><i class="fa fa-pencil-square-o"></i> View previous notes</button>
+            <button type="submit" routerLink="/projects"><i class="fa fa-eye"></i> View previous notes</button>
+          </form>
+        </div>
+        <div class="one-half column">
+          <form>
+            <button type="submit" routerLink="/projects"><i class="fa fa-pencil-square-o"></i> Take notes</button>
           </form>
         </div>
         <div class="row">
