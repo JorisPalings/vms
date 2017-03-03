@@ -26,4 +26,15 @@ form button {
     i {
         margin-right: 8px;
     }
+
+    &:disabled {
+      background-color: lighten($cw-blue, 50%);
+      cursor: not-allowed;
+    }
+
+    &:disabled:hover {
+      background-color: lighten($cw-blue, 50%);
+      cursor: not-allowed;
+    }
+
 }

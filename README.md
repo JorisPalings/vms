@@ -10,6 +10,9 @@ To install and run this project, you'll need to have [Node.js with npm](https://
 ### Windows
 
 ```
+:: Install TypeScipt globally
+npm install -g typescript
+
 :: Clone the files from the GitHub repository
 git clone https://github.com/JorisPalings/vms.git
 

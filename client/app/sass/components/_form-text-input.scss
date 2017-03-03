@@ -1,4 +1,10 @@
 form {
+  .alert-danger {
+    font-size: 0.8rem;
+    color: $danger;
+    text-align: left;
+  }
+
     input[type="text"], input[type="email"],
     input[type="password"], input[type="tel"] {
         border-radius: 8px;
@@ -7,10 +13,13 @@ form {
         display: block;
         font-family: 'Montserrat', sans-serif;
         font-size: $font-size-normal;
-        margin-top: 1rem;
+        margin-bottom: 1rem;
         padding: .75rem 1.25rem;
         transition: all .25s ease-in-out;
         width: 100%;
+    }
+    input:first-child {
+      margin-top: 1rem;
     }
 
     input::placeholder {

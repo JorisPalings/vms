@@ -7,12 +7,14 @@ import { AuthenticationService } from '../shared/services/authentication.service
 @Component({
   selector: 'settings-page',
   template: `
+  <feedback *ngIf="notificationShown"></feedback>
   <header class="private-dash-header">
       <branding></branding>
-      <div>
-          <h1>Settings</h1>
+      <div class="title">
+        <a routerLink="/private-dashboard"><i class="fa fa-chevron-left"></i></a>
+        <h1>Settings</h1>
       </div>
-      <profile></profile>
+      <profile [name]="name"></profile>
   </header>
   <main>
       <div class="container">
@@ -26,7 +28,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
                         <input type="email" id="email" placeholder="Email" [value]="userData.email" name="email" ngModel/>
                         <button><i class="fa fa-floppy-o"></i> Save changes</button>
                         <a href="#" class="form-instruction float-left">Change password</a>
-                        <a href="#" class="form-instruction float-right dangerous">Delete account</a>
+                        <a href="#" class="form-instruction float-right dangerous" (click)="deleteAccount()">Delete account</a>
                     </form>
                   </section>
               </div>
@@ -59,13 +61,16 @@ export class SettingsComponent {
   private calendars;
   public userData = {fname:"", lname: "", email:""};
   public checkboxes = [];
+  private notificationShown = false;
+  private name;
 
-  constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService ) { }
+  constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService ) { }
 
   ngOnInit() {
     this.authenticationService.requestUserData()
         .subscribe(data => {
           this.userData = data;
+          this.name = data.fname + " " + data.lname;
     });
     this.userService.getCalendars()
       .subscribe(data => {
@@ -95,6 +100,7 @@ export class SettingsComponent {
   linkCals() {
     this.userService.linkCalendars(this.getSelectedOptions())
       .subscribe(data => {
+        this.showNotification();
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
@@ -124,10 +130,33 @@ export class SettingsComponent {
     }
     this.authenticationService.updateUserData(this.userData)
       .subscribe(data => {
+        // Show a notification with timeout
+        this.showNotification();
+
+        this.authenticationService.updateEmployee(this.userData);
+        this.name = this.userData.fname + " " + this.userData.lname;
+
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
       error => console.error(error));
+  }
+
+  showNotification(){
+    this.notificationShown = true;
+    setTimeout(() => {
+      this.notificationShown = false;
+    }, 4000);
+  }
+
+  deleteAccount() {
+    if(confirm("Are you sure you want to delete your account?") && confirm("100%?") && confirm("It will be gone forever, sure you wanna do it?")) {
+      this.authenticationService.deleteAccount()
+      .subscribe(data => {
+        // Router back to landing page
+        this.router.navigate(['/']);
+      });
+    }
   }
 
 }

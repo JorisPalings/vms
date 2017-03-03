@@ -20,7 +20,9 @@ var login = function(req, res, next) {
     else {
       var error = JSON.parse(response.body).error;
       //Throw error to the Angular request
-      res.status(error.statusCode).send({error: error.message});
+      console.log(error);
+
+      res.status(error.statusCode).send(error);
     }
   })
 }
@@ -98,14 +100,36 @@ var logout = function(req, res, next) {
       res.status(error.statusCode).send({error: error.message});
     }
   })
+}
 
+var deleteAccount = function(req, res, next) {
+  var data = req.body;
+  console.log(data);
+  request({
+    uri: "http://localhost:4000/api/employees/removeAllData?id=" + data.id + "&access_token=" + data.token,
+    method: "DELETE"
+  },function(error, response, body){
+    if (!error && response.statusCode === 204){
+      //Do something with the response json and go to the next step
+      console.log("Delete Response", response.body);
+      res.status(204).send(response.body);
+    }
+    else {
+      console.log("body", response.body);
+      var error = JSON.parse(response.body).error;
+
+      //Throw error to the Angular request
+      res.status(error.statusCode).send({error: error.message});
+    }
+  })
 }
 
 var auth = {
   login: login,
   register: register,
   logout: logout,
-  update: update
+  update: update,
+  deleteAccount: deleteAccount
 }
 
 module.exports = auth;

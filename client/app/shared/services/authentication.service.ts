@@ -92,6 +92,7 @@ export class AuthenticationService {
             this.token = token;
             this.email = credentials.mail;
             this.employee = response.json().userId;
+
             // store username and jwt token as cookie to keep user logged in between page refreshes
             this.cookieService.put('currentUser', JSON.stringify({ email: credentials.mail, token: token, id: response.json().userId }));
             return true;
@@ -101,7 +102,17 @@ export class AuthenticationService {
             return false;
         }
       })
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 401){
+          console.log('ERROR 401');
+          return Observable.throw("This email and password combination is incorrect");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
+
+      });
   }
 
   requestUserData(){
@@ -127,7 +138,22 @@ export class AuthenticationService {
 
     return this.http.post('http://localhost:3000/api/register', JSON.stringify(userData), options)
       .map((response: Response) => response.json())
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log(error);
+        if (error.status === 422){
+          return Observable.throw("An account has already been created with this email address");
+        }
+        else {
+          return Observable.throw('A server error occured. Please contact the admin');
+        }
+
+      })
+  }
+
+  updateEmployee(userData:any){
+    this.currentUser.fname = userData.fname;
+    this.currentUser.lname = userData.lname;
+    this.currentUser.email = userData.email;
   }
 
   updateUserData(userData: any): Observable<boolean> {
@@ -136,8 +162,27 @@ export class AuthenticationService {
     let options = new RequestOptions({ headers: headers });
     userData.token = this.token;
 
+
+
     return this.http.post('http://localhost:3000/api/update', JSON.stringify(userData), options)
       .map((response: Response) => response.json())
       .catch(this.handleError)
+  }
+
+  deleteAccount() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    let data = { token: this.token, id: this.getId()};
+
+    this.token = null;
+    this.email = null;
+    this.employee = null;
+
+    this.cookieService.removeAll();
+
+    return this.http.post('http://localhost:3000/api/deleteAccount', JSON.stringify(data), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
   }
 }

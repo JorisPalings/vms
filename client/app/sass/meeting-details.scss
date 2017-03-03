@@ -2,6 +2,7 @@
 @import "components/form-button";
 @import "components/modal";
 @import "participant";
+<<<<<<< HEAD
 
 .private-dash-header {
     display: flex;
@@ -43,4 +44,12 @@
     .participant-row:nth-child(odd) {
         margin-left: 0;
     }
+=======
+@import "components/private-dash";
+
+@media (min-width: 550px){
+  .participant-row:nth-child(odd) {
+    margin-left: 0;
+  }
+>>>>>>> 116c25719fe4d3985c0bd35ba94348556e1d8139
 }

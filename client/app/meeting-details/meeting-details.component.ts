@@ -9,7 +9,10 @@ import { ModalModule } from 'ngx-modal';
     template: `
   <header class="private-dash-header">
 	  <branding></branding>
-    <h1>Meeting</h1>
+    <div class="title">
+      <a routerLink="/private-dashboard"><i class="fa fa-chevron-left"></i></a>
+      <h1>Meeting</h1>
+    </div>
     <profile></profile>
   </header>
   <main>
@@ -48,7 +51,6 @@ import { ModalModule } from 'ngx-modal';
 
       </modal>
         </div>
-
       </div>
     </div>
 
@@ -58,7 +60,6 @@ import { ModalModule } from 'ngx-modal';
 })
 
 export class MeetingDetailsComponent {
-
 
     private meeting: any = {};
     private meetingId: string;
@@ -82,5 +83,4 @@ export class MeetingDetailsComponent {
     ngOnDestroy() {
         this.sub.unsubscribe();
     }
-
 }

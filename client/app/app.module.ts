@@ -27,10 +27,12 @@ import { RegistrationComponent } from './register/registration.component';
 import { IntegrationsComponent } from './integrations/integrations.component';
 import { CalendarsComponent } from './calendars/calendars.component';
 import { SettingsComponent } from './settings/settings.component';
+import { FeedbackComponent } from './settings/feedback.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './landing/login.component';
 import { MeetingDetailsComponent } from './meeting-details/meeting-details.component';
 import { ParticipantComponent } from './meeting-details/participant.component';
+import { ProjectsComponent } from './projects/projects.component';
 import { TimelineComponent } from './shared/timeline.component';
 import { MeetingComponent } from './shared/meeting.component';
 import { DropdownComponent } from './shared/dropdown.component';
@@ -58,12 +60,14 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     IntegrationsComponent,
     CalendarsComponent,
     SettingsComponent,
+    FeedbackComponent,
     NotFoundComponent,
     LoginComponent,
     BrandingComponent,
     MeetingComponent,
     MeetingDetailsComponent,
     ParticipantComponent,
+    ProjectsComponent,
     TimelineComponent,
     DropdownComponent,
     ProfileComponent,
