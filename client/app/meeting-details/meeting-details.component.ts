@@ -72,10 +72,12 @@ export class MeetingDetailsComponent {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.meetingId = params['id']; // (+) converts string 'id' to a number
-        });
 
-        //TODO: Load the meeting detail using MeetingService
-        this.meeting = this.meetingService.getMeeting(this.meetingId);
+            //TODO: Load the meeting detail using MeetingService
+            this.meetingService.getMeeting(this.meetingId).subscribe(data => {
+                this.meeting = data;  
+            });
+        });
 
         this.now = new Date();
         this.tomorrow = new Date();
