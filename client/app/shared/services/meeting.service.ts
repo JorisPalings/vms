@@ -40,14 +40,27 @@ export class MeetingService {
         this.meetings = meetings;
     }
 
-    getMeeting(id: string): Meeting {
-        let meeting = <Meeting>({});
-        for(var i = 0; i < this.meetings.length; i++){
-            if(this.meetings[i].id == id){
-                meeting = this.meetings[i];
-            }
-        }
-        return meeting;
+    getMeeting(id: string): Observable<Meeting> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        let data = { access_token: this.authenticationService.token,
+                     name: this.authenticationService.email,
+                     id: id };
+
+        return this.http
+            .post('http://localhost:3000/api/meeting', data, options)
+            .map((result: Response) => result.json())
+            .catch((error:any) => {
+              console.log("error: ", error);
+              console.log("error to json: ", error.json());
+
+              if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')){
+                return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
+              }
+              return Observable.throw('A server error occured. Please contact the admin');
+            })
     }
 }
 
