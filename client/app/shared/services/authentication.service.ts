@@ -185,4 +185,16 @@ export class AuthenticationService {
       .map((response: Response) => response.json())
       .catch(this.handleError);
   }
+
+  integrations(): Observable<any> {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+    let data = { token: this.token, id: this.getId()};
+
+    return this.http.post('http://localhost:3000/api/integrations', JSON.stringify(data), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
 }

@@ -124,12 +124,33 @@ var deleteAccount = function(req, res, next) {
   })
 }
 
+var integrations = function(req, res, next) {
+  var data = req.body;
+  // Send the credentials to the loopback API
+  request({
+    uri: "http://localhost:4000/api/employees/integrations?id=" + data.id + "&access_token=" + data.token,
+    method: "GET"
+  },function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      res.status(200).send(response.body);
+    }
+    else {
+      var error = JSON.parse(response.body).error;
+      //Throw error to the Angular request
+      console.log(error);
+
+      res.status(error.statusCode).send(error);
+    }
+  })
+}
+
 var auth = {
   login: login,
   register: register,
   logout: logout,
   update: update,
-  deleteAccount: deleteAccount
+  deleteAccount: deleteAccount,
+  integrations: integrations
 }
 
 module.exports = auth;

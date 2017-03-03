@@ -22,21 +22,24 @@ export class IntegrationButtonsComponent implements OnInit {
     private googleURL = 'http://localhost:4000/auth/google';
     private linkedinURL = 'http://localhost:4000/auth/linkedin';
 
-    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService, private router:Router, private authenticationService:AuthenticationService) {
-        if(this.cookieService.get('LinkedInAuthenticated') === 'true'){
-            this.linkedInAuthenticated = true;
-        }
-        if(this.cookieService.get('GoogleAuthenticated') === 'true'){
-            this.googleAuthenticated = true;
-        }
-    }
+    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService, private router:Router, private authenticationService:AuthenticationService) {}
 
     ngOnInit() {
+        this.authenticationService.integrations().subscribe(data => {
+            var integrations = data.integrations;
+            for(var i = 0; i < integrations.length; i++) {
+                if(integrations[i] === 'google-login') {
+                    this.googleAuthenticated = true;
+                } else if(integrations[i] === 'linkedin-login') {
+                    this.linkedInAuthenticated = true;
+                }
+            }
+        });
         // subscribe to router event
         this.activatedRoute.queryParams.subscribe((params: Params) => {
-            let success = params['success'];
+            //let success = params['success'];
             let callbackParam = params['callback'];
-            if(success){
+            /*if(success){
                 if(success == 'linkedin'){
                     this.cookieService.put('LinkedInAuthenticated', 'true');
                     this.linkedInAuthenticated = true;
@@ -44,7 +47,7 @@ export class IntegrationButtonsComponent implements OnInit {
                     this.cookieService.put('GoogleAuthenticated', 'true');
                     this.googleAuthenticated = true;
                 }
-            }
+            }*/
             if(callbackParam) {
                 if(callbackParam === 'settings') {
                     this.router.navigate(['/settings']);
