@@ -34,7 +34,18 @@ export class UserService {
 
     return this.http.post('http://localhost:3000/api/google-calendars', json, options)
       .map((response: Response) => response.json())
-      .catch(this.handleError)
+      .catch((error:any) => {
+        console.log("error: ", error);
+        console.log("error to json: ", error.json());
+
+        if (error.status === 500 && error.json().error === 'Google not integrated.'){
+          return Observable.throw('You have not yet integrated your Google account.');
+        }
+
+        return Observable.throw('A server error occured. Please contact the admin');
+
+
+      })
   }
 
   getCurrentCalendars(): Observable<any> {

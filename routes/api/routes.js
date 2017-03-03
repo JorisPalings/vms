@@ -21,6 +21,9 @@ router.post('/update', auth.update);
 // 5. Delete account
 router.post('/deleteAccount', auth.deleteAccount);
 
+// 6. Get Integrations
+router.post('/integrations', auth.integrations);
+
 // User data
 // 1. Get google calendars
 router.post('/google-calendars', user.googlecalendars);
