@@ -7,6 +7,8 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class MeetingService {
+    public meetings: Meeting[];
+
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
     getAllMeetings(): Observable<Meeting[]> {
@@ -22,26 +24,27 @@ export class MeetingService {
             .map((result: Response) => mapMeetings(result));
     }
 
-    getMeeting(id: string): Observable<any> {
-        console.log("ID:", id);
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        let options = new RequestOptions({ headers: headers });
+    setMeetings(meetings: Meeting[]){
+        this.meetings = meetings;
+    }
 
-        let data = { access_token: this.authenticationService.token, id: id};
-
-        return this.http
-            .post('http://localhost:3000/api/meeting', JSON.stringify(data), options)
-            .map((result: Response) => toMeeting(result.json()));
+    getMeeting(id: string): Meeting {
+        let meeting = <Meeting>({});
+        for(var i = 0; i < this.meetings.length; i++){
+            if(this.meetings[i].id == id){
+                meeting = this.meetings[i];
+            }
+        }
+        return meeting;
     }
 }
 
 function mapMeetings(response: Response): Meeting[] {
-    return response.json().meetings.map(toMeeting);
+    let meetings = response.json().meetings.map(toMeeting);
+    return meetings;
 }
 
 function toMeeting(r: any): Meeting {
-  console.log(r);
     let meeting = <Meeting>({
         id: r.id,
         externalID: r.externalId,

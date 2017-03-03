@@ -1,5 +1,6 @@
 @import "vars";
 @import "components/form-button";
+@import "components/modal";
 @import "participant";
 
 .private-dash-header {
@@ -37,14 +38,9 @@
             border-bottom: 2px solid #232323;
         }
     }
-
-
-
 }
-
-@media (min-width: 550px){
-
-  .participant-row:nth-child(odd) {
-    margin-left: 0;
-  }
+@media (min-width: 550px) {
+    .participant-row:nth-child(odd) {
+        margin-left: 0;
+    }
 }

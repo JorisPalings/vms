@@ -2,10 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Meeting } from '../_models/meeting';
 import { ActivatedRoute } from '@angular/router';
 import { MeetingService } from '../shared/services/meeting.service';
+import { ModalModule } from 'ngx-modal';
 
 @Component({
-  selector: 'meeting-details',
-  template: `
+    selector: 'meeting-details',
+    template: `
   <header class="private-dash-header">
 	  <branding></branding>
     <h1>Meeting</h1>
@@ -25,17 +26,35 @@ import { MeetingService } from '../shared/services/meeting.service';
           </form>
         </div>
         <div class="row">
-          <participant class="one-half column participant-row"></participant>
-          <participant class="one-half column participant-row"></participant>
-          <participant class="one-half column participant-row"></participant>
-          <participant class="one-half column participant-row"></participant>
+          <participant class="one-half column participant-row" *ngFor="let external of meeting.externals" [external]="external" (click)="myModal.open()" ></participant>
+          <modal  #myModal
+              title=""
+              modalClass="modal-large"
+              [hideCloseButton]="false"
+              [closeOnEscape]="true"
+              [closeOnOutsideClick]="true">
+
+          <modal-header>
+              Modal header content goes there.
+          </modal-header>
+
+          <modal-content>
+              Modal body content goes there.
+          </modal-content>
+
+          <modal-footer>
+              Modal footer content goes there.
+          </modal-footer>
+
+      </modal>
         </div>
 
       </div>
     </div>
+
   </main>
   `,
-  styleUrls: ['../dist/assets/css/meeting-details.css']
+    styleUrls: ['../dist/assets/css/meeting-details.css']
 })
 
 export class MeetingDetailsComponent {
@@ -45,26 +64,23 @@ export class MeetingDetailsComponent {
     private meetingId: string;
     private sub: any;
 
-    constructor(private route: ActivatedRoute, private meetingService: MeetingService){}
+    constructor(private route: ActivatedRoute, private meetingService: MeetingService) { }
 
-    ngOnInit(){
-      this.sub = this.route.params.subscribe(params => {
-        this.meetingId = params['id']; // (+) converts string 'id' to a number
-      });
+    ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            this.meetingId = params['id']; // (+) converts string 'id' to a number
+        });
 
-       //TODO: Load the meeting detail using MeetingService
-       this.meetingService.getMeeting(this.meetingId)
-        .subscribe(data => {
-          console.log("Meeting Details: ", data);
-          this.meeting = data;
+        //TODO: Load the meeting detail using MeetingService
+        this.meeting = this.meetingService.getMeeting(this.meetingId);
+    }
 
-        },
-        error => console.log(error));
+    showParticipant(external: any) {
 
     }
 
     ngOnDestroy() {
-      this.sub.unsubscribe();
+        this.sub.unsubscribe();
     }
 
 }

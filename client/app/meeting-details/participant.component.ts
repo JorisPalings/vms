@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'participant',
-  template: `
+    selector: 'participant',
+    template: `
 	<div class="participant">
-		<img src="http://s0.img.humo.be/q100/w300/h300/img_767/76780.jpg" alt="Guy Mortier">
-		Guy Mortier
+		<img src="{{external.pictureURL}}" alt="Guy Mortier">
+		{{external.fname}} {{external.lname}}
 	</div>
   `,
-  styleUrls: ['../dist/assets/css/participant.css']
+    styleUrls: ['../dist/assets/css/participant.css']
 })
 
-export class ParticipantComponent {}
+export class ParticipantComponent {
+    @Input()
+    private external: any;
+}

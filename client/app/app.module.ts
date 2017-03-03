@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
+import { ModalModule } from 'ngx-modal';
 
 // Validators
 import { EqualValidator } from './directives/equal-validator.directive';
@@ -43,7 +44,8 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     appRouting,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    ModalModule
   ],
   declarations: [
     AppComponent,

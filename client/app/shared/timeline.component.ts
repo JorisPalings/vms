@@ -35,6 +35,7 @@ export class TimelineComponent implements OnInit {
     }
 
     processMeetings(meetings: Meeting[]) {
+        this.meetingService.setMeetings(meetings);
         let number = 0;
         meetings.sort(function(a, b) {
             return +new Date(a.start) - +new Date(b.start);
