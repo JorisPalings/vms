@@ -1,6 +1,6 @@
 import { Input, OnInit, OnDestroy, Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import {CookieService} from 'angular2-cookie/core';
+import { CookieService } from 'angular2-cookie/core';
 import { AuthenticationService } from '../shared/services/authentication.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
   <button class="integration-button linkedin" [disabled]="linkedInAuthenticated" [ngClass]="{'linked no-hover': linkedInAuthenticated}" (click)="authenticateWithLinkedin($event)">LinkedIn <i class="fa fa-check" [hidden]="!linkedInAuthenticated" aria-hidden="true"></i></button>
   `,
     styleUrls: ['../dist/assets/css/integrations.css'],
-    providers: [ CookieService ]
+    providers: [CookieService]
 })
 
 export class IntegrationButtonsComponent implements OnInit {
@@ -22,38 +22,33 @@ export class IntegrationButtonsComponent implements OnInit {
     private googleURL = 'http://localhost:4000/auth/google';
     private linkedinURL = 'http://localhost:4000/auth/linkedin';
 
-    constructor(private activatedRoute: ActivatedRoute, private cookieService:CookieService, private router:Router, private authenticationService:AuthenticationService) {}
+    constructor(private activatedRoute: ActivatedRoute, private cookieService: CookieService, private router: Router, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
-        this.authenticationService.integrations().subscribe(data => {
-            var integrations = data.integrations;
-            for(var i = 0; i < integrations.length; i++) {
-                if(integrations[i] === 'google-login') {
-                    this.googleAuthenticated = true;
-                } else if(integrations[i] === 'linkedin-login') {
-                    this.linkedInAuthenticated = true;
+
+        if (!this.authenticationService.isAuthenticated()) {
+            this.router.navigate(['/']);
+        } else {
+            this.authenticationService.integrations().subscribe(data => {
+                var integrations = data.integrations;
+                for (var i = 0; i < integrations.length; i++) {
+                    if (integrations[i] === 'google-login') {
+                        this.googleAuthenticated = true;
+                    } else if (integrations[i] === 'linkedin-login') {
+                        this.linkedInAuthenticated = true;
+                    }
                 }
-            }
-        });
-        // subscribe to router event
-        this.activatedRoute.queryParams.subscribe((params: Params) => {
-            //let success = params['success'];
-            let callbackParam = params['callback'];
-            /*if(success){
-                if(success == 'linkedin'){
-                    this.cookieService.put('LinkedInAuthenticated', 'true');
-                    this.linkedInAuthenticated = true;
-                } else if(success == 'google'){
-                    this.cookieService.put('GoogleAuthenticated', 'true');
-                    this.googleAuthenticated = true;
+            });
+            // subscribe to router event
+            this.activatedRoute.queryParams.subscribe((params: Params) => {
+                let callbackParam = params['callback'];
+                if (callbackParam) {
+                    if (callbackParam === 'settings') {
+                        this.router.navigate(['/settings']);
+                    }
                 }
-            }*/
-            if(callbackParam) {
-                if(callbackParam === 'settings') {
-                    this.router.navigate(['/settings']);
-                }
-            }
-        });
+            });
+        }
     }
 
     authenticateWithGoogle(event) {

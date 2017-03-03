@@ -3,6 +3,8 @@ import { DropdownComponent } from './dropdown.component';
 import { MeetingComponent } from './meeting.component';
 import { MeetingService } from './services/meeting.service';
 import { Meeting } from '../_models/meeting';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'timeline',
@@ -29,27 +31,31 @@ export class TimelineComponent implements OnInit {
     private past: any[] = [];
     private now: Date;
     private tomorrow: Date;
-    private errorMessage:string;
+    private errorMessage: string;
 
-    constructor(private meetingService: MeetingService) { }
+    constructor(private meetingService: MeetingService, private authenticationService: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
-        this.meetingService.getAllMeetings()
-          .subscribe(data =>  {
-            this.processMeetings(data)
-          },
-          error => {
-            this.errorMessage = error;
-          });
-        this.now = new Date();
-        this.tomorrow = new Date();
-        this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+        if (!this.authenticationService.isAuthenticated()) {
+            this.router.navigate(['/']);
+        } else {
+            this.meetingService.getAllMeetings()
+                .subscribe(data => {
+                    this.processMeetings(data)
+                },
+                error => {
+                    this.errorMessage = error;
+                });
+            this.now = new Date();
+            this.tomorrow = new Date();
+            this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+        }
     }
 
     processMeetings(meetings: Meeting[]) {
         this.meetingService.setMeetings(meetings);
         let number = 0;
-        meetings.sort(function(a, b) {
+        meetings.sort(function (a, b) {
             return +new Date(a.start) - +new Date(b.start);
         });
         for (let index in meetings) {

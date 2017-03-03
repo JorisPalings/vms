@@ -25,14 +25,18 @@ export class ProfileComponent implements OnInit {
 
   public picture;
 
-  constructor(private authenticationService: AuthenticationService, private router: Router){}
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  ngOnInit(){
-    this.authenticationService.requestUserData()
-    .subscribe(data => {
-      this.name = data.fname + " " + data.lname;
-      this.picture = data.pictureURL;
-    })
+  ngOnInit() {
+    if (!this.authenticationService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    } else {
+      this.authenticationService.requestUserData()
+        .subscribe(data => {
+          this.name = data.fname + " " + data.lname;
+          this.picture = data.pictureURL;
+        })
+    }
   }
 
 

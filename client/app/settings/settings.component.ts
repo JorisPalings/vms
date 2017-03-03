@@ -73,10 +73,10 @@ export class SettingsComponent {
   public checkboxes = [];
   private notificationShown = false;
   private name;
-  private calendarError:string;
+  private calendarError: string;
   private user: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService, private fb: FormBuilder) { }
+  constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.user = this.fb.group({
@@ -85,45 +85,49 @@ export class SettingsComponent {
       mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])]
     })
 
-
-    this.authenticationService.requestUserData()
+    if (!this.authenticationService.isAuthenticated()) {
+      this.router.navigate(['/']);
+    } else {
+      this.authenticationService.requestUserData()
         .subscribe(data => {
           this.name = data.fname + " " + data.lname;
 
-          this.user.patchValue({firstname: data.fname});
-          this.user.patchValue({lastname: data.lname});
-          this.user.patchValue({mail: data.email});
+          this.user.patchValue({ firstname: data.fname });
+          this.user.patchValue({ lastname: data.lname });
+          this.user.patchValue({ mail: data.email });
 
-    });
-    this.userService.getCalendars()
-      .subscribe(data => {
-        this.calendars = data.calendars;
+        });
+      this.userService.getCalendars()
+        .subscribe(data => {
+          this.calendars = data.calendars;
 
-        this.userService.getCurrentCalendars()
-          .subscribe(data => {
-            for (let cal of this.calendars) {
-              let isChecked = "";
-              if(data.calendars && data.calendars.includes(cal.id)) {
-                isChecked = "checked";
-              }
-              else {
-                isChecked = "";
-              }
-              this.checkboxes.push(
-                {
-                  display: cal.summary,
-                  displayOverride: cal.summaryOverride,
-                  id: cal.id,
-                  checked: isChecked
+          this.userService.getCurrentCalendars()
+            .subscribe(data => {
+              for (let cal of this.calendars) {
+                let isChecked = "";
+                if (data.calendars && data.calendars.includes(cal.id)) {
+                  isChecked = "checked";
                 }
-              )
-            }
-          });
-      },
-      error => {
-        // Display the error
-        this.calendarError = error;
-      });
+                else {
+                  isChecked = "";
+                }
+                this.checkboxes.push(
+                  {
+                    display: cal.summary,
+                    displayOverride: cal.summaryOverride,
+                    id: cal.id,
+                    checked: isChecked
+                  }
+                )
+              }
+            });
+        },
+        error => {
+          // Display the error
+          this.calendarError = error;
+        });
+    }
+
   }
 
   linkCals() {
@@ -149,18 +153,18 @@ export class SettingsComponent {
 
   saveUserData() {
     let userData = {
-      fname:"",
+      fname: "",
       lname: "",
-      email:""
+      email: ""
     };
 
-    if(this.user.value.firstname.trim().length > 0) {
+    if (this.user.value.firstname.trim().length > 0) {
       userData.fname = this.user.value.firstname;
     }
-    if(this.user.value.lastname.trim().length > 0) {
+    if (this.user.value.lastname.trim().length > 0) {
       userData.lname = this.user.value.lastname;
     }
-    if(this.user.value.mail.trim().length > 0) {
+    if (this.user.value.mail.trim().length > 0) {
       userData.email = this.user.value.mail;
     }
     console.log(userData);
@@ -178,7 +182,7 @@ export class SettingsComponent {
       error => console.error(error));
   }
 
-  showNotification(){
+  showNotification() {
     this.notificationShown = true;
     setTimeout(() => {
       this.notificationShown = false;
@@ -186,12 +190,12 @@ export class SettingsComponent {
   }
 
   deleteAccount() {
-    if(confirm("Are you sure you want to delete your account?") && confirm("100%?") && confirm("It will be gone forever, sure you wanna do it?")) {
+    if (confirm("Are you sure you want to delete your account?") && confirm("100%?") && confirm("It will be gone forever, sure you wanna do it?")) {
       this.authenticationService.deleteAccount()
-      .subscribe(data => {
-        // Router back to landing page
-        this.router.navigate(['/']);
-      });
+        .subscribe(data => {
+          // Router back to landing page
+          this.router.navigate(['/']);
+        });
     }
   }
 
