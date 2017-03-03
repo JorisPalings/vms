@@ -161,7 +161,7 @@ export class AuthenticationService {
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     userData.token = this.token;
-
+    userData.id = this.getId();
 
 
     return this.http.post('http://localhost:3000/api/update', JSON.stringify(userData), options)

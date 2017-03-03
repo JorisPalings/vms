@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms'
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UserService } from '../shared/services/user.service';
 import { AuthenticationService } from '../shared/services/authentication.service';
+import { EmailValidator } from '../directives/mail-validator';
 
 @Component({
   selector: 'settings-page',
@@ -22,11 +23,16 @@ import { AuthenticationService } from '../shared/services/authentication.service
               <div class="form five columns">
                   <section>
                     <h2>Profile information</h2>
-                    <form #user="ngForm" (ngSubmit)="saveUserData(user.value)">
-                        <input type="text" id="first-name" placeholder="First name" [value]="userData.fname" name="fname" ngModel/>
-                        <input type="text" id="last-name" placeholder="Last name" [value]="userData.lname" name="lname" ngModel/>
-                        <input type="email" id="email" placeholder="Email" [value]="userData.email" name="email" ngModel/>
-                        <button type="submit"><i class="fa fa-floppy-o"></i> Save changes</button>
+                    <form [formGroup]="user" (ngSubmit)="saveUserData() ">
+                        <div *ngIf="user.controls['firstname'].hasError('required') && user.controls['firstname'].dirty" class="alert alert-danger">You must include a first name.</div>
+                        <input type="text" id="first-name" placeholder="First name" name="fname" [formControl]="user.controls['firstname']"/>
+                        <div *ngIf="user.controls['lastname'].hasError('required') && user.controls['lastname'].dirty" class="alert alert-danger">You must include a last name.</div>
+                        <input type="text" id="last-name" placeholder="Last name"  name="lname" [formControl]="user.controls['lastname']"/>
+                        <div *ngIf="user.controls['mail'].hasError('required') && user.controls['mail'].dirty" class="alert alert-danger">You must include an email address.</div>
+                        <div *ngIf="user.controls['mail'].hasError('invalidEmailAddress') && user.controls['mail'].touched" class="alert alert-danger">Your email address must be of pattern \"john@doe.com\".</div>
+                        <input type="email" id="email" placeholder="Email" name="mail" [formControl]="user.controls['mail']"/>
+
+                        <button [disabled]="!user.valid" type="submit"><i class="fa fa-floppy-o"></i> Save changes</button>
                         <a href="#" class="form-instruction float-left">Change password</a>
                         <a href="#" class="form-instruction float-right dangerous" (click)="deleteAccount()">Delete account</a>
                     </form>
@@ -64,19 +70,30 @@ export class SettingsComponent {
 
   integrationsCallback = "settings";
   private calendars;
-  public userData = {fname:"", lname: "", email:""};
   public checkboxes = [];
   private notificationShown = false;
   private name;
   private calendarError:string;
+  private user: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService ) { }
+  constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.user = this.fb.group({
+      firstname: [null, Validators.required],
+      lastname: [null, Validators.required],
+      mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])]
+    })
+
+
     this.authenticationService.requestUserData()
         .subscribe(data => {
-          this.userData = data;
           this.name = data.fname + " " + data.lname;
+
+          this.user.patchValue({firstname: data.fname});
+          this.user.patchValue({lastname: data.lname});
+          this.user.patchValue({mail: data.email});
+
     });
     this.userService.getCalendars()
       .subscribe(data => {
@@ -130,23 +147,30 @@ export class SettingsComponent {
     this.checkboxes[this.checkboxes.indexOf(cal)] = cal;
   }
 
-  saveUserData(user) {
-    if(user.fname.trim().length > 0) {
-      this.userData.fname = user.fname;
+  saveUserData() {
+    let userData = {
+      fname:"",
+      lname: "",
+      email:""
+    };
+
+    if(this.user.value.firstname.trim().length > 0) {
+      userData.fname = this.user.value.firstname;
     }
-    if(user.lname.trim().length > 0) {
-      this.userData.lname = user.lname;
+    if(this.user.value.lastname.trim().length > 0) {
+      userData.lname = this.user.value.lastname;
     }
-    if(user.email.trim().length > 0) {
-      this.userData.email = user.email;
+    if(this.user.value.mail.trim().length > 0) {
+      userData.email = this.user.value.mail;
     }
-    this.authenticationService.updateUserData(this.userData)
+    console.log(userData);
+    this.authenticationService.updateUserData(userData)
       .subscribe(data => {
         // Show a notification with timeout
         this.showNotification();
 
-        this.authenticationService.updateEmployee(this.userData);
-        this.name = this.userData.fname + " " + this.userData.lname;
+        this.authenticationService.updateEmployee(userData);
+        this.name = this.user.value.firstname + " " + this.user.value.lastname;
 
         // Route to private dashboard
         this.router.navigate(['/settings']);

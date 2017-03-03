@@ -26,7 +26,7 @@ export class MeetingService {
               console.log("error: ", error);
               console.log("error to json: ", error.json());
 
-              if (error.status === 500 && error.json().error === 'No calendars selected.'){
+              if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')){
                 return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
               }
 
