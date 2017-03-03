@@ -7,4 +7,5 @@ export interface Meeting {
     end: Date;
     externals: any[];
     meetees: any[];
+    projectId: string;
 }

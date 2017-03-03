@@ -65,7 +65,8 @@ function toMeeting(r: any): Meeting {
         summary: r.summary,
         room: r.room,
         externals: r.externals,
-        meetees: r.meetees
+        meetees: r.meetees,
+        projectId: r.projectId
     });
     return meeting;
 }
