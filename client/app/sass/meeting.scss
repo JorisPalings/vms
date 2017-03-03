@@ -36,10 +36,17 @@
     }
 
     .meeting-card {
+        border-radius: 15px;
+        box-shadow: $shadow-1;
         cursor: pointer;
         display: flex;
         line-height: 1;
         min-width: 60vw;
+        transition: .125s ease-in-out;
+
+        &:hover {
+          box-shadow: $shadow-2;
+        }
 
         .time-box {
             align-items: center;
