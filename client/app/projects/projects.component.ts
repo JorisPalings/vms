@@ -13,43 +13,55 @@ import { Component } from '@angular/core';
     </header>
     <main>
         <div class="container">
-            <ul>
-                <!-- <li *ngFor="let project of projects" id="{{project.id}}"> -->
-                <li>
-                    <!-- <h2>{{project.name || project.tag}}</h2>-->
-                    <h2 id="{{project.id}}">VMS</h2>
-                    <ul class="notes-list">
-                        <!-- <li *ngFor="let note of project.notes">{{note.text}}</li> -->
+            <div class="row">
+                <div class="three columns">
+                    <ul class="projects-list">
                         <li>
-                            Sun Mar 05 2017, 10:00 - 12:00
+                            <h2>VMS</h2>
                         </li>
                         <li>
-                            Mon Mar 06 2017, 11:30 - 12:00
+                            <h2>Pepper</h2>
                         </li>
                         <li>
-                            Tue Mar 07 2017, 16:30 - 16:45
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <h2>Pepper</h2>
-                    <ul class="notes-list">
-                        <li>
-                            Sun Mar 05 2017, 9:30 - 10:00
+                            <h2>UCLL</h2>
                         </li>
                         <li>
-                            Wed Mar 08 2017, 13:00 - 14:00
-                        </li>
-                        <li>
-                            Fri Mar 10 2017, 10:00 - 11:00
+                            <h2>Stage</h2>
                         </li>
                     </ul>
-                </li>
-            </ul>
+                </div>
+                <div class="nine columns">
+                    <ul class="meetings-list">
+                        <li>
+                            <ul class="meeting-item">
+                                <li><i class="fa fa-fw fa-calendar"></i>Sun Mar 05 2017, 10:00 - 12:00</li>
+                                <li><i class="fa fa-fw fa-users"></i>Guy Mortier, Sander Lenaerts, Nick Van Vynckt</li>
+                                <li><i class="fa fa-fw fa-map-marker"></i>Everest</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="meeting-item">
+                                <li><i class="fa fa-fw fa-calendar"></i>Mon Mar 06 2017, 11:30 - 12:00</li>
+                                <li><i class="fa fa-fw fa-users"></i>Bert Vandormael</li>
+                                <li><i class="fa fa-fw fa-map-marker"></i>Ben Nevis</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class="meeting-item">
+                                <li><i class="fa fa-fw fa-calendar"></i>Tue Mar 07 2017, 16:30 - 16:45</li>
+                                <li><i class="fa fa-fw fa-calendar"></i>Jan Janssens, Peter Peeters</li>
+                                <li><i class="fa fa-fw fa-map-marker"></i>Mont Blanc</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </main>
     `,
     styleUrls: ['../dist/assets/css/projects.css']
 })
 
-export class ProjectsComponent {}
+export class ProjectsComponent {
+
+}
