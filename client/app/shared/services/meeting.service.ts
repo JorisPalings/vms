@@ -21,7 +21,19 @@ export class MeetingService {
 
         return this.http
             .post('http://localhost:3000/api/meetings', data, options)
-            .map((result: Response) => mapMeetings(result));
+            .map((result: Response) => mapMeetings(result))
+            .catch((error:any) => {
+              console.log("error: ", error);
+              console.log("error to json: ", error.json());
+
+              if (error.status === 500 && error.json().error === 'No calendars selected.'){
+                return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
+              }
+
+              return Observable.throw('A server error occured. Please contact the admin');
+
+
+            })
     }
 
     setMeetings(meetings: Meeting[]){

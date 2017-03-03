@@ -1,0 +1,14 @@
+@import "vars";
+
+.notes-list {
+    margin-bottom: 1.5rem;
+
+    li {
+        cursor: pointer;
+        padding: 1rem;
+
+        &:nth-of-type(2n) {
+            background: $white;
+        }
+    }
+}

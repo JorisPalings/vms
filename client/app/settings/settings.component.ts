@@ -26,7 +26,7 @@ import { AuthenticationService } from '../shared/services/authentication.service
                         <input type="text" id="first-name" placeholder="First name" [value]="userData.fname" name="fname" ngModel/>
                         <input type="text" id="last-name" placeholder="Last name" [value]="userData.lname" name="lname" ngModel/>
                         <input type="email" id="email" placeholder="Email" [value]="userData.email" name="email" ngModel/>
-                        <button><i class="fa fa-floppy-o"></i> Save changes</button>
+                        <button type="submit"><i class="fa fa-floppy-o"></i> Save changes</button>
                         <a href="#" class="form-instruction float-left">Change password</a>
                         <a href="#" class="form-instruction float-right dangerous" (click)="deleteAccount()">Delete account</a>
                     </form>
@@ -39,12 +39,17 @@ import { AuthenticationService } from '../shared/services/authentication.service
                 </section>
                 <section>
                   <h2>Calendars</h2>
-                  <form #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
+                  <div *ngIf="calendarError" class="has-errors">
+                    <li class="error">
+                      {{calendarError}}
+                    </li>
+                  </div>
+                  <form *ngIf="!calendarError" #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
                     <fieldset *ngFor="let cal of checkboxes">
                         <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" checked="{{cal.checked}}" (change)="checkboxClicked(cal)"/>
                         <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                     </fieldset>
-                    <button><i class="fa fa-floppy-o"></i> Save calendars</button>
+                    <button type="submit"><i class="fa fa-floppy-o"></i> Save calendars</button>
                   </form>
                 </section>
               </div>
@@ -63,6 +68,7 @@ export class SettingsComponent {
   public checkboxes = [];
   private notificationShown = false;
   private name;
+  private calendarError:string;
 
   constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService ) { }
 
@@ -80,8 +86,11 @@ export class SettingsComponent {
           .subscribe(data => {
             for (let cal of this.calendars) {
               let isChecked = "";
-              if(data.calendars.includes(cal.id)) {
+              if(data.calendars && data.calendars.includes(cal.id)) {
                 isChecked = "checked";
+              }
+              else {
+                isChecked = "";
               }
               this.checkboxes.push(
                 {
@@ -94,7 +103,10 @@ export class SettingsComponent {
             }
           });
       },
-      error => console.log(error));
+      error => {
+        // Display the error
+        this.calendarError = error;
+      });
   }
 
   linkCals() {

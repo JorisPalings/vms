@@ -93,11 +93,10 @@ export class RegistrationComponent implements OnInit {
             this.authenticationService.login(credentials)
               .subscribe(data => {
                 console.log('Login after register success', data);
+                // Route to the integrations step
+                this.router.navigate(['/integrations']);
               },
               error => console.error(error));
-
-            // Route to the integrations step
-            this.router.navigate(['/integrations']);
           },
           err => {
             console.log(err);

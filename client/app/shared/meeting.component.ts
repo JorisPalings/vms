@@ -16,7 +16,7 @@ import { Meeting } from '../_models/meeting';
     <span class="meeting-info">
             <p><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last">{{external.fname}} {{external.lname}}{{isLast ? '' : ', '}}</span></p>
             <p>{{meeting.summary}}</p>
-            <p>{{meeting.room === undefined ? 'Room is not set for meeting' : meeting.room}}</p>
+            <p>{{meeting.room === undefined ? 'No room has been set for this meeting' : meeting.room}}</p>
           </span>
     <span class="profile-image">
             <img src="{{meeting.externals[0] === undefined ? (meeting.meetees[0] === undefined ? 'https://cdn-images-1.medium.com/max/800/0*9BYGa20RkF4rTpJU.png' : meeting.meetees[0].pictureURL ) : meeting.externals[0].pictureURL}}">
