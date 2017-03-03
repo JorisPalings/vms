@@ -24,7 +24,7 @@ export class Credentials {
       <p>Your form has been submitted.</p>
     </div>
     <div *ngIf="errors" class="has-errors">
-      <li *ngFor="let error of errors">
+      <li *ngFor="let error of errors" class="error">
         {{error}}
       </li>
     </div>
