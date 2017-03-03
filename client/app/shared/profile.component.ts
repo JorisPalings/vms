@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   <div class="profile">
     <span>{{name}}</span>
     <div class="profile-image dropdown">
-      <img class="img-profile" onclick="triggerProfileDropdown()" src="{{picture}}">
+      <img class="img-profile" onclick="triggerProfileDropdown()" src="{{picture || '../dist/assets/images/profile-placeholder.jpeg'}}">
       <profile-dropdown></profile-dropdown>
     </div>
   </div>
