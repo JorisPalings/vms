@@ -14,10 +14,10 @@ import { Component } from '@angular/core';
     <main>
         <div class="container">
             <ul>
-                <!-- <li *ngFor="let project of projects"> -->
+                <!-- <li *ngFor="let project of projects" id="{{project.id}}"> -->
                 <li>
                     <!-- <h2>{{project.name || project.tag}}</h2>-->
-                    <h2>VMS</h2>
+                    <h2 id="{{project.id}}">VMS</h2>
                     <ul class="notes-list">
                         <!-- <li *ngFor="let note of project.notes">{{note.text}}</li> -->
                         <li>
