@@ -33,10 +33,6 @@ const appRoutes : Routes = [
     component: PrivateDashboardComponent
   },
   {
-    path: 'meeting',
-    component: MeetingDetailsComponent
-  },
-  {
     path: 'projects',
     component: ProjectsComponent
   },
