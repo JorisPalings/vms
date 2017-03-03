@@ -25,7 +25,7 @@ import { ModalModule } from 'ngx-modal';
 
         <div class="one-half column offset-by-three">
           <form>
-            <button><i class="fa fa-pencil-square-o"></i> View previous notes</button>
+            <button type="submit"><i class="fa fa-pencil-square-o"></i> View previous notes</button>
           </form>
         </div>
         <div class="row">
