@@ -4,7 +4,11 @@
     background: $success;
     color: $white;
     line-height: 2;
+    position: fixed;
+    left: 0;
     text-align: center;
+    top: 0;
+    width: 100%;
 
     i {
         margin-right: 8px;
