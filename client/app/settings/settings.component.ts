@@ -7,14 +7,14 @@ import { AuthenticationService } from '../shared/services/authentication.service
 @Component({
   selector: 'settings-page',
   template: `
-  <feedback></feedback>
+  <feedback *ngIf="notificationShown"></feedback>
   <header class="private-dash-header">
       <branding></branding>
       <div class="title">
         <a routerLink="/private-dashboard"><i class="fa fa-chevron-left"></i></a>
         <h1>Settings</h1>
       </div>
-      <profile></profile>
+      <profile [name]="name"></profile>
   </header>
   <main>
       <div class="container">
@@ -61,6 +61,8 @@ export class SettingsComponent {
   private calendars;
   public userData = {fname:"", lname: "", email:""};
   public checkboxes = [];
+  private notificationShown = false;
+  private name;
 
   constructor(private userService: UserService, private router: Router, private authenticationService:AuthenticationService ) { }
 
@@ -68,6 +70,7 @@ export class SettingsComponent {
     this.authenticationService.requestUserData()
         .subscribe(data => {
           this.userData = data;
+          this.name = data.fname + " " + data.lname;
     });
     this.userService.getCalendars()
       .subscribe(data => {
@@ -97,6 +100,7 @@ export class SettingsComponent {
   linkCals() {
     this.userService.linkCalendars(this.getSelectedOptions())
       .subscribe(data => {
+        this.showNotification();
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
@@ -126,10 +130,23 @@ export class SettingsComponent {
     }
     this.authenticationService.updateUserData(this.userData)
       .subscribe(data => {
+        // Show a notification with timeout
+        this.showNotification();
+
+        this.authenticationService.updateEmployee(this.userData);
+        this.name = this.userData.fname + " " + this.userData.lname;
+
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
       error => console.error(error));
+  }
+
+  showNotification(){
+    this.notificationShown = true;
+    setTimeout(() => {
+      this.notificationShown = false;
+    }, 4000);
   }
 
   deleteAccount() {

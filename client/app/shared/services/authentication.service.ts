@@ -150,11 +150,19 @@ export class AuthenticationService {
       })
   }
 
+  updateEmployee(userData:any){
+    this.currentUser.fname = userData.fname;
+    this.currentUser.lname = userData.lname;
+    this.currentUser.email = userData.email;
+  }
+
   updateUserData(userData: any): Observable<boolean> {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let options = new RequestOptions({ headers: headers });
     userData.token = this.token;
+
+
 
     return this.http.post('http://localhost:3000/api/update', JSON.stringify(userData), options)
       .map((response: Response) => response.json())

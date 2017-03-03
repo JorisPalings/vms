@@ -1,6 +1,7 @@
 @import "vars";
 @import "components/form-button";
 @import "participant";
+@import "components/private-dash";
 
 @media (min-width: 550px){
   .participant-row:nth-child(odd) {

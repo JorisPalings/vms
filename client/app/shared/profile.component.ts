@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import { AuthenticationService } from './services/authentication.service';
 import { Router } from '@angular/router';
@@ -20,7 +20,9 @@ import { Router } from '@angular/router';
 
 export class ProfileComponent implements OnInit {
 
+  @Input()
   public name;
+
   public picture;
 
   constructor(private authenticationService: AuthenticationService, private router: Router){}
