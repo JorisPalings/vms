@@ -1,0 +1,13 @@
+@import "vars";
+
+.not-found {
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+
+  .four-o-four {
+    font-size: 6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
