@@ -14,7 +14,17 @@ import { Meeting } from '../_models/meeting';
         </div>
       </span>
       <span class="meeting-info">
-        <p><i class="fa fa-fw fa-users"></i><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last">{{external.fname}} {{external.lname}}{{isLast ? '' : ', '}}</span></p>
+        <p>
+            <i class="fa fa-fw fa-users"></i>
+            <span *ngIf="meeting.externals != 0 || meeting.meetees != 0">
+              <span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last">
+                {{external.fname}} {{external.lname}}{{isLast ? '' : ', '}}
+              </span>
+            </span>
+            <span *ngIf="meeting.externals == 0 && meeting.meetees == 0">
+                Just you
+            </span>
+        </p>
         <p><i class="fa fa-fw fa-folder"></i>{{meeting.summary}}</p>
         <p><i class="fa fa-fw fa-map-marker"></i>{{meeting.room === undefined ? 'No room has been set for this meeting' : meeting.room}}</p>
       </span>
