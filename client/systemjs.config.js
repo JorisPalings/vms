@@ -10,7 +10,7 @@
         'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
         'rxjs': 'node_modules/rxjs',
         'angular2-cookie': 'node_modules/angular2-cookie',
-        'ngx-modal': 'node_modules/ngx-modal'
+        'angular2-modal': 'node_modules/angular2-modal'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
@@ -29,11 +29,19 @@
             main: './core.js',
             defaultExtension: 'js'
         },
-        "ngx-modal": {
-            "main": "index.js",
-            "defaultExtension": "js"
+        'angular2-modal': {
+            main: 'bundles/angular2-modal.umd',
+            defaultExtension: 'js'
         }
     };
+
+    // UMD bundles
+    map['angular2-modal/plugins/bootstrap'] = map['angular2-modal'] + '/bundles';
+    packages['angular2-modal/plugins/bootstrap'] = {
+        defaultExtension: 'js',
+        main: 'angular2-modal.bootstrap.umd'
+    };
+
     var ngPackageNames = [
         'common',
         'compiler',

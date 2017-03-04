@@ -2,7 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Meeting } from '../_models/meeting';
 import { ActivatedRoute } from '@angular/router';
 import { MeetingService } from '../shared/services/meeting.service';
-import { ModalModule } from 'ngx-modal';
+import { Overlay, overlayConfigFactory } from 'angular2-modal';
+import { Modal } from 'angular2-modal/plugins/bootstrap';
 
 @Component({
     selector: 'meeting-details',
@@ -34,22 +35,10 @@ import { ModalModule } from 'ngx-modal';
           </form>
         </div>
         <div class="row">
-          <participant class="one-half column participant-row" *ngFor="let external of externals" [external]="external" (click)="myModal.open()" ></participant>
+          <participant class="one-half column participant-row" *ngFor="let external of externals" [external]="external" (click)="showModal(external)" ></participant>
         </div>
       </div>
-      <modal  #myModal
-              title=""
-              class="modal-large"
-              [hideCloseButton]="false"
-              [closeOnEscape]="true"
-              [closeOnOutsideClick]="true">
-
-          <modal-header></modal-header>
-
-          <modal-content>
-              Modal body content goes there.
-          </modal-content>
-      </modal>
+      <span defaultOverlayTarget></span>
     </div>
 
   </main>
@@ -66,7 +55,7 @@ export class MeetingDetailsComponent {
     private now: Date;
     private tomorrow: Date;
 
-    constructor(private route: ActivatedRoute, private meetingService: MeetingService) { }
+    constructor(private route: ActivatedRoute, private meetingService: MeetingService, private modal: Modal) { }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
@@ -107,6 +96,17 @@ export class MeetingDetailsComponent {
             dateString = new Date(date).toDateString();
         }
         return dateString;
+    }
+
+    showModal(external: any) {
+        this.modal.alert()
+            .size('lg')
+            .isBlocking(true)
+            .showClose(true)
+            .keyboard(27)
+            .title('Hello '+external.fname)
+            .body('A Customized Modal')
+            .open();
     }
 
 }
