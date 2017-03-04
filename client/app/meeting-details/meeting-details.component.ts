@@ -35,28 +35,21 @@ import { ModalModule } from 'ngx-modal';
         </div>
         <div class="row">
           <participant class="one-half column participant-row" *ngFor="let external of externals" [external]="external" (click)="myModal.open()" ></participant>
-          <modal  #myModal
+        </div>
+      </div>
+      <modal  #myModal
               title=""
               class="modal-large"
               [hideCloseButton]="false"
               [closeOnEscape]="true"
               [closeOnOutsideClick]="true">
 
-          <modal-header>
-              Modal header content goes there.
-          </modal-header>
+          <modal-header></modal-header>
 
           <modal-content>
               Modal body content goes there.
           </modal-content>
-
-          <modal-footer>
-              Modal footer content goes there.
-          </modal-footer>
-
       </modal>
-        </div>
-      </div>
     </div>
 
   </main>
