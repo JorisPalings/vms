@@ -34,10 +34,10 @@ import { ModalModule } from 'ngx-modal';
           </form>
         </div>
         <div class="row">
-          <participant class="one-half column participant-row" *ngFor="let external of meeting.externals" [external]="external" (click)="myModal.open()" ></participant>
+          <participant class="one-half column participant-row" *ngFor="let external of externals" [external]="external" (click)="myModal.open()" ></participant>
           <modal  #myModal
               title=""
-              modalClass="modal-large"
+              class="modal-large"
               [hideCloseButton]="false"
               [closeOnEscape]="true"
               [closeOnOutsideClick]="true">
@@ -68,6 +68,7 @@ export class MeetingDetailsComponent {
 
     private meeting: any = {};
     private meetingId: string;
+    private externals: any[] = [];
     private sub: any;
     private now: Date;
     private tomorrow: Date;
@@ -78,11 +79,18 @@ export class MeetingDetailsComponent {
         this.sub = this.route.params.subscribe(params => {
             this.meetingId = params['id']; // (+) converts string 'id' to a number
 
-            //TODO: Load the meeting detail using MeetingService
+            //Load the meeting detail using MeetingService
             this.meetingService.getMeeting(this.meetingId).subscribe(data => {
-                this.meeting = data;  
+                this.meeting = data;
+            });
+
+            //Load the meeting externals using MeetingService
+            this.meetingService.getExternals(this.meetingId).subscribe(data => {
+                console.log(data);
+                this.externals = data;
             });
         });
+
 
         this.now = new Date();
         this.tomorrow = new Date();

@@ -44,5 +44,8 @@ router.post('/meetings', meeting.getAll);
 //2. Get meeting
 router.post('/meeting', meeting.getMeeting);
 
+//3. Get externals
+router.post('/externals', meeting.getExternals);
+
 
 module.exports = router;

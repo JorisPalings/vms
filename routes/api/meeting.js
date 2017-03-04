@@ -25,9 +25,22 @@ var getMeeting = function(req, res, next) {
     });
 }
 
+var getExternals = function(req, res, next) {
+    request("http://localhost:4000/api/meetings/"+req.body.id+"/externals?access_token="+req.body.access_token, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            res.status(200).send(response.body);
+        } else {
+            var error = JSON.parse(response.body).error;
+            //Throw error to the Angular request
+            res.status(error.statusCode).send({error: error.message});
+        }
+    });
+}
+
 var meeting = {
     getAll: getAll,
-    getMeeting: getMeeting
+    getMeeting: getMeeting,
+    getExternals: getExternals
 }
 
 module.exports = meeting;
