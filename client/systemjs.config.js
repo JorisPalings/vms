@@ -10,7 +10,7 @@
         'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
         'rxjs': 'node_modules/rxjs',
         'angular2-cookie': 'node_modules/angular2-cookie',
-        'angular2-modal': 'node_modules/angular2-modal'
+        'ngx-modal': 'node_modules/ngx-modal'
     };
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
@@ -29,17 +29,10 @@
             main: './core.js',
             defaultExtension: 'js'
         },
-        'angular2-modal': {
-            main: 'bundles/angular2-modal.umd',
-            defaultExtension: 'js'
+        "ngx-modal": {
+            "main": "index.js",
+            "defaultExtension": "js"
         }
-    };
-
-    // UMD bundles
-    map['angular2-modal/plugins/bootstrap'] = map['angular2-modal'] + '/bundles';
-    packages['angular2-modal/plugins/bootstrap'] = {
-        defaultExtension: 'js',
-        main: 'angular2-modal.bootstrap.umd'
     };
 
     var ngPackageNames = [
@@ -69,9 +62,9 @@
         };
     }
     // Most environments should use UMD; some (Karma) need the individual index files
-    var setPackageConfig = System.packageWithIndex
-        ? packIndex
-        : packUmd;
+    var setPackageConfig = System.packageWithIndex ?
+        packIndex :
+        packUmd;
     // Add package entries for angular packages
     ngPackageNames.forEach(setPackageConfig);
     var config = {

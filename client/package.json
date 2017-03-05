@@ -1,54 +1,54 @@
 {
-  "name": "vms",
-  "version": "1.0.0",
-  "description": "Afstudeerproject 2017",
-  "main": "index.js",
-  "scripts": {
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run gulp:w\"",
-    "gulp": "gulp",
-    "test": "node_modules/.bin/mocha -w",
-    "tsc": "tsc",
-    "tsc:w": "tsc -w",
-    "gulp:w": "gulp"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JorisPalings/vms.git"
-  },
-  "author": "Sander Lenaerts, Joris Palings, Bert Vandormael, Nick Van Vynckt",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/JorisPalings/vms/issues"
-  },
-  "homepage": "https://github.com/JorisPalings/vms#readme",
-  "devDependencies": {
-    "@types/core-js": "^0.9.35",
-    "@types/jasmine": "^2.5.43",
-    "@types/node": "^7.0.5",
-    "concurrently": "^3.3.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-imagemin": "^3.1.1",
-    "gulp-sass": "^3.1.0",
-    "gulp-tsc": "^1.2.6",
-    "sass": "^0.5.0",
-    "typescript": "^2.1.6"
-  },
-  "dependencies": {
-    "@angular/common": "^2.4.8",
-    "@angular/compiler": "^2.4.8",
-    "@angular/core": "^2.4.8",
-    "@angular/forms": "^2.4.8",
-    "@angular/http": "^2.4.8",
-    "@angular/platform-browser": "^2.4.8",
-    "@angular/platform-browser-dynamic": "^2.4.8",
-    "@angular/router": "^3.4.8",
-    "angular2-cookie": "^1.2.6",
-    "angular2-modal": "^2.0.3",
-    "core-js": "^2.4.1",
-    "reflect-metadata": "^0.1.9",
-    "rxjs": "^5.1.1",
-    "systemjs": "^0.20.9",
-    "zone.js": "^0.7.7"
-  }
+    "name": "vms",
+    "version": "1.0.0",
+    "description": "Afstudeerproject 2017",
+    "main": "index.js",
+    "scripts": {
+        "start": "tsc && concurrently \"npm run tsc:w\" \"npm run gulp:w\"",
+        "gulp": "gulp",
+        "test": "node_modules/.bin/mocha -w",
+        "tsc": "tsc",
+        "tsc:w": "tsc -w",
+        "gulp:w": "gulp"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JorisPalings/vms.git"
+    },
+    "author": "Sander Lenaerts, Joris Palings, Bert Vandormael, Nick Van Vynckt",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/JorisPalings/vms/issues"
+    },
+    "homepage": "https://github.com/JorisPalings/vms#readme",
+    "devDependencies": {
+        "@types/core-js": "^0.9.35",
+        "@types/jasmine": "^2.5.43",
+        "@types/node": "^7.0.5",
+        "concurrently": "^3.3.0",
+        "gulp": "^3.9.1",
+        "gulp-babel": "^6.1.2",
+        "gulp-imagemin": "^3.1.1",
+        "gulp-sass": "^3.1.0",
+        "gulp-tsc": "^1.2.6",
+        "sass": "^0.5.0",
+        "typescript": "^2.1.6"
+    },
+    "dependencies": {
+        "@angular/common": "^2.4.8",
+        "@angular/compiler": "^2.4.8",
+        "@angular/core": "^2.4.8",
+        "@angular/forms": "^2.4.8",
+        "@angular/http": "^2.4.8",
+        "@angular/platform-browser": "^2.4.8",
+        "@angular/platform-browser-dynamic": "^2.4.8",
+        "@angular/router": "^3.4.8",
+        "angular2-cookie": "^1.2.6",
+        "ngx-modal": "0.0.29",
+        "core-js": "^2.4.1",
+        "reflect-metadata": "^0.1.9",
+        "rxjs": "^5.1.1",
+        "systemjs": "^0.20.9",
+        "zone.js": "^0.7.7"
+    }
 }
