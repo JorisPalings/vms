@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProjectService } from '../shared/services/project.service';
 
 @Component({
     selector: 'projects',
@@ -16,17 +17,8 @@ import { Component } from '@angular/core';
             <div class="row">
                 <div class="three columns">
                     <ul class="projects-list">
-                        <li>
-                            <h2>VMS</h2>
-                        </li>
-                        <li>
-                            <h2>Pepper</h2>
-                        </li>
-                        <li>
-                            <h2>UCLL</h2>
-                        </li>
-                        <li>
-                            <h2>Stage</h2>
+                        <li *ngFor="let project of projects">
+                            <h2>{{project.tag}}</h2>
                         </li>
                     </ul>
                 </div>
@@ -63,5 +55,15 @@ import { Component } from '@angular/core';
 })
 
 export class ProjectsComponent {
+
+    private projects: any[] = [];
+
+    constructor(private projectService: ProjectService) {}
+
+    ngOnInit() {
+        this.projectService.getAllProjects().subscribe(data => {
+            this.projects = data;
+        });
+    }
 
 }
