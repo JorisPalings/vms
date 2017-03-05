@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Meeting } from '../_models/meeting';
 import { ActivatedRoute } from '@angular/router';
 import { MeetingService } from '../shared/services/meeting.service';
@@ -6,6 +6,7 @@ import { ModalModule } from 'ngx-modal';
 
 @Component({
     selector: 'meeting-details',
+    encapsulation: ViewEncapsulation.None,
     template: `
   <header class="private-dash-header">
 	  <branding></branding>
@@ -34,24 +35,32 @@ import { ModalModule } from 'ngx-modal';
           </form>
         </div>
         <div class="row">
-          <participant class="one-half column participant-row" *ngFor="let external of externals" [external]="external" (click)="myModal.open()" ></participant>
+          <participant class="one-half column participant-row" *ngFor="let external of externals" [external]="external" (click)="myModal.open(); setExternal(external);" ></participant>
         </div>
       </div>
-      <modal  #myModal
-              title=""
-              class="modal-large"
-              [hideCloseButton]="false"
-              [closeOnEscape]="true"
-              [closeOnOutsideClick]="true">
-
-          <modal-header></modal-header>
-
-          <modal-content>
-              Modal body content goes there.
-          </modal-content>
-      </modal>
     </div>
+    <modal  #myModal
+            title=""
+            class="modal-large"
+            [hideCloseButton]="true"
+            [closeOnEscape]="true"
+            [closeOnOutsideClick]="true">
 
+        <modal-header>
+            <img src="{{external.pictureURL}}" alt="{{external.fname}} {{external.lname}}">
+            <h1>{{external.fname}} {{external.lname}}</h1>
+            <button (click)="myModal.close()" class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </modal-header>
+
+        <modal-content>
+            <table>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </modal-content>
+    </modal>
   </main>
   `,
     styleUrls: ['../dist/assets/css/meeting-details.css']
@@ -65,6 +74,7 @@ export class MeetingDetailsComponent {
     private sub: any;
     private now: Date;
     private tomorrow: Date;
+    private external: any = {};
 
     constructor(private route: ActivatedRoute, private meetingService: MeetingService) { }
 
@@ -107,6 +117,11 @@ export class MeetingDetailsComponent {
             dateString = new Date(date).toDateString();
         }
         return dateString;
+    }
+
+    setExternal(external: any) {
+        this.external = external;
+        console.log(external);
     }
 
 }
