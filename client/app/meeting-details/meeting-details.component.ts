@@ -2,7 +2,10 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Meeting } from '../_models/meeting';
 import { ActivatedRoute } from '@angular/router';
 import { MeetingService } from '../shared/services/meeting.service';
+import { UserService } from '../shared/services/user.service';
 import { ModalModule } from 'ngx-modal';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { EmailValidator } from '../directives/mail-validator';
 
 @Component({
     selector: 'meeting-details',
@@ -52,13 +55,31 @@ import { ModalModule } from 'ngx-modal';
             <button (click)="myModal.close()" class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
         </modal-header>
 
-        <modal-content>
+        <modal-content class="user-details">
+          <button  [ngClass]="{'toggleIsDisabled': !isUserEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-eye"></i> Edit fields</button>
+          <form class="container">
             <table>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td>Phone: </td>
+                    <td>
+                      <input placeholder="Phone" [disabled]="!isUserEditable" type="text" name="phone" value="{{external.phone}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email: </td>
+                    <td>
+                      <input placeholder="Email" [disabled]="!isUserEditable" type="text" name="email" value="{{external.email}}">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Company: </td>
+                    <td>
+                      <input placeholder="Company" [disabled]="!isUserEditable" type="text" name="company" value="{{external.company}}">
+                    </td>
                 </tr>
             </table>
+            <button *ngIf="isUserEditable" type="submit">Save data</button>
+          </form>
         </modal-content>
     </modal>
   </main>
@@ -75,10 +96,18 @@ export class MeetingDetailsComponent {
     private now: Date;
     private tomorrow: Date;
     private external: any = {};
+    public isUserEditable = false;
+    private externalForm: FormGroup;
 
-    constructor(private route: ActivatedRoute, private meetingService: MeetingService) { }
+    constructor(private route: ActivatedRoute, private meetingService: MeetingService, private userService: UserService, private fb:FormBuilder) { }
 
     ngOnInit() {
+        this.externalForm = this.fb.group({
+          company: [null, Validators.required],
+          phone: [null, Validators.required],
+          mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
+        })
+
         this.sub = this.route.params.subscribe(params => {
             this.meetingId = params['id']; // (+) converts string 'id' to a number
 
@@ -104,6 +133,46 @@ export class MeetingDetailsComponent {
         this.sub.unsubscribe();
     }
 
+    toggleFieldsEditable(){
+      if (this.isUserEditable){
+        this.isUserEditable = false;
+      }
+      else {
+        this.isUserEditable = true;
+      }
+    }
+
+    saveExternalData(){
+      // TODO: Send the data to the userService
+      let externalData = {
+        id: this.external.id,
+        fname: this.external.fname,
+        lname: this.external.lname,
+        email: this.externalForm.value.mail,
+        company: this.externalForm.value.company,
+        phone: this.externalForm.value.phone
+      }
+
+      this.userService.updateExternal(externalData)
+        .subscribe(data => {
+          console.log(data);
+          // TODO: Success message
+
+          // Update the data locally
+          for (var _i = 0; _i < this.externals.length; _i++) {
+              if (this.externals[_i].fname === this.external.fname && this.externals[_i].lname === this.external.lname){
+                this.external[_i] = this.external;
+              }
+          }
+        },
+        error => {
+          // TODO: Error message
+        })
+
+
+
+    }
+
     processDate(date: string) {
         let dateString;
         let now = this.now.toDateString();
@@ -121,6 +190,10 @@ export class MeetingDetailsComponent {
 
     setExternal(external: any) {
         this.external = external;
+        this.externalForm.value.mail = this.external.email;
+        this.externalForm.value.company = this.external.company;
+        this.externalForm.value.phone = this.external.phone;
+
         console.log(external);
     }
 

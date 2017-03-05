@@ -37,6 +37,9 @@ router.post('/calendars', user.calendars);
 // 4. Get all the user data
 router.post('/user', user.user);
 
+// 5. Update the external data
+router.post('/update-external', user.update-external);
+
 // Meeting service
 //1. Get all meetings
 router.post('/meetings', meeting.getAll);

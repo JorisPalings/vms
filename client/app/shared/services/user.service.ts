@@ -62,6 +62,19 @@ export class UserService {
       .catch(this.handleError)
   }
 
+  updateExternal(external: any){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+
+    external.token = this.authenticationService.token;
+
+    return this.http.post('http://localhost:3000/api/update-external', JSON.stringify(external), options)
+      .map((response: Response) => response.json())
+      .catch(this.handleError)
+
+  }
+
   linkCalendars(cals: any){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

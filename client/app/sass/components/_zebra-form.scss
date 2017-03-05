@@ -18,3 +18,25 @@ fieldset {
         background: $white;
     }
 }
+
+form {
+  tr {
+    &:nth-child(2n){
+      background: $off-white;
+
+      td input {
+        background-color: $white
+      }
+    }
+    &:nth-child(odd){
+      td input {
+        background-color: $off-white;
+      }
+    }
+
+    td {
+      padding: 20px;
+    }
+
+  }
+}
