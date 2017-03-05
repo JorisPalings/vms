@@ -78,11 +78,45 @@ var user = function(req, res, next) {
   })
 }
 
+var update-external = function(req, res, next){
+  let data = req.body;
+
+  let id = data.id;
+  let token = data.token;
+
+  let externalData = {
+    fname: data.fname,
+    lname: data.lname,
+    email: data.mail,
+    company: data.company,
+    phone: data.phone
+  }
+
+
+  request({
+    uri: "http://localhost:4000/api/externals/" + id + "?access_token=" + token,
+    method: "PATCH",
+    form: externalData
+  },function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      res.status(200).send(response.body);
+    }
+    else {
+      console.log(response);
+      var error = JSON.parse(response.body).error;
+      res.status(error.statusCode).send({error: error.message});
+    }
+  })
+
+
+}
+
 var userData = {
   googlecalendars: googlecalendars,
   linkcals: linkcals,
   calendars: calendars,
-  user: user
+  user: user,
+  update-external: update-external
 }
 
 module.exports = userData;

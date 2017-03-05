@@ -26,7 +26,7 @@ import { IntegrationButtonsComponent } from '../shared/integration-buttons.compo
               <p class="align-left">Import your calendars automatically by connecting your Google and LinkedIn accounts below:</p>
               <form>
                   <integration-buttons [callback]="integrationsCallback"></integration-buttons>
-                  <button type="submit" routerLink="/calendars">Next</button>
+                  <button class="margin-top" type="submit" routerLink="/calendars">Next</button>
               </form>
           </div>
       </div>

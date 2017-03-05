@@ -1,2 +1,25 @@
 @import "components/private-dash";
-@import "components/meetings-list"
+@import "components/meetings-list";
+.projects-list {
+    li {
+        cursor: pointer;
+        h2 {
+            position: relative;
+            padding-bottom: 0;
+            margin-bottom: 5px;
+        }
+        &.current {
+            h2 {
+                &:after {
+                    content: "";
+                    position: absolute;
+                    width: 7.5%;
+                    height: 1px;
+                    bottom: 0;
+                    left: 0;
+                    border-bottom: 1px solid $cw-blue-darken;
+                }
+            }
+        }
+    }
+}

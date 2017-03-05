@@ -4,6 +4,7 @@ var router = express.Router();
 var auth = require('./authentication');
 var user = require('./user');
 var meeting = require('./meeting');
+var project = require('./project');
 
 // Authentication
 // 1. Login
@@ -37,6 +38,9 @@ router.post('/calendars', user.calendars);
 // 4. Get all the user data
 router.post('/user', user.user);
 
+// 5. Update the external data
+router.post('/update-external', user.update-external);
+
 // Meeting service
 //1. Get all meetings for current user
 router.post('/meetingsUser', meeting.getAllForOne);
@@ -50,5 +54,11 @@ router.post('/externals', meeting.getExternals);
 //4. Get all meetings
 router.post('/meetings', meeting.getAll);
 
+// Project service
+// 1. Get all projects
+router.post('/projects', project.getAll);
+
+// 2. Get meetings for project
+router.post('/meetingsForProject', project.getMeetingsForProject);
 
 module.exports = router;

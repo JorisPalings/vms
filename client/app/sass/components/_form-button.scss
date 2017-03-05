@@ -1,4 +1,4 @@
-form button {
+ form button {
     background: $cw-blue;
     border-radius: 8px;
     border: 0;
@@ -14,6 +14,10 @@ form button {
     text-transform: uppercase;
     transition: all .125s ease-in-out;
     width: 100%;
+
+    &.margin-top {
+        margin-top: 64px;
+    }
 
     &[type="submit"]:focus {
         outline: none;

@@ -16,6 +16,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { AuthenticationService } from './shared/services/authentication.service';
 import { MeetingService } from './shared/services/meeting.service';
 import { UserService } from './shared/services/user.service';
+import { ProjectService } from './shared/services/project.service';
 
 // Components
 import { appRouting } from './app.routing';
@@ -76,7 +77,7 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     IntegrationButtonsComponent
   ],
   bootstrap: [ AppComponent ],
-  providers: [ CookieService, AuthenticationService, MeetingService, UserService ]
+  providers: [ CookieService, AuthenticationService, MeetingService, UserService, ProjectService ]
 })
 
 export class AppModule {}
