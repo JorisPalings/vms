@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, style, state, animate, transition, trigger } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UserService } from '../shared/services/user.service';
@@ -8,7 +8,7 @@ import { EmailValidator } from '../directives/mail-validator';
 @Component({
   selector: 'settings-page',
   template: `
-  <feedback *ngIf="notificationShown"></feedback>
+  <feedback *ngIf="notificationShown" [@fadeInOut]></feedback>
   <header class="private-dash-header">
       <branding></branding>
       <div class="title">
@@ -63,7 +63,18 @@ import { EmailValidator } from '../directives/mail-validator';
       </div>
   </main>
   `,
-  styleUrls: ['../dist/assets/css/settings.css']
+  styleUrls: ['../dist/assets/css/settings.css'],
+  animations: [
+      trigger('fadeInOut', [
+        transition(':enter', [   // :enter is alias to 'void => *'
+          style({opacity:0}),
+          animate(250, style({ opacity: 1 }))
+        ]),
+        transition(':leave', [   // :leave is alias to '* => void'
+          animate(250, style({ opacity: 0 }))
+        ])
+      ])
+    ]
 })
 
 export class SettingsComponent {
@@ -190,7 +201,7 @@ export class SettingsComponent {
   }
 
   deleteAccount() {
-    if (confirm("Are you sure you want to delete your account?") && confirm("100%?") && confirm("It will be gone forever, sure you wanna do it?")) {
+    if (confirm("Are you sure you want to delete your account?\nThis action cannot be reversed!")) {
       this.authenticationService.deleteAccount()
         .subscribe(data => {
           // Router back to landing page
