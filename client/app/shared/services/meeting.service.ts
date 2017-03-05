@@ -11,7 +11,7 @@ export class MeetingService {
 
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
-    getAllMeetings(): Observable<Meeting[]> {
+    getAllMeetingsForOneUser(): Observable<Meeting[]> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
@@ -20,6 +20,30 @@ export class MeetingService {
             access_token: this.authenticationService.token,
             name: this.authenticationService.email
         };
+
+        return this.http
+            .post('http://localhost:3000/api/meetingsUser', data, options)
+            .map((result: Response) => mapMeetings(result))
+            .catch((error: any) => {
+                console.log("error: ", error);
+                console.log("error to json: ", error.json());
+
+                if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')) {
+                    return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
+                }
+
+                return Observable.throw('A server error occured. Please contact the admin');
+
+
+            })
+    }
+
+    getAllMeetings(): Observable<Meeting[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        let data = {};
 
         return this.http
             .post('http://localhost:3000/api/meetings', data, options)
@@ -92,7 +116,13 @@ export class MeetingService {
 }
 
 function mapMeetings(response: Response): Meeting[] {
-    let meetings = response.json().meetings.map(toMeeting);
+    let meetings;
+    if(response.json().meetings){
+        meetings = response.json().meetings.map(toMeeting);
+    } else {
+        meetings = response.json().map(toMeeting);
+    }
+    console.log(meetings);
     return meetings;
 }
 

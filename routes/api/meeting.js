@@ -2,6 +2,18 @@ var router = require('express').Router();
 var request = require('request');
 
 var getAll = function(req, res, next) {
+    request("http://localhost:4000/api/meetings/all", function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            res.status(200).send(response.body);
+        } else {
+            var error = JSON.parse(response.body).error;
+            //Throw error to the Angular request
+            res.status(error.statusCode).send({error: error.message});
+        }
+    });
+}
+
+var getAllForOne = function(req, res, next) {
     request("http://localhost:4000/api/employees/getMeetings?name="+req.body.name+"&access_token="+req.body.access_token, function(error, response, body) {
         if (!error && response.statusCode === 200) {
             res.status(200).send(response.body);
@@ -39,6 +51,7 @@ var getExternals = function(req, res, next) {
 
 var meeting = {
     getAll: getAll,
+    getAllForOne: getAllForOne,
     getMeeting: getMeeting,
     getExternals: getExternals
 }

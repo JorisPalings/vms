@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import { MeetingComponent } from './meeting.component';
 import { MeetingService } from './services/meeting.service';
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
     <div class="timerow" *ngFor="let day of meetings">
       <div class="date">{{processDate(day[0].start)}}</div>
       <div class="vertical">
-        <meeting *ngFor="let meeting of day" [meeting]="meeting"></meeting>
+        <meeting *ngFor="let meeting of day" [meeting]="meeting" [isPublic]="isPublic"></meeting>
       </div>
     </div>
   </section>
@@ -27,6 +27,8 @@ import { Router } from '@angular/router';
 })
 
 export class TimelineComponent implements OnInit {
+    @Input()
+    private isPublic: boolean;
     private meetings: any[];
     private past: any[] = [];
     private now: Date;
@@ -39,13 +41,24 @@ export class TimelineComponent implements OnInit {
         if (!this.authenticationService.isAuthenticated()) {
             this.router.navigate(['/']);
         } else {
-            this.meetingService.getAllMeetings()
-                .subscribe(data => {
-                    this.processMeetings(data)
-                },
-                error => {
-                    this.errorMessage = error;
-                });
+            if (!this.isPublic) {
+                this.meetingService.getAllMeetingsForOneUser()
+                    .subscribe(data => {
+                        this.processMeetings(data)
+                    },
+                    error => {
+                        this.errorMessage = error;
+                    });
+            } else {
+                this.meetingService.getAllMeetings()
+                    .subscribe(data => {
+                        this.processMeetings(data)
+                    },
+                    error => {
+                        this.errorMessage = error;
+                    });
+            }
+
             this.now = new Date();
             this.tomorrow = new Date();
             this.tomorrow.setDate(this.tomorrow.getDate() + 1);
@@ -53,9 +66,10 @@ export class TimelineComponent implements OnInit {
     }
 
     processMeetings(meetings: Meeting[]) {
+        console.log(meetings);
         this.meetingService.setMeetings(meetings);
         let number = 0;
-        meetings.sort(function (a, b) {
+        meetings.sort(function(a, b) {
             return +new Date(a.start) - +new Date(b.start);
         });
         for (let index in meetings) {

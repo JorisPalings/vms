@@ -1,4 +1,3 @@
-
 import { Component, OnInit, Input } from '@angular/core';
 import { DropdownComponent } from './dropdown.component';
 import { AuthenticationService } from './services/authentication.service';

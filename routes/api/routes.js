@@ -38,14 +38,17 @@ router.post('/calendars', user.calendars);
 router.post('/user', user.user);
 
 // Meeting service
-//1. Get all meetings
-router.post('/meetings', meeting.getAll);
+//1. Get all meetings for current user
+router.post('/meetingsUser', meeting.getAllForOne);
 
 //2. Get meeting
 router.post('/meeting', meeting.getMeeting);
 
 //3. Get externals
 router.post('/externals', meeting.getExternals);
+
+//4. Get all meetings
+router.post('/meetings', meeting.getAll);
 
 
 module.exports = router;

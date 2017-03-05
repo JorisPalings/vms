@@ -38,6 +38,7 @@ import { MeetingComponent } from './shared/meeting.component';
 import { DropdownComponent } from './shared/dropdown.component';
 import { BrandingComponent } from './shared/branding.component';
 import { ProfileComponent } from './shared/profile.component';
+import { ClockComponent } from './public_dashboard/clock.component';
 import { IntegrationButtonsComponent } from './shared/integration-buttons.component';
 
 @NgModule ({
@@ -71,6 +72,7 @@ import { IntegrationButtonsComponent } from './shared/integration-buttons.compon
     TimelineComponent,
     DropdownComponent,
     ProfileComponent,
+    ClockComponent,
     IntegrationButtonsComponent
   ],
   bootstrap: [ AppComponent ],
