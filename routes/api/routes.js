@@ -52,5 +52,8 @@ router.post('/externals', meeting.getExternals);
 // 1. Get all projects
 router.post('/projects', project.getAll);
 
+// 2. Get meetings for project
+router.post('/meetingsForProject', project.getMeetingsForProject);
+
 
 module.exports = router;

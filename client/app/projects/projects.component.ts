@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ProjectService } from '../shared/services/project.service';
+import { MeetingService } from '../shared/services/meeting.service';
 
 @Component({
     selector: 'projects',
@@ -17,32 +18,18 @@ import { ProjectService } from '../shared/services/project.service';
             <div class="row">
                 <div class="three columns">
                     <ul class="projects-list">
-                        <li *ngFor="let project of projects">
+                        <li *ngFor="let project of projects" (click)="showMeetings(project.id)" class="{{project.id == current ? 'current' : ''}}">
                             <h2>{{project.tag}}</h2>
                         </li>
                     </ul>
                 </div>
                 <div class="nine columns">
                     <ul class="meetings-list">
-                        <li>
+                        <li *ngFor="let meeting of meetings">
                             <ul class="meeting-item">
-                                <li><i class="fa fa-fw fa-calendar"></i>Sun Mar 05 2017, 10:00 - 12:00</li>
-                                <li><i class="fa fa-fw fa-users"></i>Guy Mortier, Sander Lenaerts, Nick Van Vynckt</li>
-                                <li><i class="fa fa-fw fa-map-marker"></i>Everest</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul class="meeting-item">
-                                <li><i class="fa fa-fw fa-calendar"></i>Mon Mar 06 2017, 11:30 - 12:00</li>
-                                <li><i class="fa fa-fw fa-users"></i>Bert Vandormael</li>
-                                <li><i class="fa fa-fw fa-map-marker"></i>Ben Nevis</li>
-                            </ul>
-                        </li>
-                        <li>
-                            <ul class="meeting-item">
-                                <li><i class="fa fa-fw fa-calendar"></i>Tue Mar 07 2017, 16:30 - 16:45</li>
-                                <li><i class="fa fa-fw fa-calendar"></i>Jan Janssens, Peter Peeters</li>
-                                <li><i class="fa fa-fw fa-map-marker"></i>Mont Blanc</li>
+                                <li><i class="fa fa-fw fa-calendar"></i>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
+                                <li><i class="fa fa-fw fa-users"></i><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last">{{external.fname}} {{external.lname}}{{isLast ? '' : ', '}}</span></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
+                                <li><i class="fa fa-fw fa-folder"></i>{{meeting.summary}}</li>
                             </ul>
                         </li>
                     </ul>
@@ -57,13 +44,52 @@ import { ProjectService } from '../shared/services/project.service';
 export class ProjectsComponent {
 
     private projects: any[] = [];
+    private meetings: any[] = [];
+    private now: Date;
+    private tomorrow: Date;
+    private current: string;
 
-    constructor(private projectService: ProjectService) {}
+    constructor(private projectService: ProjectService, private meetingService: MeetingService) {}
 
     ngOnInit() {
         this.projectService.getAllProjects().subscribe(data => {
             this.projects = data;
+            this.showMeetings(this.projects[0].id);
         });
+        this.now = new Date();
+        this.tomorrow = new Date();
+        this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+    }
+
+    showMeetings(id: string) {
+        this.current = id;
+        this.projectService.getMeetingsForProject(id).subscribe(data => {
+            this.meetings = data;
+            for(var i = 0; i < this.meetings.length; i++) {
+                this.addExternals(i);
+            }
+        });
+    }
+
+    addExternals(i: number) {
+        this.meetingService.getExternals(this.meetings[i].id).subscribe(data => {
+            this.meetings[i].externals = data;
+        });
+    }
+
+    processDate(date: string) {
+        let dateString;
+        let now = this.now.toDateString();
+        let tomorrow = this.tomorrow.toDateString();
+        if (new Date(date).toDateString() == now) {
+            dateString = 'Today';
+        } else if (new Date(date).toDateString() == tomorrow) {
+            dateString = 'Tomorrow';
+        }
+        else {
+            dateString = new Date(date).toDateString();
+        }
+        return dateString;
     }
 
 }
