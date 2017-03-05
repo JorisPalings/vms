@@ -78,7 +78,7 @@ var user = function(req, res, next) {
   })
 }
 
-var update-external = function(req, res, next){
+var update_external = function(req, res, next){
   let data = req.body;
 
   let id = data.id;
@@ -116,7 +116,7 @@ var userData = {
   linkcals: linkcals,
   calendars: calendars,
   user: user,
-  update-external: update-external
+  update_external: update_external
 }
 
 module.exports = userData;

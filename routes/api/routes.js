@@ -39,7 +39,7 @@ router.post('/calendars', user.calendars);
 router.post('/user', user.user);
 
 // 5. Update the external data
-router.post('/update-external', user.update-external);
+router.post('/update-external', user.update_external);
 
 // Meeting service
 //1. Get all meetings for current user
