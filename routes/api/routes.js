@@ -4,6 +4,7 @@ var router = express.Router();
 var auth = require('./authentication');
 var user = require('./user');
 var meeting = require('./meeting');
+var project = require('./project');
 
 // Authentication
 // 1. Login
@@ -49,6 +50,13 @@ router.post('/meeting', meeting.getMeeting);
 
 //3. Get externals
 router.post('/externals', meeting.getExternals);
+
+// Project service
+// 1. Get all projects
+router.post('/projects', project.getAll);
+
+// 2. Get meetings for project
+router.post('/meetingsForProject', project.getMeetingsForProject);
 
 
 module.exports = router;
