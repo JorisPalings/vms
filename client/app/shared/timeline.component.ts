@@ -15,6 +15,10 @@ import { Router } from '@angular/router';
         {{errorMessage}}
       </li>
     </div>
+    <div class="loading container" *ngIf="loading">
+        <img src="../dist/assets/images/crafty-much-pretty.png"/>
+        <h3>Loading ...</h3>
+    </div>
     <div class="timerow" *ngFor="let day of meetings">
       <div class="date">{{processDate(day[0].start)}}</div>
       <div class="vertical">
@@ -34,6 +38,7 @@ export class TimelineComponent implements OnInit {
     private now: Date;
     private tomorrow: Date;
     private errorMessage: string;
+    private loading = true;
 
     constructor(private meetingService: MeetingService, private authenticationService: AuthenticationService, private router: Router) { }
 
@@ -44,7 +49,8 @@ export class TimelineComponent implements OnInit {
             if (!this.isPublic) {
                 this.meetingService.getAllMeetingsForOneUser()
                     .subscribe(data => {
-                        this.processMeetings(data)
+                        this.processMeetings(data);
+                        this.loading = false;
                     },
                     error => {
                         this.errorMessage = error;
@@ -52,7 +58,8 @@ export class TimelineComponent implements OnInit {
             } else {
                 this.meetingService.getAllMeetings()
                     .subscribe(data => {
-                        this.processMeetings(data)
+                        this.processMeetings(data);
+                        this.loading = false;
                     },
                     error => {
                         this.errorMessage = error;
