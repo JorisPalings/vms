@@ -67,4 +67,7 @@ router.post('/projects', project.getAll);
 // 2. Get meetings for project
 router.post('/meetingsForProject', project.getMeetingsForProject);
 
+// 3. Get notes of meetings of projects
+router.post('/notesOfMeetingsFromProject', project.getNotesForMeetingForProject);
+
 module.exports = router;

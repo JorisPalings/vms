@@ -31,8 +31,7 @@ import { MeetingService } from '../shared/services/meeting.service';
                             <h2>{{meeting.summary}}</h2>
                             <ul class="meeting-item">
                                 <li>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
-                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="myModal.open()" *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last"><span>{{external.fname}}</span> {{external.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
-
+                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="myModal.open()" *ngFor="let note of meeting.notes"><span>{{note.author.fname}}</span> {{note.author.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
                             </ul>
                         </li>
                     </ul>
@@ -89,13 +88,19 @@ export class ProjectsComponent {
     showMeetings(id: string) {
 
         this.current = id;
-        this.projectService.getMeetingsForProject(id).subscribe(data => {
+        this.projectService.getNotesForMeetingForProject(id).subscribe(data => {
             console.log(data);
-            this.meetings = data;
-            for(var i = 0; i < this.meetings.length; i++) {
-                this.addExternals(i);
-            }
+            console.log(data.project.meetings);
+            this.meetings = data.project.meetings;
+            this.sortMeetings();
+            console.log(this.meetings);
         });
+    }
+
+    sortMeetings(){
+      this.meetings.sort(function(a, b) {
+          return +new Date(a.start) - +new Date(b.start);
+      });
     }
 
     addExternals(i: number) {
