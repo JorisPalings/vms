@@ -22,7 +22,7 @@ import 'rxjs/add/observable/throw';
   <div class="step"></div>
   <div class="step"></div>
   <h2 class="form-subtitle">Step 1 - Credentials</h2>
-  <div *ngIf="errors" class="has-errors">
+  <div *ngIf="errors.length > 0" class="has-errors">
     <li *ngFor="let error of errors" class="error">
       {{error}}
     </li>
@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
 
   submitted: boolean = false; // check if the form has been submitted
   form: FormGroup;
-  private errors: string[];
+  private errors: string[] = [];
   public submitTried = false;
 
   constructor(private router: Router, private fb: FormBuilder, private authenticationService: AuthenticationService){}
@@ -74,8 +74,6 @@ export class RegistrationComponent implements OnInit {
 
 
   doRegister(isValid: boolean){
-    this.errors = [];
-
     if (this.form.value.password === this.form.value.repeatpassword){
       this.authenticationService.register(this.form.value)
         .subscribe(
