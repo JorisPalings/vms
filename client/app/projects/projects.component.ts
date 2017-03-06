@@ -2,6 +2,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { ModalModule } from 'ngx-modal';
 import { ProjectService } from '../shared/services/project.service';
 import { MeetingService } from '../shared/services/meeting.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
     selector: 'projects',
@@ -39,7 +41,7 @@ import { MeetingService } from '../shared/services/meeting.service';
                             <h2>{{meeting.summary}}</h2>
                             <ul class="meeting-item">
                                 <li>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
-                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="myModal.open()" *ngFor="let note of meeting.notes"><span>{{note.author.fname}}</span> {{note.author.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
+                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="openNotesModal(note); myModal.open();" *ngFor="let note of meeting.notes"><span>{{note.author.fname}}</span> {{note.author.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
                             </ul>
                         </li>
                     </ul>
@@ -55,16 +57,15 @@ import { MeetingService } from '../shared/services/meeting.service';
 
             <modal-header>
                 <button (click)="myModal.close()" class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
-                <img src="" alt=""><!-- External avatar goes here -->
                 <h1>Note</h1>
             </modal-header>
 
             <modal-content class="notes-details">
-                <button [ngClass]="{'toggleIsDisabled': !isNoteEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-pencil"></i> Edit notes</button>
-                <form class="container">
-                    <textarea [disabled]="!isUserEditable" value=""><!-- Value = note.content --></textarea>
-                    <button *ngIf="isNoteEditable" type="submit">Save note</button>
+                <form [formGroup]="" *ngIf="isModalEditable" class="container" (submit)="saveNotes(activeNote)">
+                    <textarea [formControl]="noteForm.controls['content']" value="{{activeNote.content}}"><!-- Value = note.content --></textarea>
+                    <button type="submit">Save note</button>
                 </form>
+                <p *ngIf="!isModalEditable">{{activeNote.content}}</p>
             </modal-content>
         </modal>
     </main>
@@ -82,10 +83,18 @@ export class ProjectsComponent {
     public isNoteEditable = false;
     private loadingProjects = true;
     private loadingMeetings = false;
+    private isModalEditable = false;
+    private activeNote:any = {};
+    private noteForm: FormGroup;
 
-    constructor(private projectService: ProjectService, private meetingService: MeetingService) {}
+
+    constructor(private projectService: ProjectService, private meetingService: MeetingService, private authenticationService: AuthenticationService, private fb: FormBuilder) {}
 
     ngOnInit() {
+        this.noteForm = this.fb.group({
+          content: [null, Validators.required]
+        })
+
         this.projectService.getAllProjects().subscribe(data => {
             this.projects = data;
             this.loadingProjects = false;
@@ -94,6 +103,39 @@ export class ProjectsComponent {
         this.now = new Date();
         this.tomorrow = new Date();
         this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+    }
+
+    saveNotes(note){
+
+      let data = {
+        isNew: false,
+        noteId: this.activeNote.id,
+        content: this.noteForm.value.content,
+        meetingId: note.meetingId
+      }
+
+      this.meetingService.saveNotes(data)
+        .subscribe(data => {
+          //TODO: Success message
+          console.log(data);
+
+        },
+        error => {
+          //TODO: Error message
+        })
+    }
+
+    openNotesModal(note){
+      console.log(note);
+      this.activeNote = note;
+      // Check if the owner of the notes is the user logged in
+
+      if (note.authorId === this.authenticationService.employee){
+        // If logged in user show the editable modal
+        this.isModalEditable = true;
+      }
+      // If other employee show the normal modal with text display
+
     }
 
     showMeetings(id: string) {
