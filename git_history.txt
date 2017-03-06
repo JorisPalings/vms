@@ -1,0 +1,422 @@
+2f3ed0f - JorisPalings, 2 minutes ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+8e95a4f - JorisPalings, 3 minutes ago : [STYLE] Added transition to highlighted project underline
+278a089 - nickvanvynckt, 4 minutes ago : [PATCH] Added styling to modal buttons
+316811c - nickvanvynckt, 4 minutes ago : [PATCH] Added styling to modal buttons
+33d5c07 - JorisPalings, 5 minutes ago : [STYLE] Added styling to modal textarea
+899e31f - JorisPalings, 5 minutes ago : [FEATURE] Added labels to modal input fields
+cd2c58e - sanderlenaerts, 18 minutes ago : [FEATURE] Edit and view note from projects page added
+52f4b2b - nickvanvynckt, 22 minutes ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+04d4eb2 - nickvanvynckt, 22 minutes ago : [FEATURE] Added a loading service that returns array of strings
+f73dd49 - JorisPalings, 24 minutes ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+f705ccb - JorisPalings, 25 minutes ago : [FEATURE] Added labels to modal input fields
+951707a - JorisPalings, 29 minutes ago : [STYLE] Fixed table padding
+2e8fab2 - JorisPalings, 29 minutes ago : [STYLE] Fixed table padding
+e9cff18 - nickvanvynckt, 67 minutes ago : [FEATURE] Added modal to delete account, needs some styling though
+50ac65d - Bert Vandormael, 88 minutes ago : [PATCH] Registration - error box doesn't flicker anymore
+9c6d649 - Bert Vandormael, 2 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+38b7498 - Bert Vandormael, 2 hours ago : [PATCH] Login validation fixed
+9991b34 - sanderlenaerts, 3 hours ago : [PATCH] Fixed save notes
+fcafbe6 - Bert Vandormael, 3 hours ago : [BUGFIX] RELOAD WORKS :D
+bcc18d3 - Bert Vandormael, 3 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+bc10f7b - Bert Vandormael, 3 hours ago : [FEATURE] Loading icon settings page
+6b447fa - sanderlenaerts, 4 hours ago : [FEATURE] Add and edit notes
+bfd8456 - Bert Vandormael, 4 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+8a63daa - sanderlenaerts, 4 hours ago : [FEATURE] Add and edit notes
+c82d683 - Bert Vandormael, 4 hours ago : [FEATURE] Loading icon on every page
+8614c68 - nickvanvynckt, 4 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+9e04853 - nickvanvynckt, 4 hours ago : [MERGE] Merging
+858f2c1 - Bert Vandormael, 4 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+8c9e3db - Bert Vandormael, 4 hours ago : [PATCH] 'Just you' is shown when creator is only meetee
+889b62a - Bert Vandormael, 6 hours ago : [FEATURE] Loading icon on private dash
+20d4717 - JorisPalings, 6 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+99513ae - JorisPalings, 6 hours ago : [STYLE] Added styling to projects
+33f72f3 - sanderlenaerts, 6 hours ago : [FEATURE] Get notes of meetings from project in project overview
+d5c8c8b - sanderlenaerts, 7 hours ago : [FEATURE] Switch between projects styling
+da978d1 - JorisPalings, 8 hours ago : [PATCH] Edited notes modal
+e00c356 - JorisPalings, 10 hours ago : [STYLE] Changed edit icon
+c37377e - JorisPalings, 10 hours ago : [FEATURE] Added note modal
+360134f - nickvanvynckt, 21 hours ago : [PATCH] Don't use dashes in function names kids\!
+f66b91e - nickvanvynckt, 21 hours ago : [FEATURE] Added a public dashboard
+9097042 - nickvanvynckt, 21 hours ago : [FEATURE] Added a public dashboard
+203a3a3 - sanderlenaerts, 23 hours ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+4ed3676 - sanderlenaerts, 23 hours ago : [FEATURE] Styling form user details of externals
+c2db3d0 - JorisPalings, 25 hours ago : [FEATURE] Added fade animation to feedback
+3b23700 - JorisPalings, 26 hours ago : [STYLE] Added margin to integration sumbit button
+8c9b61f - Bert Vandormael, 26 hours ago : [FEATURE] Project overview shows projects with meetings
+f39a075 - Bert Vandormael, 27 hours ago : [FEATURE] Project service added
+373413f - Bert Vandormael, 29 hours ago : [PATCH] Package fixed
+921da00 - Bert Vandormael, 29 hours ago : [MERGE]
+453292f - Bert Vandormael, 29 hours ago : [FEATURE] Modal styling
+97a7928 - nickvanvynckt, 2 days ago : [FEATURE] Using another modal pacakge now. Easier to style (I hope)
+9f7419d - nickvanvynckt, 2 days ago : [FEATURE] Added basic position CSS to modal
+29b3cc4 - nickvanvynckt, 2 days ago : [FEATURE] Using an extra call to the API to get the externals of the meeting
+59483cf - JorisPalings, 3 days ago : [STYLE] Decreased h3 font size
+0f48a8b - JorisPalings, 3 days ago : [FEATURE] Display placeholder on meetings with no externals or meetees
+3b0655b - JorisPalings, 3 days ago : [PATCH] Moved to projects
+b403e67 - JorisPalings, 3 days ago : [STYLE] Edited projects view
+88faa54 - JorisPalings, 3 days ago : [STYLE] Added hover effects
+d2c4d79 - JorisPalings, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+cc84985 - JorisPalings, 3 days ago : [FEATURE] Added add notes button
+a486582 - Bert Vandormael, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+d043845 - Bert Vandormael, 3 days ago : [BUGFIX] Meeting details doesnt crash on reload - CSS still not working
+2c71550 - JorisPalings, 3 days ago : [PATCH] Removed route to no-ID /meeting
+53e5dbf - JorisPalings, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+f2c0681 - JorisPalings, 3 days ago : [PATCH] Fixed whitespace
+ad2a133 - Bert Vandormael, 3 days ago : [FEATURE] If not logged in -> redirect to landing page
+f000bf9 - sanderlenaerts, 3 days ago : [FEATURE] Z-index fix for dropdown menu
+6dbc047 - sanderlenaerts, 3 days ago : [FEATURE] Placeholder image and not found styling
+d32193f - sanderlenaerts, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+5b8f195 - sanderlenaerts, 3 days ago : [FEATURE] Form validation update user in settings
+cbf85fd - JorisPalings, 3 days ago : [FEATURE] Added feedback when you're the only person at an event
+b79249d - JorisPalings, 3 days ago : [STYLE] Set FontAwesome icons to fixed-width
+a0b717f - JorisPalings, 3 days ago : [PATCH] Removed obsolote vendor prefixes
+2b85553 - JorisPalings, 3 days ago : [FEATURE] Added icons to meeting info to preserve empty lines
+23dc21c - JorisPalings, 3 days ago : [FEATURE] Added projectId to meeting service
+5f06ce3 - JorisPalings, 3 days ago : [PATCH] Formated date & time
+18c893e - JorisPalings, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+b28fb87 - JorisPalings, 3 days ago : [PATCH] Removed routerLink from bell, fixed whitespace
+437e7d5 - nickvanvynckt, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+1297e0a - nickvanvynckt, 3 days ago : [PATCH] Forgot to add these files
+d08e0cb - JorisPalings, 3 days ago : [FEATURE] Added favicon
+4e0773e - JorisPalings, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+4fb33de - JorisPalings, 3 days ago : [PATCH] Added *ngFors in comments
+4b062c9 - Bert Vandormael, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+2716aeb - Bert Vandormael, 3 days ago : [PATCH] Integration check without cookies
+f4679b7 - sanderlenaerts, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+8e29c20 - sanderlenaerts, 3 days ago : [FEATURE] Error handling when google not integrated for calendars
+88f5381 - JorisPalings, 3 days ago : [STYLE] Added button styling
+9281e90 - JorisPalings, 3 days ago : [PATCH] Added *ngFors in comments
+03ddd55 - JorisPalings, 3 days ago : [PATCH] Changed text when no room is set
+6fdb819 - JorisPalings, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+97d3b7f - JorisPalings, 3 days ago : [STYLE] Added styling to projects page and added sample notes
+772cd9a - JorisPalings, 3 days ago : [STYLE] Added styling to submit buttons
+5a151e5 - sanderlenaerts, 3 days ago : [FEATURE] Placeholder profile image and 404 page styling
+8d746c6 - JorisPalings, 3 days ago : [STYLE] Added hover shadow to meeting cards
+fe2e8d8 - JorisPalings, 3 days ago : [STYLE] Added cursor: pointer to meeting cards
+61069e3 - JorisPalings, 3 days ago : [PATCH] Commented out broken import
+3a1601e - nickvanvynckt, 3 days ago : [FEATURE] Added modal
+19b204a - nickvanvynckt, 3 days ago : [FEATURE] Added modal
+116c257 - sanderlenaerts, 3 days ago : [PATCH] Fix error styling on login
+29b3016 - sanderlenaerts, 3 days ago : [PATCH] Notification z-index fix and error styling on login
+445f7d6 - JorisPalings, 3 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+7cf8e9c - JorisPalings, 3 days ago : [FEATURE] Added routerLink to projects component to profile dropdown
+3d7d367 - JorisPalings, 3 days ago : [FEATURE] Added project component
+401838c - sanderlenaerts, 3 days ago : [FEATURE] Update profile when saving settings and notification shown
+e7e1311 - JorisPalings, 3 days ago : [PATCH] Changed notes component to projects component
+b30d82e - JorisPalings, 3 days ago : [PATCH] Added TypeScript installation instruction
+4596ab9 - JorisPalings, 3 days ago : [STYLE] Feedback bar fixed, full-width
+9b5237b - JorisPalings, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+d2cfaa9 - Bert Vandormael, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+e388456 - Bert Vandormael, 4 days ago : [FEATURE] Account can be deleted - employee + integrations
+43a8216 - JorisPalings, 4 days ago : [FEATURE] Added link to login
+99cc837 - sanderlenaerts, 4 days ago : [FEATURE] Email validation and error styling added
+5d27ffc - sanderlenaerts, 4 days ago : [FEATURE] Validation login and register added
+1e6f943 - JorisPalings, 4 days ago : [FEATURE] Added notes component
+5195902 - JorisPalings, 4 days ago : [PATCH] Moved private-dash to components
+f2368ee - JorisPalings, 4 days ago : [PATCH] Fixed whitespace
+6f48060 - sanderlenaerts, 4 days ago : [FEATURE] Login validation added
+058cc9d - JorisPalings, 4 days ago : [FEATURE] Added feedback when settings are changed
+a205231 - Bert Vandormael, 4 days ago : [PATCH] Integrations connected to correct employee object
+b89ab61 - JorisPalings, 4 days ago : [FEATURE] Added back button
+a7f744c - sanderlenaerts, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+4af1b45 - sanderlenaerts, 4 days ago : [FEATURE] Single meeting view
+7cdd8cb - JorisPalings, 4 days ago : [PATCH] Changed default meetee picture
+c52aa03 - sanderlenaerts, 4 days ago : [FEATURE] Single meeting view
+a72220b - JorisPalings, 4 days ago : [PATCH] Changed calendars submit button text
+4399325 - JorisPalings, 4 days ago : [PATCH] Removed unused error handling
+614eb5f - JorisPalings, 4 days ago : [PATCH] Refactoring whitespace & logging
+8c07fe3 - JorisPalings, 4 days ago : [STYLE] Added styling to validation messages
+37fc030 - JorisPalings, 4 days ago : [MERGE]
+ca2fac4 - JorisPalings, 4 days ago : [STYLE] Added sections with margin-bottom
+95b12ef - Bert Vandormael, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+e36c3ce - Bert Vandormael, 4 days ago : [FEATURE] Profile information update working
+aa26c3b - JorisPalings, 4 days ago : [PATCH] Changed href to routerLink
+52e4307 - JorisPalings, 4 days ago : [STYLE] Removed margin-top from submit buttons
+d7c2fcd - JorisPalings, 4 days ago : [STYLE] Removed float-right from form instructions
+cdd7017 - JorisPalings, 4 days ago : [STYLE] Added form instruction styling
+0e967f9 - nickvanvynckt, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+b53c776 - nickvanvynckt, 4 days ago : [PATCH] Get meeting fix
+38b4c69 - sanderlenaerts, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+7557bc5 - sanderlenaerts, 4 days ago : [PATCH] Loading meeting details fix
+940fae4 - nickvanvynckt, 4 days ago : [PATCH] Dumb mistake, & has to be ?
+4ed7ce7 - sanderlenaerts, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+1c0d9c5 - sanderlenaerts, 4 days ago : [FEATURE] Get meeting details overview
+fafa87e - nickvanvynckt, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+5de827b - nickvanvynckt, 4 days ago : [PATCH] Added id to meeting interface
+903d5da - JorisPalings, 4 days ago : [PATCH] Added calendar list styling
+cafca0c - JorisPalings, 4 days ago : [PATCH] Fixed double scrollbars
+0320461 - JorisPalings, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+8b9f3b0 - JorisPalings, 4 days ago : [PATCH] Changed href to routerLink
+98a5429 - JorisPalings, 4 days ago : [STYLE] Always show vertical scrollbar to stop horizontal jumping
+1cfab2c - nickvanvynckt, 4 days ago : [PATCH] Some more quick fixes
+f013efa - JorisPalings, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+173a1de - nickvanvynckt, 4 days ago : [PATCH] Forgot to add the route
+6a12686 - JorisPalings, 4 days ago : [FEATURE] Added routerLink to logo, removed duplicate styling
+bcbcdd8 - JorisPalings, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+142b6a1 - nickvanvynckt, 4 days ago : [FEATURE] Added function to get one meeting by id
+47ade8c - nickvanvynckt, 4 days ago : [FEATURE] Meeting details is taking meeting as input
+67dd15c - JorisPalings, 4 days ago : [STYLE] Fixed vertical-align on icons
+36b62f0 - Bert Vandormael, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+1010059 - JorisPalings, 4 days ago : [FEATURE] Added placeholders to inputs & changed submit button text
+49b8a56 - Bert Vandormael, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+3aaec7d - JorisPalings, 4 days ago : [FEATURE] Added placeholders to inputs & changed submit button text
+897360d - Bert Vandormael, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+55c34e5 - Bert Vandormael, 4 days ago : [FEATURE] Integrations redirect to correct page
+7abe230 - JorisPalings, 4 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+d0d33dd - nickvanvynckt, 5 days ago : [FEATURE] Today and tomorrow is printed instead of date in overview
+f1f12cf - JorisPalings, 5 days ago : [STYLE] Changed input placeholders from uppercase to capitalized
+bcd6644 - JorisPalings, 5 days ago : [STYLE] Added pointer to profile image & dropdown
+6a7e500 - JorisPalings, 5 days ago : [FEATURE] Added extra information to registration steps
+f3bceeb - sanderlenaerts, 5 days ago : [FEATURE] Redirect register to dashboard when logged in
+38d8b8d - JorisPalings, 5 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+51ffdd8 - JorisPalings, 5 days ago : [STYLE] Made button text lowercase and added text-transform
+7d472f6 - sanderlenaerts, 5 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+9ad4ce5 - sanderlenaerts, 5 days ago : [FEATURE] Added Authorization possibilities
+fbb0db4 - JorisPalings, 5 days ago : [PATCH] Fixed whitespace
+3ddce5a - JorisPalings, 5 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+ecddfed - JorisPalings, 5 days ago : [FEATURE] Added meeting participant component and increased global line-height
+8a36670 - JorisPalings, 5 days ago : [STYLE] Added h3 styling
+2c95170 - JorisPalings, 5 days ago : [PATCH] Removed unused main.scss
+29f5e0f - JorisPalings, 5 days ago : [PATCH] Fixed whitespace
+c27961e - Bert Vandormael, 5 days ago : [MERGE]
+bf325b7 - Bert Vandormael, 5 days ago : [FEATURE] Settings - checkbox used calendar automatically checked
+cfe5f1a - sanderlenaerts, 5 days ago : [FEATURE] Log out added
+b1ebaa2 - sanderlenaerts, 5 days ago : [FEATURE] Added Employee model
+dcaaa19 - sanderlenaerts, 5 days ago : [FEATURE] Profile component showing logged in user
+db22a50 - JorisPalings, 5 days ago : [FEATURE] Added meeting details component
+2f05846 - nickvanvynckt, 5 days ago : [PATCH] Removed the hard coded data from the meeting service
+1c851e5 - sanderlenaerts, 5 days ago : [FEATURE] Patching calendars to user
+271b76c - nickvanvynckt, 5 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+77fbc67 - nickvanvynckt, 5 days ago : [PATCH] Fixed the meetings view flexbox direction
+aef8953 - Bert Vandormael, 5 days ago : [FEATURE] Private dash - if no externals, meetees will be shown
+8986069 - nickvanvynckt, 6 days ago : [FEATURE] Made the connection to the database and made the overview of the meetings work
+1165bfb - nickvanvynckt, 6 days ago : [FEATURE] Made the connection to the database and made the overview of the meetings work
+e18bef8 - sanderlenaerts, 6 days ago : [PATCH] Decomponentized calendar list
+bcdd712 - sanderlenaerts, 6 days ago : [PATCH] Fixed routerlink from landing page to register page
+e9cfaaf - sanderlenaerts, 6 days ago : [PATCH] Added userId to the currentUser cookie
+217eb2b - nickvanvynckt, 6 days ago : [PATCH] Woepsie, forgot this file. LELELELELELELELEL
+ae160ad - sanderlenaerts, 6 days ago : [FEATURE] Added UserService
+ce0c8fa - sanderlenaerts, 6 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+39b7510 - sanderlenaerts, 6 days ago : [FEATURE] Added UserService, fetched Google calendars in register process
+edcbf40 - nickvanvynckt, 6 days ago : [FEATURE] Added meeting service
+7746153 - sanderlenaerts, 6 days ago : [FEATURE] Added UserService, fetched Google calendars in register process
+664d121 - nickvanvynckt, 6 days ago : [FEATURE] Added meeting service
+ab67d9c - nickvanvynckt, 6 days ago : [FEATURE] Added meeting service
+7ac7952 - Bert Vandormael, 6 days ago : [BUGFIX] Added gitignore to all folders
+727c1c6 - Bert Vandormael, 6 days ago : [BUGFIX] Keeping folder structure, not files
+1f27094 - Bert Vandormael, 6 days ago : [FEATURE] Removing generated files
+5387fcb - sanderlenaerts, 6 days ago : [FEATURE] Added routing link for google calendars
+2d62ee6 - sanderlenaerts, 6 days ago : [FEATURE] Added routes for google calendars
+9f33d18 - sanderlenaerts, 6 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+c6f2fa5 - sanderlenaerts, 7 days ago : [FEATURE] Redirect to integrations
+78d7959 - JorisPalings, 7 days ago : [PATCH] Fixed wrong step indicator
+faa8651 - sanderlenaerts, 7 days ago : [FEATURE] Redirect after register to integrations
+21649a1 - sanderlenaerts, 7 days ago : [REFACTOR] Refactor login and register to use authentication service
+e73ebd4 - sanderlenaerts, 7 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+55a871a - sanderlenaerts, 7 days ago : [FEATURE] Added authentication service
+889f5cc - nickvanvynckt, 7 days ago : [PATCH] Changed the integration buttons to respond to redirect from back-end
+8333e0d - sanderlenaerts, 7 days ago : [FEATURE] Wiring login and register API
+f921ae7 - sanderlenaerts, 7 days ago : [FEATURE] Wiring of register and login
+7faade1 - sanderlenaerts, 7 days ago : [FEATURE] Added request package
+c6d3f74 - sanderlenaerts, 7 days ago : [FEATURE] Email validator added
+9441c5e - JorisPalings, 8 days ago : [FEATURE] Added link to API repository
+45ef66f - JorisPalings, 8 days ago : [FEATURE] Added Linux/OSX installation instructions
+126ae20 - JorisPalings, 8 days ago : [PATCH] Start server in the background and open the browser
+515fa95 - JorisPalings, 8 days ago : [PATCH] Fixed incorrect file name
+74ebac8 - JorisPalings, 8 days ago : [FEATURE] Changed README.md to installation instructions
+6fc5a83 - JorisPalings, 8 days ago : [PATCH] Removed dist directory from version control
+9b12742 - JorisPalings, 8 days ago : [PATCH] Deleted obsolete templates
+345ec6c - JorisPalings, 8 days ago : [STYLE] Calendar list styling
+df696f7 - JorisPalings, 8 days ago : [PATCH] Narrowed input styles down to specific types
+efd6598 - JorisPalings, 8 days ago : [PATCH] Fixed missing styles
+397f209 - JorisPalings, 8 days ago : [PATCH] Moved form submit outside of calendar-list component
+63ef07d - JorisPalings, 8 days ago : [PATCH] Extracted calendar-list from calendars into its own component and added it to settings
+92f6a41 - nickvanvynckt, 8 days ago : [FEATURE] Added a check symbol to the buttons when integration is success
+c9e05af - nickvanvynckt, 9 days ago : [PATCH] Disabled the buttons when authenticated with Google or Linkedin, also removed the on hover when authenticated
+c66c5a0 - nickvanvynckt, 9 days ago : [FEATURE] Added link between front-end and back-end to login with Google and Linkedin
+00e1480 - nickvanvynckt, 9 days ago : [FEATURE] Added link between front-end and back-end to login with Google and Linkedin
+38685fe - nickvanvynckt, 9 days ago : [FEATURE] Added link between front-end and back-end to login with Google and Linkedin
+184078d - sanderlenaerts, 9 days ago : [FEATURE] Implemented password mismatch using custom equal validator and form builder
+83aa1d3 - sanderlenaerts, 9 days ago : [FEATURE] Added equal validator
+d9152b2 - JorisPalings, 10 days ago : [PATCH] Fixed showing password strength (moved to component)
+40a8379 - JorisPalings, 10 days ago : [PATCH] Extracted integration buttons component from integrations and settings
+01d1d56 - JorisPalings, 10 days ago : [STYLE] Added general paragraph styling
+cef04d1 - JorisPalings, 10 days ago : [FEATURE] Added successful styling, renamed align to float, added align
+20c1a7d - JorisPalings, 10 days ago : [FEATURE] Added success green and changed danger red
+c940b7a - JorisPalings, 10 days ago : [PATCH] Fixed whitespace
+dc48675 - JorisPalings, 10 days ago : [PATCH] Removed unused Twitter integration button
+9370683 - JorisPalings, 11 days ago : [STYLE] Made calendar checkboxes full-width
+cbf17b8 - JorisPalings, 11 days ago : [PATCH] Fixed label
+c040cec - JorisPalings, 11 days ago : [PATCH] Added transitions and box-shadows, removed unused Twitter colors
+d4aef91 - JorisPalings, 11 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+52f0913 - JorisPalings, 11 days ago : [FEATURE] Added calendars component
+c1358aa - sanderlenaerts, 11 days ago : [FEATURE] Login express routing
+dde113c - sanderlenaerts, 11 days ago : [FEATURE] Login form processing
+fc1ccf5 - JorisPalings, 11 days ago : [FEATURE] Added integrations component
+036f6fa - JorisPalings, 11 days ago : [FEATURE] Added registration components
+7ea614b - JorisPalings, 11 days ago : [FEATURE] Added registration components
+2b93684 - sanderlenaerts, 11 days ago : [PATCH] Fixed z-index of backdrop
+49ae004 - JorisPalings, 11 days ago : [PATCH] Fixed package.json ;)
+67c7af2 - sanderlenaerts, 11 days ago : [PATCH] Added package.json
+784b61f - sanderlenaerts, 12 days ago : [FEATURE] Added components for private dashboard
+345d73d - JorisPalings, 12 days ago : [PATCH] Moved sass and assets into client directory and updated gulpfile accordingly
+1f3ee99 - JorisPalings, 12 days ago : [PATCH] Edited folder structure and gulpfile
+adfe8d4 - sanderlenaerts, 12 days ago : [FEATURE] Added login component
+2448c25 - sanderlenaerts, 12 days ago : [STYLE] Extracted form styling
+f35312c - sanderlenaerts, 12 days ago : [PATCH] Changed path to index.html
+2396b3a - sanderlenaerts, 12 days ago : [PATCH] Removed index.html from folder
+d21e438 - JorisPalings, 12 days ago : [PATCH] Moved images to assets
+4b88fc1 - sanderlenaerts, 12 days ago : [FEATURE] Added custom 404 page routing
+c924351 - sanderlenaerts, 13 days ago : [FEATURE] Added type safety to routing
+ecd4335 - sanderlenaerts, 13 days ago : [FEATURE] Angular 2 setup, basic components and start routing
+0060272 - sanderlenaerts, 13 days ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+428c89d - sanderlenaerts, 13 days ago : [PATCH] Updatd gitignore
+8e90467 - JorisPalings, 2 weeks ago : [PATCH] Moved settings template to templates directory
+8488b61 - sanderlenaerts, 2 weeks ago : [PATCH] Patch url links
+33d8389 - sanderlenaerts, 2 weeks ago : [PATCH] Removed unused imports and fixed rename
+9e92872 - sanderlenaerts, 2 weeks ago : [PATCH] Folder structure Angular 2 and Express - Scaffolding Angular 2
+4ba4771 - sanderlenaerts, 2 weeks ago : [STYLE] Backdrop and heading on landing page
+6b0ec8f - sanderlenaerts, 2 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+6bad85d - sanderlenaerts, 2 weeks ago : [STYLE] Added backdrop on landing
+de1ab8b - Nick Van Vynckt, 2 weeks ago : [PATCH] Formatted the html files a little bit
+6a42786 - sanderlenaerts, 2 weeks ago : [FEATURE] Added layout for public dashboard
+b1e8e19 - sanderlenaerts, 2 weeks ago : [BUGFIX] Fixed centering title
+2013c81 - JorisPalings, 2 weeks ago : [PATCH] Fixed form title size and color
+37b19d9 - JorisPalings, 2 weeks ago : [PATCH] Fixed form title color and size
+beb53f8 - JorisPalings, 2 weeks ago : [PATCH] Encapsulated form elements inside form selector
+362f89d - JorisPalings, 2 weeks ago : [FEATURE] Added password rating
+2e5d16c - JorisPalings, 2 weeks ago : [FEATURE] Added password rating
+cbc20a7 - JorisPalings, 2 weeks ago : [STYLE] Added 'danger' styling for delete account link
+ec7c15a - JorisPalings, 2 weeks ago : [STYLE] Added letter-spacing to password field
+17c2519 - JorisPalings, 2 weeks ago : [PATCH] Moved models and tests to server
+2eae36e - JorisPalings, 2 weeks ago : [PATCH] Moved main script to top but deferred
+0df3769 - JorisPalings, 2 weeks ago : [FEATURE] Removed Microsoft Exchange
+93b7171 - JorisPalings, 2 weeks ago : [STYLE] Increased h1 letter-spacing
+0e781dc - JorisPalings, 2 weeks ago : [FEATURE] Removed Microsoft Exchange
+91a0b62 - JorisPalings, 2 weeks ago : [STYLE] Added left and right alignment classes
+134ad56 - JorisPalings, 2 weeks ago : [STYLE] Changed font-size to normal
+e242e50 - JorisPalings, 2 weeks ago : [PATCH] Omitted closing input tags
+656594e - JorisPalings, 2 weeks ago : [PATCH] Omitted closing input tags
+8a5237f - JorisPalings, 2 weeks ago : [STYLE] Changed h1 size
+eeac6f6 - JorisPalings, 2 weeks ago : [STYLE] Changed h1 to uppercase & ordered properties
+cd1c430 - JorisPalings, 2 weeks ago : [PATCH] Moved watch task into default task
+83c5a92 - JorisPalings, 2 weeks ago : [PATCH] Uniformized heading sizes
+a230f9b - JorisPalings, 2 weeks ago : [PATCH] Refactored font-sizes
+38a7246 - JorisPalings, 2 weeks ago : [PATCH] Removed obsolete vendor prefixes, changed background to shorthand, sorted properties, refactored font-sizes
+bf882c8 - JorisPalings, 2 weeks ago : [STYLE] Added back arrow styling
+06342ba - sanderlenaerts, 2 weeks ago : [BUGFIX] Width overflow due to vw fix
+a35b4d7 - JorisPalings, 2 weeks ago : [STYLE] Set h1 display to inline-block to allow for back arrow
+f2cb62b - sanderlenaerts, 2 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+b3bd2fa - sanderlenaerts, 2 weeks ago : [STYLE] Added FontAwesome as an icon font
+0bbf3ad - JorisPalings, 2 weeks ago : [PATCH] Removed main.css from repo
+4b1c032 - JorisPalings, 2 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+870936d - JorisPalings, 2 weeks ago : [STYLE] Added box-shadows
+a30bb22 - sanderlenaerts, 2 weeks ago : [STYLE] Added dropdown functionality to profile menu
+a33b7dd - sanderlenaerts, 2 weeks ago : [STYLE] Added styling for dropdown
+a9e298d - sanderlenaerts, 2 weeks ago : [FEATURE] Added main js file with dropdown functionality
+69c86e4 - JorisPalings, 2 weeks ago : [STYLE] Added margin before NEXT and FINISH buttons
+395e107 - JorisPalings, 2 weeks ago : [STYLE] Added integration buttons style
+055369d - JorisPalings, 2 weeks ago : [STYLE] Added brand colors
+60af068 - sanderlenaerts, 2 weeks ago : [STYLE] Added meeting card styling and HTML hierarchy
+3977dfc - sanderlenaerts, 2 weeks ago : [PATCH] Merge different component imports
+fca6d25 - sanderlenaerts, 2 weeks ago : [PATCH] Merge with comments
+221040e - JorisPalings, 3 weeks ago : [PATCH] Fixed page title
+75f5194 - JorisPalings, 3 weeks ago : [PATCH] Fixed main.scss not being a partial
+dcd3e59 - JorisPalings, 3 weeks ago : [STYLE] Vertically centered login and registration page content
+fe2e831 - JorisPalings, 3 weeks ago : [STYLE] Added full height and center content vertically utility classes
+4e80a77 - JorisPalings, 3 weeks ago : [PATCH] Uniformized HTML file structure
+0f31345 - JorisPalings, 3 weeks ago : [PATCH] Extracted form classes
+1d77a2a - JorisPalings, 3 weeks ago : [STYLE] Added utility partial
+66bee07 - JorisPalings, 3 weeks ago : [STYLE] Added global anchor color
+c26ae15 - JorisPalings, 3 weeks ago : [PATCH] Removed unused import
+352aeb4 - sanderlenaerts, 3 weeks ago : [STYLE] Set default font color and background size
+ae9dcdf - sanderlenaerts, 3 weeks ago : [STYLE] Added black variant color
+9eb3472 - sanderlenaerts, 3 weeks ago : [STYLE] Added header in logged in state
+cf8c56d - JorisPalings, 3 weeks ago : [PATCH] Changed entry point from landing.html to index.html
+3d252f1 - JorisPalings, 3 weeks ago : [STYLE] Moved body background and text color to main
+a9ae765 - sanderlenaerts, 3 weeks ago : [PATCH] Sass folder structure reorganisation
+2d660ce - sanderlenaerts, 3 weeks ago : [PATCH] Added assets folder
+d2fba5f - sanderlenaerts, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+146ba07 - sanderlenaerts, 3 weeks ago : [STYLE] Added default font
+c928bb4 - JorisPalings, 3 weeks ago : [STYLE] Extracted steps from registration.scss
+1708a8b - JorisPalings, 3 weeks ago : [STYLE] Extracted components from landing/registration Sass files
+20b58bb - JorisPalings, 3 weeks ago : [PATCH] Removed path from static_routes app.use
+57ea08b - JorisPalings, 3 weeks ago : [PATCH] Added layouts directory with index.html
+432e85e - JorisPalings, 3 weeks ago : [PATCH] Set module.exports to router
+148ca74 - JorisPalings, 3 weeks ago : [STYLE] Added main.scss
+c5bd125 - JorisPalings, 3 weeks ago : [STYLE] Fixed Craftworks blue
+91e682c - JorisPalings, 3 weeks ago : [STYLE] Added Skeleton grid
+6b4a853 - JorisPalings, 3 weeks ago : [PATCH] Set module.exports to router
+7fb25ad - JorisPalings, 3 weeks ago : [DEV] Added express, express-validator and body-parser to package.json
+5955a07 - sanderlenaerts, 3 weeks ago : [STYLE] Added navbar components file
+cde64d7 - Nick Van Vynckt, 3 weeks ago : [PATCH] Added the external feature to the test file
+9ed83c2 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added a test for the external
+71ca023 - Nick Van Vynckt, 3 weeks ago : [UPDATE] Meeting did not have external yet
+407eb9d - Nick Van Vynckt, 3 weeks ago : [UPDATE] Added a valid case to the meeting test
+40c8fca - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added a test for the employee model
+954efe8 - Nick Van Vynckt, 3 weeks ago : [PATCH] Added a valid test case to the company test + the create and delete database functionality
+ca61ebf - Nick Van Vynckt, 3 weeks ago : [PATCH] Added the remove statement to the test
+c2e5adf - Nick Van Vynckt, 3 weeks ago : [ISSUE] Can't add the unique constraint to Employee or External
+252e54b - Nick Van Vynckt, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+89e9ae7 - Nick Van Vynckt, 3 weeks ago : [PATCH] Starting to integrate database functions tot the tests
+d6b3a0a - Nick Van Vynckt, 3 weeks ago : [PATCH] Added the test URI to the database
+8ba43f6 - Nick Van Vynckt, 3 weeks ago : [PATCH] Added the unique constraint to the model classes
+d878848 - JorisPalings, 3 weeks ago : [PATCH] Moved HTML files to templates directory
+6d72aa5 - JorisPalings, 3 weeks ago : [FEATURE] Created landing and registration pages
+96ec759 - JorisPalings, 3 weeks ago : [STYLE] Added Sasss reset and variables
+743616c - JorisPalings, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+83c291e - JorisPalings, 3 weeks ago : [DEV] Added watch and default tasks to gulpfile
+ab3194e - Nick Van Vynckt, 3 weeks ago : [PATCH] Changed the gulp-file
+a6083bf - JorisPalings, 3 weeks ago : [DEV] Added watch and default task to gulpfile
+b2f2026 - Nick Van Vynckt, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+f4414de - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the noteTest
+2a42a8e - Bert Vandormael, 3 weeks ago : [PATCH] meetingTest.js - the working version
+013171d - Nick Van Vynckt, 3 weeks ago : [PATCH] Merge
+4232a1a - Nick Van Vynckt, 3 weeks ago : [PATCH] Completed the tests
+ef58869 - Bert Vandormael, 3 weeks ago : [BUGFIX] meetingTest.js working again
+6881027 - JorisPalings, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+59dbd41 - Bert Vandormael, 3 weeks ago : [PATCH] meetinfTest.js refactored to ES6
+742e792 - Nick Van Vynckt, 3 weeks ago : [PATCH] Refactored the test file of company to ES6
+bc9d979 - Bert Vandormael, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+41d1cfa - Bert Vandormael, 3 weeks ago : [FEATURE] Tests for meeting.js added
+a59a7b6 - JorisPalings, 3 weeks ago : [PATCH] Whitespace
+5825d42 - Nick Van Vynckt, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+31b3ad6 - Nick Van Vynckt, 3 weeks ago : [PATCH] Refactored the model files to ES6
+ad784b9 - Bert Vandormael, 3 weeks ago : [FEATURE] Companytests done
+74d785e - Nick Van Vynckt, 3 weeks ago : [FEATURE] Finished the location test file and the project test file
+ffdf373 - JorisPalings, 3 weeks ago : [DEV] Added gulp-imagemin to devDependencies
+4fbfdcb - Bert Vandormael, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+806a6b9 - Bert Vandormael, 3 weeks ago : [PATCH] File person.js working + some changes to person.js and location.js
+e6fc9bf - JorisPalings, 3 weeks ago : [DEV] Added image optimization to gulpfile
+7837522 - JorisPalings, 3 weeks ago : [FEATURE] Added db.js
+1c1c907 - Bert Vandormael, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+04c9e10 - Bert Vandormael, 3 weeks ago : [FEATURE] Changes to companyTest.js
+8de8a79 - Nick Van Vynckt, 3 weeks ago : [PATCH] Had some troubles with the constructor of the model files not being recognized
+563a8b4 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added an empty db.js
+b811dc7 - Nick Van Vynckt, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+29503a0 - Nick Van Vynckt, 3 weeks ago : [PATCH] Added mongoose as dependency
+fb7c093 - Bert Vandormael, 3 weeks ago : [PATCH] File companyTest.js moved to test-folder
+a7a5092 - Bert Vandormael, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+cc271d2 - Bert Vandormael, 3 weeks ago : [MERGE] Merging
+1156e7b - Nick Van Vynckt, 3 weeks ago : [PATCH] Finalized the mocha setup
+57af385 - Bert Vandormael, 3 weeks ago : [PATCH] File companyTest.js moved to model-folder
+0a54a5d - Bert Vandormael, 3 weeks ago : [FEATURE] File companyTest.js added
+424745b - Nick Van Vynckt, 3 weeks ago : [PATCH] Added mocha to dev dependencies
+44eabed - JorisPalings, 3 weeks ago : [DEV] Added gulp-sass package
+5f2d0d3 - JorisPalings, 3 weeks ago : [DEV] Added gulpfile
+40e9e61 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the model file for the persons (employee or external)
+6e50557 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the model file for the location (only used in company)
+686567d - Nick Van Vynckt, 3 weeks ago : Merge branch 'master' of https://github.com/JorisPalings/vms
+df28719 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the model file for the company
+476edcc - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the model file for the meeting
+711be62 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the model file for project
+1670c6d - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the model file for the notes
+062818a - Bert Vandormael, 3 weeks ago : [FEATURE] File api/routes.js created + changes
+6c2b0dc - Bert Vandormael, 3 weeks ago : [FEATURE] Changed file static_routes.js
+44e8df8 - Bert Vandormael, 3 weeks ago : [FEATURE] File static_routes.js added
+f119559 - Nick Van Vynckt, 3 weeks ago : [FEATURE] Added the server.js file
+f1d0842 - JorisPalings, 3 weeks ago : Added bower, gulp and sass to devDependencies
+980f46d - sanderlenaerts, 3 weeks ago : Updated readme.md
+82c36a7 - sanderlenaerts, 3 weeks ago : Updated readme.md
+cfa8b4c - sanderlenaerts, 3 weeks ago : Updated .gitignore for technologies
+19155f4 - Joris Palings, 3 weeks ago : Initial commit
