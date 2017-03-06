@@ -76,29 +76,32 @@
             padding: 25px;
             outline: none;
 
-            .modal-header {
-                img {
-                    width: 120px;
-                    height: 120px;
-                    border-radius: 50%;
-                    position: relative;
-                    left: calc(50% - 60px);
+            button {
+                background: $cw-blue;
+                border-radius: 8px;
+                border: 0;
+                box-shadow: $shadow-1;
+                box-sizing: border-box;
+                color: $white;
+                cursor: pointer;
+                font-family: 'Montserrat', sans-serif;
+                font-size: $font-size-normal;
+                margin-top: 1rem;
+                padding: 0.75rem 1.25rem;
+                text-transform: uppercase;
+                transition: all .125s ease-in-out;
+                width: 49%;
+
+                &.danger-button {
+                    background: $google-red;
+
+                    &:hover {
+                        background: $google-red-darken;
+                    }
                 }
 
-                h1 {
-                    text-align: center;
-                }
-
-                .close {
-                    position: absolute;
-                    right: 25px;
-                    top: 25px;
-                    background: transparent;
-                    font-size: $font-size-huge;
-                    border: none;
-                    padding: 0;
-                    color: $cw-blue-darken;
-                    cursor: pointer;
+                &:hover {
+                    background: $cw-blue-darken;
                 }
             }
         }

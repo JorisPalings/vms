@@ -75,7 +75,7 @@ import { EmailValidator } from '../directives/mail-validator';
 
           <modal-content class="user-details">
             <p>Are you sure you want to delete your account?<br>This action cannot be reversed!</p>
-            <button (click)="deleteAccount()">Yes!</button>
+            <button (click)="deleteAccount()" class="danger-button">Yes!</button>
             <button (click)="deleteModal.close()">No, abort!</button>
           </modal-content>
       </modal>
