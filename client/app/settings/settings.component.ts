@@ -74,9 +74,10 @@ import { EmailValidator } from '../directives/mail-validator';
               [closeOnOutsideClick]="false">
 
           <modal-content class="user-details">
-            <p>Are you sure you want to delete your account?<br>This action cannot be reversed!</p>
-            <button (click)="deleteAccount()" class="danger-button">Yes!</button>
-            <button (click)="deleteModal.close()">No, abort!</button>
+            <p>Are you sure you want to delete your account?</p>
+            <p>This action cannot be reversed!</p>
+            <button (click)="deleteAccount()" class="danger-button"><i class="fa fa-check"></i> Yes!</button>
+            <button (click)="deleteModal.close()"><i class="fa fa-times"></i> No, abort!</button>
           </modal-content>
       </modal>
   </main>
