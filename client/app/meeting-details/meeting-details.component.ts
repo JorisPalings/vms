@@ -210,6 +210,8 @@ export class MeetingDetailsComponent {
       meetingId: this.meetingId,
     }
 
+    this.hadNotesBefore = !this.hadNotesBefore;
+
     this.meetingService.saveNotes(data)
       .subscribe(data => {
         //TODO: Success message

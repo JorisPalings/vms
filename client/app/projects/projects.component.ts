@@ -137,6 +137,10 @@ export class ProjectsComponent {
     openNotesModal(note){
       console.log(note);
       this.activeNote = note;
+
+      this.noteForm.setValue({
+        content: this.activeNote.content
+      })
       // Check if the owner of the notes is the user logged in
 
       if (note.authorId === this.authenticationService.employee){
