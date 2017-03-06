@@ -29,12 +29,12 @@ export class Credentials {
       </li>
     </div>
     <form *ngIf="!submitted" #login="ngForm" novalidate (ngSubmit)="doLogin(login.value, login.valid)">
-        <small *ngIf="mail.invalid || (!mail.dirty && login.submitted)" class="dangerous">
+        <small *ngIf="mail.errors && (mail.dirty || mail.touched)" class="dangerous">
             E-mail is required.
         </small>
         <input type="email" name="mail" [(ngModel)]="loginUser.mail" #mail="ngModel" required placeholder="Email" autofocus />
 
-        <small [hidden]="password.valid || (password.dirty && !login.submitted)" class="dangerous">
+        <small *ngIf="password.errors && (password.dirty || password.touched)" class="dangerous">
             Password is required.
         </small>
         <input type="password" placeholder="Password" name="password" [(ngModel)]="loginUser.password" #password="ngModel" required />
