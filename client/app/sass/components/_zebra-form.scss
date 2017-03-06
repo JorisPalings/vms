@@ -10,7 +10,6 @@ fieldset {
     }
 
     label {
-        cursor: pointer;
         margin: 1rem 0;
     }
 
@@ -20,6 +19,10 @@ fieldset {
 }
 
 form {
+  label {
+    cursor: pointer;
+  }
+
   tr {
     &:nth-child(2n){
       background: $off-white;
@@ -28,6 +31,7 @@ form {
         background-color: $white
       }
     }
+
     &:nth-child(odd){
       td input {
         background-color: $off-white;
@@ -37,6 +41,5 @@ form {
     td {
       padding: 0 20px;
     }
-
   }
 }
