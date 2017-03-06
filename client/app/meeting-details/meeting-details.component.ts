@@ -107,7 +107,7 @@ import { EmailValidator } from '../directives/mail-validator';
                     </td>
                 </tr>
             </table>
-            <button *ngIf="isUserEditable" type="submit">Save data</button>
+            <button *ngIf="isUserEditable" type="submit"><i class="fa fa-eye"></i> Save data</button>
           </form>
         </modal-content>
     </modal>
