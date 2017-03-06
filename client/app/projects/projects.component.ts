@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalModule } from 'ngx-modal';
 import { ProjectService } from '../shared/services/project.service';
 import { MeetingService } from '../shared/services/meeting.service';
 
@@ -25,7 +26,7 @@ import { MeetingService } from '../shared/services/meeting.service';
                 </div>
                 <div class="nine columns">
                     <ul class="meetings-list">
-                        <li *ngFor="let meeting of meetings">
+                        <li *ngFor="let meeting of meetings" (click)="myModal.open()">
                             <ul class="meeting-item">
                                 <li><i class="fa fa-fw fa-calendar"></i>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
                                 <li><i class="fa fa-fw fa-users"></i><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last">{{external.fname}} {{external.lname}}{{isLast ? '' : ', '}}</span></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
@@ -36,6 +37,27 @@ import { MeetingService } from '../shared/services/meeting.service';
                 </div>
             </div>
         </div>
+        <modal  #myModal
+                title=""
+                class="modal-large"
+                [hideCloseButton]="true"
+                [closeOnEscape]="true"
+                [closeOnOutsideClick]="true">
+
+            <modal-header>
+                <!-- External avatar goes here -->
+                <h1><!-- Meeting details go here --></h1>
+                <button (click)="myModal.close()" class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </modal-header>
+
+            <modal-content class="user-details">
+              <button  [ngClass]="{'toggleIsDisabled': !isNoteEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-eye"></i> Edit notes</button>
+              <form class="container">
+                <textarea></textarea>
+                <button *ngIf="isNoteEditable" type="submit">Save note</button>
+              </form>
+            </modal-content>
+        </modal>
     </main>
     `,
     styleUrls: ['../dist/assets/css/projects.css']
