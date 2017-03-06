@@ -1,13 +1,18 @@
+@import "components/form";
 @import "components/private-dash";
 @import "components/meetings-list";
+@import "components/modal";
+
 .projects-list {
     li {
         cursor: pointer;
+
         h2 {
             position: relative;
             padding-bottom: 0;
             margin-bottom: 5px;
         }
+
         &.current {
             h2 {
                 &:after {
@@ -20,6 +25,72 @@
                     border-bottom: 1px solid $cw-blue-darken;
                 }
             }
+        }
+    }
+}
+
+.modal-large {
+    top: 20%;
+}
+
+.notes-details {
+    button:focus {
+        outline: 0;
+    }
+
+    .toggle-button {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: $cw-blue;
+        border-radius: 8px;
+        border: 0;
+        box-shadow: $shadow-1;
+        box-sizing: border-box;
+        color: $white;
+        cursor: pointer;
+        display: block;
+        font-family: 'Montserrat', sans-serif;
+        font-size: $font-size-normal;
+        margin-top: 1rem;
+        padding: 0.75rem 1.25rem;
+        text-transform: uppercase;
+        transition: all 0.125s ease-in-out;
+
+        &[type="submit"]:focus {
+            outline: none;
+        }
+
+        &[type="submit"]:hover {
+            background: $cw-blue-darken;
+        }
+
+        i {
+            margin-right: 8px;
+        }
+
+        &:disabled {
+            background-color: lighten($cw-blue, 50%);
+            cursor: not-allowed;
+        }
+
+        &:disabled:hover {
+            background-color: lighten($cw-blue, 50%);
+            cursor: not-allowed;
+        }
+    }
+
+    .toggleIsDisabled {
+        background-color: $off-white;
+        color: darken($off-white, 50%);
+    }
+
+    form {
+        textarea {
+            background: $white;
+            font-size: $font-size-normal;
+            resize: none;
+            width: 100%;
         }
     }
 }

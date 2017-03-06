@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { ModalModule } from 'ngx-modal';
 import { ProjectService } from '../shared/services/project.service';
 import { MeetingService } from '../shared/services/meeting.service';
 
 @Component({
     selector: 'projects',
+    encapsulation: ViewEncapsulation.None,
     template: `
     <header class="private-dash-header">
         <branding></branding>
@@ -19,7 +20,7 @@ import { MeetingService } from '../shared/services/meeting.service';
             <div class="row">
                 <div class="three columns">
                     <ul class="projects-list">
-                        <li *ngFor="let project of projects" (click)="showMeetings(project.id)" class="{{project.id == current ? 'current' : ''}}">
+                        <li *ngFor="let project of projects" class="{{project.id == current ? 'current' : ''}}">
                             <h2>{{project.tag}}</h2>
                         </li>
                     </ul>
@@ -29,7 +30,7 @@ import { MeetingService } from '../shared/services/meeting.service';
                         <li *ngFor="let meeting of meetings" (click)="myModal.open()">
                             <ul class="meeting-item">
                                 <li><i class="fa fa-fw fa-calendar"></i>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
-                                <li><i class="fa fa-fw fa-users"></i><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last">{{external.fname}} {{external.lname}}{{isLast ? '' : ', '}}</span></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
+                                <li><i class="fa fa-fw fa-users"></i><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last"><span (click)="showMeetings(project.id)">{{external.fname}}</span> {{external.lname}}{{isLast ? '' : ', '}}</span></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
                                 <li><i class="fa fa-fw fa-folder"></i>{{meeting.summary}}</li>
                             </ul>
                         </li>
@@ -45,17 +46,17 @@ import { MeetingService } from '../shared/services/meeting.service';
                 [closeOnOutsideClick]="true">
 
             <modal-header>
-                <!-- External avatar goes here -->
-                <h1><!-- Meeting details go here --></h1>
                 <button (click)="myModal.close()" class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <img src="" alt=""><!-- External avatar goes here -->
+                <h1>Note</h1>
             </modal-header>
 
-            <modal-content class="user-details">
-              <button  [ngClass]="{'toggleIsDisabled': !isNoteEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-eye"></i> Edit notes</button>
-              <form class="container">
-                <textarea></textarea>
-                <button *ngIf="isNoteEditable" type="submit">Save note</button>
-              </form>
+            <modal-content class="notes-details">
+                <button [ngClass]="{'toggleIsDisabled': !isNoteEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-pencil"></i> Edit notes</button>
+                <form class="container">
+                    <textarea [disabled]="!isUserEditable" value=""><!-- Value = note.content --></textarea>
+                    <button *ngIf="isNoteEditable" type="submit">Save note</button>
+                </form>
             </modal-content>
         </modal>
     </main>
@@ -70,6 +71,7 @@ export class ProjectsComponent {
     private now: Date;
     private tomorrow: Date;
     private current: string;
+    public isNoteEditable = false;
 
     constructor(private projectService: ProjectService, private meetingService: MeetingService) {}
 
@@ -112,6 +114,15 @@ export class ProjectsComponent {
             dateString = new Date(date).toDateString();
         }
         return dateString;
+    }
+
+    toggleFieldsEditable(){
+      if (this.isNoteEditable){
+        this.isNoteEditable = false;
+      }
+      else {
+        this.isNoteEditable = true;
+      }
     }
 
 }
