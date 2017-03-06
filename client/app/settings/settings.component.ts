@@ -1,4 +1,4 @@
-import { Component, style, state, animate, transition, trigger } from '@angular/core';
+import { Component, style, state, animate, transition, trigger, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { UserService } from '../shared/services/user.service';
@@ -7,6 +7,7 @@ import { EmailValidator } from '../directives/mail-validator';
 
 @Component({
   selector: 'settings-page',
+  encapsulation: ViewEncapsulation.None,
   template: `
   <feedback *ngIf="notificationShown" [@fadeInOut]></feedback>
   <header class="private-dash-header">
@@ -34,7 +35,7 @@ import { EmailValidator } from '../directives/mail-validator';
 
                         <button [disabled]="!user.valid" type="submit"><i class="fa fa-floppy-o"></i> Save changes</button>
                         <a href="#" class="form-instruction float-left">Change password</a>
-                        <a href="#" class="form-instruction float-right dangerous" (click)="deleteAccount()">Delete account</a>
+                        <p class="form-instruction float-right dangerous underline" (click)="deleteModal.open()">Delete account</p>
                     </form>
                   </section>
               </div>
@@ -65,6 +66,19 @@ import { EmailValidator } from '../directives/mail-validator';
               </div>
           </div>
       </div>
+      <modal  #deleteModal
+              title=""
+              class="modal-small"
+              [hideCloseButton]="true"
+              [closeOnEscape]="false"
+              [closeOnOutsideClick]="false">
+
+          <modal-content class="user-details">
+            <p>Are you sure you want to delete your account?<br>This action cannot be reversed!</p>
+            <button (click)="deleteAccount()">Yes!</button>
+            <button (click)="deleteModal.close()">No, abort!</button>
+          </modal-content>
+      </modal>
   </main>
   `,
   styleUrls: ['../dist/assets/css/settings.css'],
