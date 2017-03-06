@@ -86,6 +86,7 @@ var addNote = function(req, res, next) {
     } else {
         // Set the note id
         console.log("Patching the note");
+        console.log("note with id", data.id);
 
         //TODO: Send a patch request
         request({

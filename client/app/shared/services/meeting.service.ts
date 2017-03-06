@@ -104,6 +104,8 @@ export class MeetingService {
         headers.append('Content-Type', 'application/json');
         let options = new RequestOptions({ headers: headers });
 
+        console.log(noteInfo.noteId);
+
         let data = {
             access_token: this.authenticationService.token,
             id: noteInfo.noteId,

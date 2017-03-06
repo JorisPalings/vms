@@ -195,6 +195,7 @@ export class MeetingDetailsComponent {
   }
 
   saveNotes() {
+    console.log("Had notes before", this.hadNotesBefore);
     let noteId;
     if (this.hadNotesBefore) {
       noteId = this.note.id;
@@ -210,12 +211,14 @@ export class MeetingDetailsComponent {
       meetingId: this.meetingId,
     }
 
-    this.hadNotesBefore = !this.hadNotesBefore;
+    this.hadNotesBefore = true;
 
     this.meetingService.saveNotes(data)
       .subscribe(data => {
         //TODO: Success message
         console.log(data);
+        this.note = data;
+        console.log(this.note);
 
       },
       error => {
