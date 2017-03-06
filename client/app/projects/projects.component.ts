@@ -20,18 +20,19 @@ import { MeetingService } from '../shared/services/meeting.service';
             <div class="row">
                 <div class="three columns">
                     <ul class="projects-list">
-                        <li *ngFor="let project of projects" class="{{project.id == current ? 'current' : ''}}">
+                        <li *ngFor="let project of projects" class="{{project.id == current ? 'current' : ''}}" (click)="showMeetings(project.id)">
                             <h2>{{project.tag}}</h2>
                         </li>
                     </ul>
                 </div>
                 <div class="nine columns">
                     <ul class="meetings-list">
-                        <li *ngFor="let meeting of meetings" (click)="myModal.open()">
+                        <li *ngFor="let meeting of meetings">
+                            <h2>{{meeting.summary}}</h2>
                             <ul class="meeting-item">
-                                <li><i class="fa fa-fw fa-calendar"></i>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
-                                <li><i class="fa fa-fw fa-users"></i><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><span *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last"><span (click)="showMeetings(project.id)">{{external.fname}}</span> {{external.lname}}{{isLast ? '' : ', '}}</span></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
-                                <li><i class="fa fa-fw fa-folder"></i>{{meeting.summary}}</li>
+                                <li>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
+                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="myModal.open()" *ngFor="let external of meeting.externals.length === 0 ? meeting.meetees : meeting.externals; let isLast=last"><span>{{external.fname}}</span> {{external.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
+
                             </ul>
                         </li>
                     </ul>
@@ -86,8 +87,10 @@ export class ProjectsComponent {
     }
 
     showMeetings(id: string) {
+
         this.current = id;
         this.projectService.getMeetingsForProject(id).subscribe(data => {
+            console.log(data);
             this.meetings = data;
             for(var i = 0; i < this.meetings.length; i++) {
                 this.addExternals(i);

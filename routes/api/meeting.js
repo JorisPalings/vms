@@ -1,3 +1,5 @@
+'use strict';
+
 var router = require('express').Router();
 var request = require('request');
 
@@ -49,11 +51,64 @@ var getExternals = function(req, res, next) {
     });
 }
 
+var addNote = function(req, res, next){
+  let data = req.body;
+  let meetingId = req.body.meetingId;
+  let authorId = req.body.authorId;
+
+  let content = req.body.content;
+
+  let notesData = {
+    meetingId: meetingId,
+    content: content,
+    authorId: authorId
+  }
+
+  // Send the credentials to the loopback API
+  request({
+    uri: "http://localhost:4000/api/meetings/" + meetingId +"/notes",
+    method: "POST",
+    form: notesData
+  },function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      res.status(200).send(response.body);
+    }
+    else {
+      var error = JSON.parse(response.body).error;
+      //Throw error to the Angular request
+      console.log(error);
+      res.status(error.statusCode).send(error);
+    }
+  })
+}
+
+var getNotes = function(req, res, next){
+  let data = req.body;
+
+  let meetingId = req.params.id;
+  let token = data.token;
+
+  console.log('Sending GET request for notes of meeting with id: ' + meetingId);
+
+  request("http://localhost:4000/api/meetings/" + meetingId + "/notes?access_token=" + token, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+          res.status(200).send(response.body);
+      }
+      else {
+          var error = JSON.parse(response.body).error;
+          //Throw error to the Angular request
+          res.status(error.statusCode).send({error: error.message});
+      }
+  });
+}
+
 var meeting = {
     getAll: getAll,
     getAllForOne: getAllForOne,
     getMeeting: getMeeting,
-    getExternals: getExternals
+    getExternals: getExternals,
+    addNote: addNote,
+    getNotes: getNotes
 }
 
 module.exports = meeting;
