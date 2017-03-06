@@ -50,6 +50,10 @@ import { EmailValidator } from '../directives/mail-validator';
                       {{calendarError}}
                     </li>
                   </div>
+                  <div class="loading container" *ngIf="loading">
+                      <img src="../dist/assets/images/crafty-much-pretty.png"/>
+                      <h3>Loading ...</h3>
+                  </div>
                   <form *ngIf="!calendarError" #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
                     <fieldset *ngFor="let cal of checkboxes">
                         <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" checked="{{cal.checked}}" (change)="checkboxClicked(cal)"/>
@@ -86,6 +90,7 @@ export class SettingsComponent {
   private name;
   private calendarError: string;
   private user: FormGroup;
+  private loading = true;
 
   constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService, private fb: FormBuilder) { }
 
@@ -130,6 +135,7 @@ export class SettingsComponent {
                     checked: isChecked
                   }
                 )
+                this.loading = false;
               }
             });
         },
