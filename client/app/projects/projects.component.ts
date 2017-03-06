@@ -41,7 +41,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
                             <h2>{{meeting.summary}}</h2>
                             <ul class="meeting-item">
                                 <li>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</li>
-                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="openNotesModal(note); myModal.open();" *ngFor="let note of meeting.notes"><span>{{note.author.fname}}</span> {{note.author.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
+                                <li><span *ngIf="meeting.externals != 0 || meeting.meetees != 0"><button (click)="openNotesModal(note); myModal.open();" *ngFor="let note of meeting.notes"><i class="fa fa-eye"></i> <span>{{note.author.fname}}</span> {{note.author.lname}}</button></span><span *ngIf="meeting.externals == 0 && meeting.meetees == 0">Just you</span></li>
                             </ul>
                         </li>
                     </ul>
@@ -62,7 +62,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 
             <modal-content class="notes-details">
                 <form [formGroup]="" *ngIf="isModalEditable" class="container" (submit)="saveNotes(activeNote)">
-                    <textarea [formControl]="noteForm.controls['content']" value="{{activeNote.content}}"><!-- Value = note.content --></textarea>
+                    <textarea [formControl]="noteForm.controls['content']" value="{{activeNote.content}}"></textarea>
                     <button type="submit">Save note</button>
                 </form>
                 <p *ngIf="!isModalEditable">{{activeNote.content}}</p>
