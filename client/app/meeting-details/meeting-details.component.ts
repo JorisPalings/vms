@@ -20,6 +20,10 @@ import { EmailValidator } from '../directives/mail-validator';
     <profile></profile>
   </header>
   <main>
+    <div class="loading container" *ngIf="loading">
+        <img src="../dist/assets/images/crafty-much-pretty.png"/>
+        <h3>Loading ...</h3>
+    </div>
     <div class="container">
         <h2>{{meeting.summary}}</h2>
         <h3>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</h3>
@@ -98,6 +102,7 @@ export class MeetingDetailsComponent {
     private external: any = {};
     public isUserEditable = false;
     private externalForm: FormGroup;
+    private loading = true;
 
     constructor(private route: ActivatedRoute, private meetingService: MeetingService, private userService: UserService, private fb:FormBuilder) { }
 
@@ -114,12 +119,14 @@ export class MeetingDetailsComponent {
             //Load the meeting detail using MeetingService
             this.meetingService.getMeeting(this.meetingId).subscribe(data => {
                 this.meeting = data;
+                this.loading = false;
             });
 
             //Load the meeting externals using MeetingService
             this.meetingService.getExternals(this.meetingId).subscribe(data => {
                 console.log(data);
                 this.externals = data;
+                this.loading = false;
             });
         });
 

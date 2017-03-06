@@ -54,6 +54,7 @@ export class TimelineComponent implements OnInit {
                     },
                     error => {
                         this.errorMessage = error;
+                        this.loading = false;
                     });
             } else {
                 this.meetingService.getAllMeetings()
@@ -63,6 +64,7 @@ export class TimelineComponent implements OnInit {
                     },
                     error => {
                         this.errorMessage = error;
+                        this.loading = false;
                     });
             }
 
