@@ -55,10 +55,14 @@ router.post('/externals', meeting.getExternals);
 router.post('/meetings', meeting.getAll);
 
 //5. Add a note to a meeting
-router.post('/notes', meeting.addNote);
+router.post('/notes', meeting.saveNote);
 
 //6. Get notes of meeting
-router.get('/meeting/:id/notes', meeting.getNotes);
+router.post('/meeting/:id/notes', meeting.getNotes);
+
+//7. Save note to meetingId
+router.post('/meeting/save-note', meeting.saveNote);
+
 
 // Project service
 // 1. Get all projects
