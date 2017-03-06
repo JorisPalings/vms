@@ -84,21 +84,21 @@ import { EmailValidator } from '../directives/mail-validator';
           <form class="container" [formGroup]="externalForm">
             <table>
                 <tr>
-                    <td>Phone: </td>
+                    <td><label for="phone">Phone:</label></td>
                     <td>
-                      <input placeholder="Phone" [disabled]="!isUserEditable" type="text" [formControl]="externalForm.controls['phone']" name="phone" value="{{external.phone}}">
+                      <input placeholder="Phone" [disabled]="!isUserEditable" type="text" [formControl]="externalForm.controls['phone']" name="phone" id="phone" value="{{external.phone}}">
                     </td>
                 </tr>
                 <tr>
-                    <td>Email: </td>
+                    <td><label for="email">Email:</label></td>
                     <td>
-                      <input [formControl]="externalForm.controls['mail']" placeholder="Email" [disabled]="!isUserEditable" type="text" name="email" value="{{external.email}}">
+                      <input [formControl]="externalForm.controls['mail']" placeholder="Email" [disabled]="!isUserEditable" type="text" name="email" id="email" value="{{external.email}}">
                     </td>
                 </tr>
                 <tr>
-                    <td>Company: </td>
+                    <td><label for="company">Company:</label></td>
                     <td>
-                      <input [formControl]="externalForm.controls['company']" placeholder="Company" [disabled]="!isUserEditable" type="text" name="company" value="{{external.company}}">
+                      <input [formControl]="externalForm.controls['company']" placeholder="Company" [disabled]="!isUserEditable" type="text" name="company" id="company" value="{{external.company}}">
                     </td>
                 </tr>
             </table>

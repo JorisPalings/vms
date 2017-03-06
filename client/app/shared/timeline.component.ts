@@ -5,6 +5,7 @@ import { MeetingService } from './services/meeting.service';
 import { Meeting } from '../_models/meeting';
 import { AuthenticationService } from '../shared/services/authentication.service';
 import { Router } from '@angular/router';
+import { LoadingService } from './services/loading.service';
 
 @Component({
     selector: 'timeline',
@@ -17,7 +18,7 @@ import { Router } from '@angular/router';
     </div>
     <div class="loading container" *ngIf="loading">
         <img src="../dist/assets/images/crafty-much-pretty.png"/>
-        <h3>Loading ...</h3>
+        <h3>{{strings[0]}}</h3>
     </div>
     <div class="timerow" *ngFor="let day of meetings">
       <div class="date">{{processDate(day[0].start)}}</div>
@@ -39,11 +40,13 @@ export class TimelineComponent implements OnInit {
     private tomorrow: Date;
     private errorMessage: string;
     private loading = true;
+    private strings: string[];
 
-    constructor(private meetingService: MeetingService, private authenticationService: AuthenticationService, private router: Router) { }
+    constructor(private meetingService: MeetingService, private authenticationService: AuthenticationService, private router: Router, private loadingService: LoadingService) { }
 
     ngOnInit() {
         this.fetchData(this.meetingService, this.authenticationService, this.router);
+        this.strings = this.loadingService.getRandomStrings();
     }
 
     fetchData(meetingService, authenticationService, router) {
