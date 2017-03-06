@@ -12,6 +12,19 @@ export class ProjectService {
 
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
+    private handleError(err) {
+        let errorMessage: string;
+        if (err instanceof Response) {
+            let body = err.json() || '';
+            let error = body.error || JSON.stringify(body);
+            errorMessage = `${error}`;
+        }
+        else {
+            errorMessage = err.message ? err.message : err.toString();
+        }
+        return Observable.throw(errorMessage);
+    }
+
     getAllProjects(): Observable<Project[]> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -32,7 +45,7 @@ export class ProjectService {
                     return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
                 }
 
-                return Observable.throw('A server error occured. Please contact the admin');
+                return this.handleError(error);
 
 
             })
@@ -59,7 +72,7 @@ export class ProjectService {
                   return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
               }
 
-              return Observable.throw('A server error occured. Please contact the admin');
+              return this.handleError(error);
           })
 
 
@@ -86,7 +99,7 @@ export class ProjectService {
                     return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
                 }
 
-                return Observable.throw('A server error occured. Please contact the admin');
+                return this.handleError(error);
             })
     }
 }

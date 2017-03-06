@@ -11,6 +11,19 @@ export class MeetingService {
 
     constructor(private http: Http, private authenticationService: AuthenticationService) { }
 
+    private handleError(err) {
+        let errorMessage: string;
+        if (err instanceof Response) {
+            let body = err.json() || '';
+            let error = body.error || JSON.stringify(body);
+            errorMessage = `${error}`;
+        }
+        else {
+            errorMessage = err.message ? err.message : err.toString();
+        }
+        return Observable.throw(errorMessage);
+    }
+
     getAllMeetingsForOneUser(): Observable<Meeting[]> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -32,34 +45,34 @@ export class MeetingService {
                     return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
                 }
 
-                return Observable.throw('A server error occured. Please contact the admin');
+                return this.handleError(error);
 
 
             })
     }
 
-    getMeetingNotes(meeting): Observable<any[]>{
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      let options = new RequestOptions({ headers: headers });
+    getMeetingNotes(meeting): Observable<any[]> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
 
-      let data = {
-        meetingId: meeting.meetingId,
-        access_token: this.authenticationService.token
-      }
+        let data = {
+            meetingId: meeting.meetingId,
+            access_token: this.authenticationService.token
+        }
 
-      return this.http.post('http://localhost:3000/api/meeting/' + data.meetingId + "/notes", JSON.stringify(data), options)
-        .map((result: Response) => result.json())
-        .catch((error: any) => {
-            console.log("error: ", error);
-            console.log("error to json: ", error.json());
+        return this.http.post('http://localhost:3000/api/meeting/' + data.meetingId + "/notes", JSON.stringify(data), options)
+            .map((result: Response) => result.json())
+            .catch((error: any) => {
+                console.log("error: ", error);
+                console.log("error to json: ", error.json());
 
-            if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')) {
-                return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
-            }
+                if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')) {
+                    return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
+                }
 
-            return Observable.throw('A server error occured. Please contact the admin');
-        });
+                return this.handleError(error);
+            });
     }
 
     getAllMeetings(): Observable<Meeting[]> {
@@ -80,34 +93,34 @@ export class MeetingService {
                     return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
                 }
 
-                return Observable.throw('A server error occured. Please contact the admin');
+                return this.handleError(error);
 
 
             })
     }
 
-    saveNotes(noteInfo){
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      let options = new RequestOptions({ headers: headers });
+    saveNotes(noteInfo) {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        let options = new RequestOptions({ headers: headers });
 
-      let data = {
-          access_token: this.authenticationService.token,
-          id: noteInfo.noteId,
-          content: noteInfo.content,
-          isNew: noteInfo.isNew,
-          meetingId: noteInfo.meetingId,
-          authorId: this.authenticationService.employee
-      };
+        let data = {
+            access_token: this.authenticationService.token,
+            id: noteInfo.noteId,
+            content: noteInfo.content,
+            isNew: noteInfo.isNew,
+            meetingId: noteInfo.meetingId,
+            authorId: this.authenticationService.employee
+        };
 
-      return this.http.post('http://localhost:3000/api/meeting/save-note', JSON.stringify(data), options)
-        .map((response: Response) => response.json())
-        .catch((error: any) => {
-            console.log("error: ", error);
-            console.log("error to json: ", error.json());
+        return this.http.post('http://localhost:3000/api/meeting/save-note', JSON.stringify(data), options)
+            .map((response: Response) => response.json())
+            .catch((error: any) => {
+                console.log("error: ", error);
+                console.log("error to json: ", error.json());
 
-            return Observable.throw('A server error occured. Please contact the admin');
-        })
+                return this.handleError(error);
+            })
 
 
     }
@@ -136,7 +149,7 @@ export class MeetingService {
                 if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')) {
                     return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
                 }
-                return Observable.throw('A server error occured. Please contact the admin');
+                return this.handleError(error);
             })
     }
 
@@ -160,14 +173,14 @@ export class MeetingService {
                 if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')) {
                     return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
                 }
-                return Observable.throw('A server error occured. Please contact the admin');
+                return this.handleError(error);
             })
     }
 }
 
 function mapMeetings(response: Response): Meeting[] {
     let meetings;
-    if(response.json().meetings){
+    if (response.json().meetings) {
         meetings = response.json().meetings.map(toMeeting);
     } else {
         meetings = response.json().map(toMeeting);
