@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Virtual Meeting Secretary</title>
+
+    <!-- Base needed for angular 2 routing -->
+    <base href="/">
 
     <link rel="shortcut icon" type="image/x-icon" href="http://craftworkz.co/images/favicon.ico">
 
     <!-- Default font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-    <link rel="stylesheet" href="./dist/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css" >
+    <link rel="stylesheet" href="./dist/assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <script src="./dist/assets/js/main.js" defer></script>
 
     <!-- Base css -->
     <link rel="stylesheet" href="./dist/assets/css/default.css">
 
-    <!-- Base needed for angular 2 routing -->
-    <base href="/">
+
 
     <!--  Load the dependencies -->
     <script src="node_modules/core-js/client/shim.min.js" charset="utf-8"></script>
@@ -28,10 +31,14 @@
     <script src="systemjs.config.js" charset="utf-8"></script>
 
     <script>
-      System.import('app').catch(function(err) { console.error(err); })
+        System.import('app').catch(function(err) {
+            console.error(err);
+        })
     </script>
-  </head>
-  <body>
+</head>
+
+<body>
     <my-app></my-app>
-  </body>
+</body>
+
 </html>
