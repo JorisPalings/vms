@@ -43,11 +43,19 @@ export class TimelineComponent implements OnInit {
     constructor(private meetingService: MeetingService, private authenticationService: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
-        if (!this.authenticationService.isAuthenticated()) {
-            this.router.navigate(['/']);
+        this.fetchData(this.meetingService, this.authenticationService, this.router);
+    }
+
+    fetchData(meetingService, authenticationService, router) {
+        this.now = new Date();
+        this.tomorrow = new Date();
+        this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+
+        if (!authenticationService.isAuthenticated()) {
+            router.navigate(['/']);
         } else {
             if (!this.isPublic) {
-                this.meetingService.getAllMeetingsForOneUser()
+                meetingService.getAllMeetingsForOneUser()
                     .subscribe(data => {
                         this.processMeetings(data);
                         this.loading = false;
@@ -57,7 +65,7 @@ export class TimelineComponent implements OnInit {
                         this.loading = false;
                     });
             } else {
-                this.meetingService.getAllMeetings()
+                meetingService.getAllMeetings()
                     .subscribe(data => {
                         this.processMeetings(data);
                         this.loading = false;
@@ -67,15 +75,11 @@ export class TimelineComponent implements OnInit {
                         this.loading = false;
                     });
             }
-
-            this.now = new Date();
-            this.tomorrow = new Date();
-            this.tomorrow.setDate(this.tomorrow.getDate() + 1);
         }
+        let refresh = setTimeout(() => {this.fetchData(meetingService, authenticationService, router)}, 60000);
     }
 
     processMeetings(meetings: Meeting[]) {
-        console.log(meetings);
         this.meetingService.setMeetings(meetings);
         let number = 0;
         meetings.sort(function(a, b) {
