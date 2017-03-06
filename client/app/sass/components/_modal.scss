@@ -55,3 +55,48 @@
         }
     }
 }
+
+.modal-small {
+    display: flex;
+    position: absolute;
+    background-color: white;
+    width: 40%;
+    margin: 0 30%;
+    z-index: 3;
+
+    .modal {
+        width: 100%;
+        outline: none;
+
+        .modal-content {
+            padding: 25px;
+            outline: none;
+
+            .modal-header {
+                img {
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    position: relative;
+                    left: calc(50% - 60px);
+                }
+
+                h1 {
+                    text-align: center;
+                }
+
+                .close {
+                    position: absolute;
+                    right: 25px;
+                    top: 25px;
+                    background: transparent;
+                    font-size: $font-size-huge;
+                    border: none;
+                    padding: 0;
+                    color: $cw-blue-darken;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
