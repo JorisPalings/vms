@@ -56,7 +56,7 @@ import { EmailValidator } from '../directives/mail-validator';
         </modal-header>
 
         <modal-content class="user-details">
-          <button  [ngClass]="{'toggleIsDisabled': !isUserEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-eye"></i> Edit fields</button>
+          <button  [ngClass]="{'toggleIsDisabled': !isUserEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-pencil"></i> Edit fields</button>
           <form class="container">
             <table>
                 <tr>
