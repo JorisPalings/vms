@@ -2,13 +2,15 @@
 
 .meetings-list {
 
+    &>li {
+        padding: 16px;
+    }
+
     &>li:nth-of-type(2n) {
         background: $white;
     }
 
     .meeting-item {
-        padding-bottom: 32px;
-
         i {
             margin-right: 1rem;
         }

@@ -9,8 +9,8 @@
 
         h2 {
             position: relative;
-            padding-bottom: 0;
-            margin-bottom: 5px;
+            padding-bottom: 5px;
+            margin-bottom: 16px;
         }
 
         &.current {
@@ -18,11 +18,11 @@
                 &:after {
                     content: "";
                     position: absolute;
-                    width: 7.5%;
+                    width: 20%;
                     height: 1px;
                     bottom: 0;
                     left: 0;
-                    border-bottom: 1px solid $cw-blue-darken;
+                    border-bottom: 2px solid $cw-blue-darken;
                 }
             }
         }
