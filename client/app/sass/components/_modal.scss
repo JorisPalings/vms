@@ -50,6 +50,10 @@
                     padding: 0;
                     color: $cw-blue-darken;
                     cursor: pointer;
+
+                    &:focus {
+                        outline: 0;
+                    }
                 }
             }
         }
