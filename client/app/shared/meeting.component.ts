@@ -25,7 +25,7 @@ import { Meeting } from '../_models/meeting';
         <img src="{{ meeting.externals === undefined || meeting.externals[0] === undefined ? (meeting.meetees === undefined || meeting.meetees[0] === undefined ? 'https://cdn-images-1.medium.com/max/800/0*9BYGa20RkF4rTpJU.png' : meeting.meetees[0].pictureURL ) : meeting.externals[0].pictureURL}}">
       </span>
     </div>
-    <div class="bell" *ngIf="!isPublic">
+    <div class="bell" [style.visibility]="isPublic?'hidden':'inherit'">
       <span>Running late</span>
     </div>
   </div>
