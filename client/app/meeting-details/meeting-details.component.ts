@@ -186,7 +186,7 @@ export class MeetingDetailsComponent {
       }
 
       let data = {
-        isNew: this.hadNotesBefore,
+        isNew: !this.hadNotesBefore,
         noteId: noteId,
         content: this.noteForm.value.content,
         meetingId: this.meetingId,

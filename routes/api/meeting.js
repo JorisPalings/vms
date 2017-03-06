@@ -64,6 +64,8 @@ var addNote = function(req, res, next){
     authorId: authorId
   }
 
+  console.log(data.isNew);
+
   if (data.isNew){
     console.log("Posting new note");
     //TODO: Send a post request
@@ -86,12 +88,11 @@ var addNote = function(req, res, next){
   }
   else {
     // Set the note id
-    notesData.id = data.noteId;
     console.log("Patching the note");
 
     //TODO: Send a patch request
     request({
-      uri: "http://localhost:4000/api/notes/?access_token=" + data.access_token,
+      uri: "http://localhost:4000/api/notes/" + data.id + "?access_token=" + data.access_token,
       method: "PATCH",
       form: notesData
     },function(error, response, body) {
