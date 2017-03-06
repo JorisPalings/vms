@@ -38,6 +38,30 @@ export class MeetingService {
             })
     }
 
+    getMeetingNotes(meeting): Observable<any[]>{
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      let options = new RequestOptions({ headers: headers });
+
+      let data = {
+        meetingId: meeting.meetingId,
+        access_token: this.authenticationService.token
+      }
+
+      return this.http.post('http://localhost:3000/api/meeting/' + data.meetingId + "/notes", JSON.stringify(data), options)
+        .map((result: Response) => result.json())
+        .catch((error: any) => {
+            console.log("error: ", error);
+            console.log("error to json: ", error.json());
+
+            if (error.status === 500 && (error.json().error === 'No calendars selected.' || error.json().error === 'Google not integrated.')) {
+                return Observable.throw('No calendars were selected or you have not yet integrated your Google account. You can integrate Google and add calendars under settings.');
+            }
+
+            return Observable.throw('A server error occured. Please contact the admin');
+        });
+    }
+
     getAllMeetings(): Observable<Meeting[]> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -60,6 +84,32 @@ export class MeetingService {
 
 
             })
+    }
+
+    saveNotes(noteInfo){
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      let options = new RequestOptions({ headers: headers });
+
+      let data = {
+          access_token: this.authenticationService.token,
+          id: noteInfo.noteId,
+          content: noteInfo.content,
+          isNew: noteInfo.isNew,
+          meetingId: noteInfo.meetingId,
+          authorId: this.authenticationService.employee
+      };
+
+      return this.http.post('http://localhost:3000/api/meeting/save-note', JSON.stringify(data), options)
+        .map((response: Response) => response.json())
+        .catch((error: any) => {
+            console.log("error: ", error);
+            console.log("error to json: ", error.json());
+
+            return Observable.throw('A server error occured. Please contact the admin');
+        })
+
+
     }
 
     setMeetings(meetings: Meeting[]) {

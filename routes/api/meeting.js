@@ -64,29 +64,55 @@ var addNote = function(req, res, next){
     authorId: authorId
   }
 
-  // Send the credentials to the loopback API
-  request({
-    uri: "http://localhost:4000/api/meetings/" + meetingId +"/notes",
-    method: "POST",
-    form: notesData
-  },function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      res.status(200).send(response.body);
-    }
-    else {
-      var error = JSON.parse(response.body).error;
-      //Throw error to the Angular request
-      console.log(error);
-      res.status(error.statusCode).send(error);
-    }
-  })
+  if (data.isNew){
+    console.log("Posting new note");
+    //TODO: Send a post request
+    request({
+      uri: "http://localhost:4000/api/notes/?access_token=" + data.access_token,
+      method: "POST",
+      form: notesData
+    },function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        res.status(200).send(response.body);
+      }
+      else {
+        var error = JSON.parse(response.body).error;
+        //Throw error to the Angular request
+        console.log(error);
+        res.status(error.statusCode).send(error);
+      }
+    })
+
+  }
+  else {
+    // Set the note id
+    notesData.id = data.noteId;
+    console.log("Patching the note");
+
+    //TODO: Send a patch request
+    request({
+      uri: "http://localhost:4000/api/notes/?access_token=" + data.access_token,
+      method: "PATCH",
+      form: notesData
+    },function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        res.status(200).send(response.body);
+      }
+      else {
+        var error = JSON.parse(response.body).error;
+        //Throw error to the Angular request
+        console.log(error);
+        res.status(error.statusCode).send(error);
+      }
+    })
+  }
 }
 
 var getNotes = function(req, res, next){
   let data = req.body;
 
   let meetingId = req.params.id;
-  let token = data.token;
+  let token = data.access_token;
 
   console.log('Sending GET request for notes of meeting with id: ' + meetingId);
 
@@ -107,7 +133,7 @@ var meeting = {
     getAllForOne: getAllForOne,
     getMeeting: getMeeting,
     getExternals: getExternals,
-    addNote: addNote,
+    saveNote: addNote,
     getNotes: getNotes
 }
 

@@ -2,6 +2,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Meeting } from '../_models/meeting';
 import { ActivatedRoute } from '@angular/router';
 import { MeetingService } from '../shared/services/meeting.service';
+import { AuthenticationService } from '../shared/services/authentication.service';
 import { UserService } from '../shared/services/user.service';
 import { ModalModule } from 'ngx-modal';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -34,7 +35,7 @@ import { EmailValidator } from '../directives/mail-validator';
         </div>
         <div class="one-half column">
           <form>
-            <button type="submit" routerLink="/projects"><i class="fa fa-pencil-square-o"></i> Take notes</button>
+            <button type="submit" (click)="noteModal.open(); importNote();"><i class="fa fa-pencil-square-o"></i> Take notes</button>
           </form>
         </div>
         <div class="row">
@@ -42,6 +43,25 @@ import { EmailValidator } from '../directives/mail-validator';
         </div>
       </div>
     </div>
+    <modal  #noteModal
+            title=""
+            class="modal-large"
+            [hideCloseButton]="true"
+            [closeOnEscape]="true"
+            [closeOnOutsideClick]="true">
+
+        <modal-header>
+            <h1>Note</h1>
+            <button (click)="noteModal.close()" class="close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </modal-header>
+
+        <modal-content class="user-details">
+          <form (submit)="saveNotes()" [formGroup]="noteForm">
+            <textarea [formControl]="noteForm.controls['content']" name="content"></textarea>
+            <button type="submit">Save notes</button>
+          </form>
+        </modal-content>
+    </modal>
     <modal  #myModal
             title=""
             class="modal-large"
@@ -57,24 +77,24 @@ import { EmailValidator } from '../directives/mail-validator';
 
         <modal-content class="user-details">
           <button  [ngClass]="{'toggleIsDisabled': !isUserEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-pencil"></i> Edit fields</button>
-          <form class="container">
+          <form class="container" [formGroup]="externalForm">
             <table>
                 <tr>
                     <td>Phone: </td>
                     <td>
-                      <input placeholder="Phone" [disabled]="!isUserEditable" type="text" name="phone" value="{{external.phone}}">
+                      <input placeholder="Phone" [disabled]="!isUserEditable" type="text" [formControl]="externalForm.controls['phone']" name="phone" value="{{external.phone}}">
                     </td>
                 </tr>
                 <tr>
                     <td>Email: </td>
                     <td>
-                      <input placeholder="Email" [disabled]="!isUserEditable" type="text" name="email" value="{{external.email}}">
+                      <input [formControl]="externalForm.controls['mail']" placeholder="Email" [disabled]="!isUserEditable" type="text" name="email" value="{{external.email}}">
                     </td>
                 </tr>
                 <tr>
                     <td>Company: </td>
                     <td>
-                      <input placeholder="Company" [disabled]="!isUserEditable" type="text" name="company" value="{{external.company}}">
+                      <input [formControl]="externalForm.controls['company']" placeholder="Company" [disabled]="!isUserEditable" type="text" name="company" value="{{external.company}}">
                     </td>
                 </tr>
             </table>
@@ -98,14 +118,21 @@ export class MeetingDetailsComponent {
     private external: any = {};
     public isUserEditable = false;
     private externalForm: FormGroup;
+    private noteForm: FormGroup;
+    private note:any;
+    private hadNotesBefore = false;
 
-    constructor(private route: ActivatedRoute, private meetingService: MeetingService, private userService: UserService, private fb:FormBuilder) { }
+    constructor(private route: ActivatedRoute, private meetingService: MeetingService, private userService: UserService, private fb:FormBuilder, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
         this.externalForm = this.fb.group({
           company: [null, Validators.required],
           phone: [null, Validators.required],
           mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
+        })
+
+        this.noteForm = this.fb.group({
+          content: [null, Validators.required]
         })
 
         this.sub = this.route.params.subscribe(params => {
@@ -127,6 +154,63 @@ export class MeetingDetailsComponent {
         this.now = new Date();
         this.tomorrow = new Date();
         this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+    }
+
+    importNote(){
+      this.note = {};
+      let data = {
+        meetingId: this.meetingId
+      }
+      this.meetingService.getMeetingNotes(data)
+        .subscribe(data => {
+          console.log("Meeting notes: ", data);
+          this.hadNotesBefore = false;
+          this.note = this.filterNotes(data);
+        })
+    }
+
+    saveNotes(){
+      let noteId;
+      if (this.hadNotesBefore){
+        noteId = this.note.id;
+      }
+      else {
+        noteId = "";
+      }
+
+      let data = {
+        isNew: this.hadNotesBefore,
+        noteId: noteId,
+        content: this.noteForm.value.content,
+        meetingId: this.meetingId,
+      }
+
+      this.meetingService.saveNotes(data)
+        .subscribe(data => {
+          //TODO: Success message
+          console.log(data);
+
+        },
+        error => {
+          //TODO: Error message
+        })
+    }
+
+    filterNotes(notes){
+      console.log("Filtering notes");
+      for (let note of notes){
+        console.log(note);
+        if (note.authorId === this.authenticationService.employee){
+          this.hadNotesBefore = true;
+          this.noteForm.setValue({
+            content: note.content
+          })
+          this.noteForm.value.content = note.content;
+          console.log('Had note before');
+          return note;
+        }
+      }
+      return {}
     }
 
     ngOnDestroy() {
