@@ -32,12 +32,17 @@ import { AuthenticationService } from '../shared/services/authentication.service
               </div>
               <p *ngIf="!calendarError" class="align-left">Choose which calendars you would like to import meetings from:</p>
 
+              <div class="loading container" *ngIf="loading">
+                  <img src="../dist/assets/images/crafty-much-pretty.png"/>
+                  <h3>Loading ...</h3>
+              </div>
+
               <form #cals="ngForm" (ngSubmit)="linkCals(cals.value, cals.valid)" class="zebra-form">
                 <fieldset *ngFor="let cal of checkboxes">
                     <input name="calendars" value="{{cal.id}}" type="checkbox" id="cal-{{cal.id}}" [(ngModel)]="cal.checked"/>
                     <label for="cal-{{cal.id}}">{{cal.displayOverride || cal.display }}</label>
                 </fieldset>
-                <button type="submit">Finish</button>
+                <button type="submit" *ngIf="!loading">Finish</button>
               </form>
           </div>
       </div>
@@ -52,6 +57,7 @@ export class CalendarsComponent {
   private calendars;
   public checkboxes = [];
   private calendarError;
+  private loading = true;
 
   constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService) { }
 
@@ -75,10 +81,11 @@ export class CalendarsComponent {
               }
             )
           }
-
+          this.loading = false;
         },
         error => {
           this.calendarError = error;
+          this.loading = false;
         });
     }
   }

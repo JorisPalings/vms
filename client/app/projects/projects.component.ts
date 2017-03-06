@@ -17,6 +17,10 @@ import { MeetingService } from '../shared/services/meeting.service';
     </header>
     <main>
         <div class="container">
+            <div class="loading container" *ngIf="loadingProjects">
+                <img src="../dist/assets/images/crafty-much-pretty.png"/>
+                <h3>Loading ...</h3>
+            </div>
             <div class="row">
                 <div class="three columns">
                     <ul class="projects-list">
@@ -26,6 +30,10 @@ import { MeetingService } from '../shared/services/meeting.service';
                     </ul>
                 </div>
                 <div class="nine columns">
+                    <div class="loading container" *ngIf="loadingMeetings">
+                        <img src="../dist/assets/images/crafty-much-pretty.png"/>
+                        <h3>Loading ...</h3>
+                    </div>
                     <ul class="meetings-list">
                         <li *ngFor="let meeting of meetings">
                             <h2>{{meeting.summary}}</h2>
@@ -72,12 +80,15 @@ export class ProjectsComponent {
     private tomorrow: Date;
     private current: string;
     public isNoteEditable = false;
+    private loadingProjects = true;
+    private loadingMeetings = false;
 
     constructor(private projectService: ProjectService, private meetingService: MeetingService) {}
 
     ngOnInit() {
         this.projectService.getAllProjects().subscribe(data => {
             this.projects = data;
+            this.loadingProjects = false;
             this.showMeetings(this.projects[0].id);
         });
         this.now = new Date();
@@ -86,14 +97,18 @@ export class ProjectsComponent {
     }
 
     showMeetings(id: string) {
-
+        this.loadingMeetings = true;
+        this.meetings = [];
         this.current = id;
         this.projectService.getNotesForMeetingForProject(id).subscribe(data => {
             console.log(data);
             console.log(data.project.meetings);
-            this.meetings = data.project.meetings;
-            this.sortMeetings();
-            console.log(this.meetings);
+            setTimeout(() => {
+                this.loadingMeetings = false;
+                this.meetings = data.project.meetings;
+                this.sortMeetings();
+                console.log(this.meetings);
+            }, 300);
         });
     }
 

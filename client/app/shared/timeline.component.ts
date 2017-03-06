@@ -62,6 +62,7 @@ export class TimelineComponent implements OnInit {
                     },
                     error => {
                         this.errorMessage = error;
+                        this.loading = false;
                     });
             } else {
                 meetingService.getAllMeetings()
@@ -71,6 +72,7 @@ export class TimelineComponent implements OnInit {
                     },
                     error => {
                         this.errorMessage = error;
+                        this.loading = false;
                     });
             }
         }
