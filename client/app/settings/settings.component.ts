@@ -19,6 +19,11 @@ import { EmailValidator } from '../directives/mail-validator';
       <profile [name]="name"></profile>
   </header>
   <main>
+      <div *ngIf="errorMessage" class="has-errors container">
+        <li class="error">
+          {{errorMessage}}
+        </li>
+      </div>
       <div class="container">
           <div class="row">
               <div class="form five columns">
@@ -103,6 +108,7 @@ export class SettingsComponent {
   private notificationShown = false;
   private name;
   private calendarError: string;
+  private errorMessage: string;
   private user: FormGroup;
   private loading = true;
 
@@ -156,6 +162,7 @@ export class SettingsComponent {
         error => {
           // Display the error
           this.calendarError = error;
+          this.loading = false;
         });
     }
 
@@ -210,7 +217,9 @@ export class SettingsComponent {
         // Route to private dashboard
         this.router.navigate(['/settings']);
       },
-      error => console.error(error));
+      error => {
+        this.errorMessage = error;
+      });
   }
 
   showNotification() {
