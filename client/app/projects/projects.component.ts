@@ -18,6 +18,11 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
         <profile></profile>
     </header>
     <main>
+        <div *ngIf="errorMessage" class="has-errors container">
+            <li class="error">
+            {{errorMessage}}
+            </li>
+        </div>
         <div class="container">
             <div class="loading container" *ngIf="loadingProjects">
                 <img src="../dist/assets/images/crafty-much-pretty.png"/>
@@ -86,6 +91,7 @@ export class ProjectsComponent {
     private isModalEditable = false;
     private activeNote:any = {};
     private noteForm: FormGroup;
+    private errorMessage: string;
 
 
     constructor(private projectService: ProjectService, private meetingService: MeetingService, private authenticationService: AuthenticationService, private fb: FormBuilder) {}
@@ -99,6 +105,9 @@ export class ProjectsComponent {
             this.projects = data;
             this.loadingProjects = false;
             this.showMeetings(this.projects[0].id);
+        }, error => {
+          this.errorMessage = error;
+          this.loadingProjects = false;
         });
         this.now = new Date();
         this.tomorrow = new Date();
@@ -121,7 +130,7 @@ export class ProjectsComponent {
 
         },
         error => {
-          //TODO: Error message
+          this.errorMessage = error;
         })
     }
 
@@ -151,6 +160,9 @@ export class ProjectsComponent {
                 this.sortMeetings();
                 console.log(this.meetings);
             }, 300);
+        }, error => {
+            this.errorMessage = error;
+            this.loadingMeetings = false;
         });
     }
 
@@ -163,6 +175,9 @@ export class ProjectsComponent {
     addExternals(i: number) {
         this.meetingService.getExternals(this.meetings[i].id).subscribe(data => {
             this.meetings[i].externals = data;
+        }, error => {
+            this.errorMessage = error;
+            this.loadingMeetings = false;
         });
     }
 

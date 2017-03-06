@@ -9,9 +9,9 @@ import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators, F
 import { EmailValidator } from '../directives/mail-validator';
 
 @Component({
-    selector: 'meeting-details',
-    encapsulation: ViewEncapsulation.None,
-    template: `
+  selector: 'meeting-details',
+  encapsulation: ViewEncapsulation.None,
+  template: `
   <header class="private-dash-header">
 	  <branding></branding>
     <div class="title">
@@ -21,11 +21,16 @@ import { EmailValidator } from '../directives/mail-validator';
     <profile></profile>
   </header>
   <main>
+    <div *ngIf="errorMessage" class="has-errors container">
+      <li class="error">
+        {{errorMessage}}
+      </li>
+    </div>
     <div class="loading container" *ngIf="loading">
         <img src="../dist/assets/images/crafty-much-pretty.png"/>
         <h3>Loading ...</h3>
     </div>
-    <div class="container">
+    <div class="container" *ngIf="!errorMessage && !loading">
         <h2>{{meeting.summary}}</h2>
         <h3>{{processDate(meeting.start)}}, {{meeting.start | date:'HH:mm'}} - {{processDate(meeting.end)}}, {{meeting.end | date:'HH:mm'}}</h3>
         <h3>{{meeting.room}}</h3>
@@ -108,184 +113,199 @@ import { EmailValidator } from '../directives/mail-validator';
     </modal>
   </main>
   `,
-    styleUrls: ['../dist/assets/css/meeting-details.css']
+  styleUrls: ['../dist/assets/css/meeting-details.css']
 })
 
 export class MeetingDetailsComponent {
 
-    private meeting: any = {};
-    private meetingId: string;
-    private externals: any[] = [];
-    private sub: any;
-    private now: Date;
-    private tomorrow: Date;
-    private external: any = {};
-    public isUserEditable = false;
-    private externalForm: FormGroup;
-    private loading = true;
-   	private noteForm: FormGroup;
-    private note:any;
-    private hadNotesBefore = false;
+  private meeting: any = {};
+  private meetingId: string;
+  private externals: any[] = [];
+  private sub: any;
+  private now: Date;
+  private tomorrow: Date;
+  private external: any = {};
+  public isUserEditable = false;
+  private externalForm: FormGroup;
+  private loading = true;
+  private noteForm: FormGroup;
+  private note: any;
+  private hadNotesBefore = false;
+  private errorMessage: string;
 
-    constructor(private route: ActivatedRoute, private meetingService: MeetingService, private userService: UserService, private fb:FormBuilder, private authenticationService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute, private meetingService: MeetingService, private userService: UserService, private fb: FormBuilder, private authenticationService: AuthenticationService) { }
 
-    ngOnInit() {
-        this.externalForm = this.fb.group({
-          company: [null, Validators.required],
-          phone: [null, Validators.required],
-          mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
-        })
+  ngOnInit() {
+    this.externalForm = this.fb.group({
+      company: [null, Validators.required],
+      phone: [null, Validators.required],
+      mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
+    })
 
-        this.noteForm = this.fb.group({
-          content: [null, Validators.required]
-        })
+    this.noteForm = this.fb.group({
+      content: [null, Validators.required]
+    })
 
-        this.sub = this.route.params.subscribe(params => {
-            this.meetingId = params['id']; // (+) converts string 'id' to a number
+    this.sub = this.route.params.subscribe(params => {
+      this.meetingId = params['id']; // (+) converts string 'id' to a number
 
-            //Load the meeting detail using MeetingService
-            this.meetingService.getMeeting(this.meetingId).subscribe(data => {
-                this.meeting = data;
-                this.loading = false;
-            });
-
-            //Load the meeting externals using MeetingService
-            this.meetingService.getExternals(this.meetingId).subscribe(data => {
-                console.log(data);
-                this.externals = data;
-                this.loading = false;
-            });
+      //Load the meeting detail using MeetingService
+      this.meetingService.getMeeting(this.meetingId).subscribe(data => {
+        this.meeting = data;
+        this.loading = false;
+      },
+        error => {
+          this.errorMessage = error;
+          this.loading = false;
         });
 
-
-        this.now = new Date();
-        this.tomorrow = new Date();
-        this.tomorrow.setDate(this.tomorrow.getDate() + 1);
-    }
-
-    importNote(){
-      this.note = {};
-      let data = {
-        meetingId: this.meetingId
-      }
-      this.meetingService.getMeetingNotes(data)
-        .subscribe(data => {
-          console.log("Meeting notes: ", data);
-          this.hadNotesBefore = false;
-          this.note = this.filterNotes(data);
-        })
-    }
-
-    saveNotes(){
-      let noteId;
-      if (this.hadNotesBefore){
-        noteId = this.note.id;
-      }
-      else {
-        noteId = "";
-      }
-
-      let data = {
-        isNew: !this.hadNotesBefore,
-        noteId: noteId,
-        content: this.noteForm.value.content,
-        meetingId: this.meetingId,
-      }
-
-      this.meetingService.saveNotes(data)
-        .subscribe(data => {
-          //TODO: Success message
-          console.log(data);
-
-        },
+      //Load the meeting externals using MeetingService
+      this.meetingService.getExternals(this.meetingId).subscribe(data => {
+        console.log(data);
+        this.externals = data;
+        this.loading = false;
+      },
         error => {
-          //TODO: Error message
+          this.errorMessage = error;
+          this.loading = false;
+        });
+    });
+
+
+    this.now = new Date();
+    this.tomorrow = new Date();
+    this.tomorrow.setDate(this.tomorrow.getDate() + 1);
+  }
+
+  importNote() {
+    this.note = {};
+    let data = {
+      meetingId: this.meetingId
+    }
+    this.meetingService.getMeetingNotes(data)
+      .subscribe(data => {
+        console.log("Meeting notes: ", data);
+        this.hadNotesBefore = false;
+        this.note = this.filterNotes(data);
+      },
+      error => {
+        this.errorMessage = error;
+        this.loading = false;
+      });
+  }
+
+  saveNotes() {
+    let noteId;
+    if (this.hadNotesBefore) {
+      noteId = this.note.id;
+    }
+    else {
+      noteId = "";
+    }
+
+    let data = {
+      isNew: !this.hadNotesBefore,
+      noteId: noteId,
+      content: this.noteForm.value.content,
+      meetingId: this.meetingId,
+    }
+
+    this.meetingService.saveNotes(data)
+      .subscribe(data => {
+        //TODO: Success message
+        console.log(data);
+
+      },
+      error => {
+        this.errorMessage = error;
+        this.loading = false;
+      });
+  }
+
+  filterNotes(notes) {
+    console.log("Filtering notes");
+    for (let note of notes) {
+      console.log(note);
+      if (note.authorId === this.authenticationService.employee) {
+        this.hadNotesBefore = true;
+        this.noteForm.setValue({
+          content: note.content
         })
-    }
-
-    filterNotes(notes){
-      console.log("Filtering notes");
-      for (let note of notes){
-        console.log(note);
-        if (note.authorId === this.authenticationService.employee){
-          this.hadNotesBefore = true;
-          this.noteForm.setValue({
-            content: note.content
-          })
-          this.noteForm.value.content = note.content;
-          console.log('Had note before');
-          return note;
-        }
-      }
-      return {}
-    }
-
-    ngOnDestroy() {
-        this.sub.unsubscribe();
-    }
-
-    toggleFieldsEditable(){
-      if (this.isUserEditable){
-        this.isUserEditable = false;
-      }
-      else {
-        this.isUserEditable = true;
+        this.noteForm.value.content = note.content;
+        console.log('Had note before');
+        return note;
       }
     }
+    return {}
+  }
 
-    saveExternalData(){
-      // TODO: Send the data to the userService
-      let externalData = {
-        id: this.external.id,
-        fname: this.external.fname,
-        lname: this.external.lname,
-        email: this.externalForm.value.mail,
-        company: this.externalForm.value.company,
-        phone: this.externalForm.value.phone
-      }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
-      this.userService.updateExternal(externalData)
-        .subscribe(data => {
-          console.log(data);
-          // TODO: Success message
+  toggleFieldsEditable() {
+    if (this.isUserEditable) {
+      this.isUserEditable = false;
+    }
+    else {
+      this.isUserEditable = true;
+    }
+  }
 
-          // Update the data locally
-          for (var _i = 0; _i < this.externals.length; _i++) {
-              if (this.externals[_i].fname === this.external.fname && this.externals[_i].lname === this.external.lname){
-                this.external[_i] = this.external;
-              }
+  saveExternalData() {
+    // TODO: Send the data to the userService
+    let externalData = {
+      id: this.external.id,
+      fname: this.external.fname,
+      lname: this.external.lname,
+      email: this.externalForm.value.mail,
+      company: this.externalForm.value.company,
+      phone: this.externalForm.value.phone
+    }
+
+    this.userService.updateExternal(externalData)
+      .subscribe(data => {
+        console.log(data);
+        // TODO: Success message
+
+        // Update the data locally
+        for (var _i = 0; _i < this.externals.length; _i++) {
+          if (this.externals[_i].fname === this.external.fname && this.externals[_i].lname === this.external.lname) {
+            this.external[_i] = this.external;
           }
-        },
-        error => {
-          // TODO: Error message
-        })
-
-
-
-    }
-
-    processDate(date: string) {
-        let dateString;
-        let now = this.now.toDateString();
-        let tomorrow = this.tomorrow.toDateString();
-        if (new Date(date).toDateString() == now) {
-            dateString = 'Today';
-        } else if (new Date(date).toDateString() == tomorrow) {
-            dateString = 'Tomorrow';
         }
-        else {
-            dateString = new Date(date).toDateString();
-        }
-        return dateString;
-    }
+      },
+      error => {
+        this.errorMessage = error;
+        this.loading = false;
+      });
 
-    setExternal(external: any) {
-        this.external = external;
-        this.externalForm.value.mail = this.external.email;
-        this.externalForm.value.company = this.external.company;
-        this.externalForm.value.phone = this.external.phone;
 
-        console.log(external);
+
+  }
+
+  processDate(date: string) {
+    let dateString;
+    let now = this.now.toDateString();
+    let tomorrow = this.tomorrow.toDateString();
+    if (new Date(date).toDateString() == now) {
+      dateString = 'Today';
+    } else if (new Date(date).toDateString() == tomorrow) {
+      dateString = 'Tomorrow';
     }
+    else {
+      dateString = new Date(date).toDateString();
+    }
+    return dateString;
+  }
+
+  setExternal(external: any) {
+    this.external = external;
+    this.externalForm.value.mail = this.external.email;
+    this.externalForm.value.company = this.external.company;
+    this.externalForm.value.phone = this.external.phone;
+
+    console.log(external);
+  }
 
 }
