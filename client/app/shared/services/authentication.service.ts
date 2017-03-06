@@ -109,7 +109,7 @@ export class AuthenticationService {
           return Observable.throw("This email and password combination is incorrect");
         }
         else {
-          return Observable.throw('A server error occured. Please contact the admin');
+          return this.handleError(error);
         }
 
       });
@@ -144,7 +144,7 @@ export class AuthenticationService {
           return Observable.throw("An account has already been created with this email address");
         }
         else {
-          return Observable.throw('A server error occured. Please contact the admin');
+          return this.handleError(error);
         }
 
       })

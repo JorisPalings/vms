@@ -42,7 +42,7 @@ export class UserService {
           return Observable.throw('You have not yet integrated your Google account.');
         }
 
-        return Observable.throw('A server error occured. Please contact the admin');
+        return this.handleError(error);
 
 
       })
