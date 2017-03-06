@@ -11,18 +11,29 @@
             position: relative;
             padding-bottom: 5px;
             margin-bottom: 16px;
+
+            &:after {
+                border-bottom: 2px solid $cw-blue-darken;
+                bottom: 0;
+                content: "";
+                height: 1px;
+                left: 0;
+                position: absolute;
+                transition: .25s ease-in-out;
+                width: 0;
+            }
         }
 
         &.current {
             h2 {
                 &:after {
+                    border-bottom: 2px solid $cw-blue-darken;
+                    bottom: 0;
                     content: "";
+                    height: 1px;
+                    left: 0;
                     position: absolute;
                     width: 20%;
-                    height: 1px;
-                    bottom: 0;
-                    left: 0;
-                    border-bottom: 2px solid $cw-blue-darken;
                 }
             }
         }
