@@ -3,8 +3,8 @@
 @import "components/grid";
 @import "components/util";
 @import "components/heading";
-
-html, body {
+html,
+body {
     background-color: $off-white;
     color: $faded-black;
     font-family: 'Montserrat', sans-serif;
@@ -28,13 +28,37 @@ section {
 }
 
 .has-errors {
-  margin-top: 1rem;
-  background-color: $google-red;
-  padding: 15px;
-  text-align: left;
+    margin-top: 1rem;
+    background-color: $google-red;
+    padding: 15px;
+    text-align: left;
+    .error {
+        list-style: none;
+        color: $off-white;
+    }
+}
 
-  .error {
-    list-style: none;
-    color: $off-white;
-  }
+.loading {
+    img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        display: block;
+        transform: rotateZ(20deg);
+        transform-origin: 120px center;
+        animation: spin 1.2s linear infinite;
+    }
+    h3 {
+        text-align: center;
+    }
+}
+
+@keyframes spin {
+    0%,
+    100% {
+        transform: rotateZ(20deg);
+    }
+    75% {
+        transform: rotateZ(-35deg);
+    }
 }
