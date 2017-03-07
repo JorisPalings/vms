@@ -86,24 +86,24 @@ import { EmailValidator } from '../directives/mail-validator';
 
         <modal-content class="user-details">
           <button  [ngClass]="{'toggleIsDisabled': !isUserEditable}" class="toggle-button" (click)="toggleFieldsEditable()"><i class="fa fa-pencil"></i> Edit fields</button>
-          <form class="container" [formGroup]="externalForm">
+          <form class="container" [formGroup]="externalForm" (submit)="saveExternalData()">
             <table>
                 <tr>
                     <td><label for="phone">Phone:</label></td>
                     <td>
-                      <input placeholder="Phone" [disabled]="!isUserEditable" type="text" [formControl]="externalForm.controls['phone']" name="phone" id="phone" value="{{external.phone}}">
+                      <input placeholder="Phone" type="text" [formControl]="externalForm.controls['phone']" name="phone" id="phone" value="{{external.phone}}">
                     </td>
                 </tr>
                 <tr>
                     <td><label for="email">Email:</label></td>
                     <td>
-                      <input [formControl]="externalForm.controls['mail']" placeholder="Email" [disabled]="!isUserEditable" type="text" name="email" id="email" value="{{external.email}}">
+                      <input [formControl]="externalForm.controls['mail']" placeholder="Email" type="text" name="email" id="email" value="{{external.email}}">
                     </td>
                 </tr>
                 <tr>
                     <td><label for="company">Company:</label></td>
                     <td>
-                      <input [formControl]="externalForm.controls['company']" placeholder="Company" [disabled]="!isUserEditable" type="text" name="company" id="company" value="{{external.company}}">
+                      <input type="text" [formControl]="externalForm.controls['company']" placeholder="Company" name="company" id="company" value="{{external.company}}">
                     </td>
                 </tr>
             </table>
@@ -137,9 +137,9 @@ export class MeetingDetailsComponent {
 
   ngOnInit() {
     this.externalForm = this.fb.group({
-      company: [null, Validators.required],
-      phone: [null, Validators.required],
-      mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
+      company: [{value: '', disabled: true}, Validators.required],
+      phone: [{value: '', disabled: true}, Validators.required],
+      mail: [{value: '', disabled: true}, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])],
     })
 
     this.noteForm = this.fb.group({
@@ -251,9 +251,17 @@ export class MeetingDetailsComponent {
   toggleFieldsEditable() {
     if (this.isUserEditable) {
       this.isUserEditable = false;
+
+      this.externalForm.get("mail").disable();
+      this.externalForm.get("company").disable();
+      this.externalForm.get("phone").disable();
+
     }
     else {
       this.isUserEditable = true;
+      this.externalForm.get("mail").enable();
+      this.externalForm.get("company").enable();
+      this.externalForm.get("phone").enable();
     }
   }
 
@@ -272,11 +280,11 @@ export class MeetingDetailsComponent {
       .subscribe(data => {
         console.log(data);
         // TODO: Success message
-
         // Update the data locally
         for (var _i = 0; _i < this.externals.length; _i++) {
           if (this.externals[_i].fname === this.external.fname && this.externals[_i].lname === this.external.lname) {
-            this.external[_i] = this.external;
+            console.log("External in array:", this.externals[_i]);
+            this.externals[_i] = data;
           }
         }
       },
@@ -306,9 +314,11 @@ export class MeetingDetailsComponent {
 
   setExternal(external: any) {
     this.external = external;
-    this.externalForm.value.mail = this.external.email;
-    this.externalForm.value.company = this.external.company;
-    this.externalForm.value.phone = this.external.phone;
+    this.externalForm.setValue({
+      mail: this.external.email,
+      company: this.external.companyName,
+      phone: this.external.phone
+    })
 
     console.log(external);
   }

@@ -84,10 +84,12 @@ var update_external = function(req, res, next) {
     let externalData = {
         fname: data.fname,
         lname: data.lname,
-        email: data.mail,
-        company: data.company,
+        email: data.email,
+        companyName: data.company,
         phone: data.phone
     }
+
+    console.log(externalData);
 
 
     request({
