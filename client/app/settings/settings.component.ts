@@ -6,9 +6,9 @@ import { AuthenticationService } from '../shared/services/authentication.service
 import { EmailValidator } from '../directives/mail-validator';
 
 @Component({
-  selector: 'settings-page',
-  encapsulation: ViewEncapsulation.None,
-  template: `
+    selector: 'settings-page',
+    encapsulation: ViewEncapsulation.None,
+    template: `
   <feedback *ngIf="notificationShown" [@fadeInOut]></feedback>
   <header class="private-dash-header">
       <branding></branding>
@@ -87,157 +87,155 @@ import { EmailValidator } from '../directives/mail-validator';
       </modal>
   </main>
   `,
-  styleUrls: ['../dist/assets/css/settings.css'],
-  animations: [
-      trigger('fadeInOut', [
-        transition(':enter', [   // :enter is alias to 'void => *'
-          style({opacity:0}),
-          animate(250, style({ opacity: 1 }))
-        ]),
-        transition(':leave', [   // :leave is alias to '* => void'
-          animate(250, style({ opacity: 0 }))
+    styleUrls: ['../dist/assets/css/settings.css'],
+    animations: [
+        trigger('fadeInOut', [
+            transition(':enter', [   // :enter is alias to 'void => *'
+                style({ opacity: 0 }),
+                animate(250, style({ opacity: 1 }))
+            ]),
+            transition(':leave', [   // :leave is alias to '* => void'
+                animate(250, style({ opacity: 0 }))
+            ])
         ])
-      ])
     ]
 })
 
 export class SettingsComponent {
 
-  integrationsCallback = "settings";
-  private calendars;
-  public checkboxes = [];
-  private notificationShown = false;
-  private name;
-  private calendarError: string;
-  private errorMessage: string;
-  private user: FormGroup;
-  private loading = true;
+    integrationsCallback = "settings";
+    private calendars;
+    public checkboxes = [];
+    private notificationShown = false;
+    private name;
+    private calendarError: string;
+    private errorMessage: string;
+    private user: FormGroup;
+    private loading = true;
 
-  constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService, private fb: FormBuilder) { }
+    constructor(private userService: UserService, private router: Router, private authenticationService: AuthenticationService, private fb: FormBuilder) { }
 
-  ngOnInit() {
-    this.user = this.fb.group({
-      firstname: [null, Validators.required],
-      lastname: [null, Validators.required],
-      mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])]
-    })
+    ngOnInit() {
+        this.user = this.fb.group({
+            firstname: [null, Validators.required],
+            lastname: [null, Validators.required],
+            mail: [null, Validators.compose([Validators.required, EmailValidator.isValidMailFormat])]
+        })
 
-    if (!this.authenticationService.isAuthenticated()) {
-      this.router.navigate(['/']);
-    } else {
-      this.authenticationService.requestUserData()
-        .subscribe(data => {
-          this.name = data.fname + " " + data.lname;
+        if (!this.authenticationService.isAuthenticated()) {
+            this.router.navigate(['/']);
+        } else {
+            this.authenticationService.requestUserData()
+                .subscribe(data => {
+                    this.name = data.fname + " " + data.lname;
 
-          this.user.patchValue({ firstname: data.fname });
-          this.user.patchValue({ lastname: data.lname });
-          this.user.patchValue({ mail: data.email });
+                    this.user.patchValue({ firstname: data.fname });
+                    this.user.patchValue({ lastname: data.lname });
+                    this.user.patchValue({ mail: data.email });
 
-        });
-      this.userService.getCalendars()
-        .subscribe(data => {
-          this.calendars = data.calendars;
+                });
+            this.userService.getCalendars()
+                .subscribe(data => {
+                    this.calendars = data.calendars;
 
-          this.userService.getCurrentCalendars()
+                    this.userService.getCurrentCalendars()
+                        .subscribe(data => {
+                            for (let cal of this.calendars) {
+                                let isChecked = "";
+                                if (data.calendars && data.calendars.includes(cal.id)) {
+                                    isChecked = "checked";
+                                }
+                                else {
+                                    isChecked = "";
+                                }
+                                this.checkboxes.push(
+                                    {
+                                        display: cal.summary,
+                                        displayOverride: cal.summaryOverride,
+                                        id: cal.id,
+                                        checked: isChecked
+                                    }
+                                )
+                                this.loading = false;
+                            }
+                        });
+                },
+                error => {
+                    // Display the error
+                    this.calendarError = error;
+                    this.loading = false;
+                });
+        }
+
+    }
+
+    linkCals() {
+        this.userService.linkCalendars(this.getSelectedOptions())
             .subscribe(data => {
-              for (let cal of this.calendars) {
-                let isChecked = "";
-                if (data.calendars && data.calendars.includes(cal.id)) {
-                  isChecked = "checked";
-                }
-                else {
-                  isChecked = "";
-                }
-                this.checkboxes.push(
-                  {
-                    display: cal.summary,
-                    displayOverride: cal.summaryOverride,
-                    id: cal.id,
-                    checked: isChecked
-                  }
-                )
-                this.loading = false;
-              }
+                this.showNotification();
+                // Route to private dashboard
+                this.router.navigate(['/settings']);
+            },
+            error => console.error(error));
+    }
+
+    getSelectedOptions() {
+        return this.checkboxes
+            .filter(cal => cal.checked)
+            .map(cal => cal.id)
+    }
+
+    checkboxClicked(cal) {
+        cal.checked = (cal.checked === "checked") ? "" : "checked";
+        this.checkboxes[this.checkboxes.indexOf(cal)] = cal;
+    }
+
+    saveUserData() {
+        let userData = {
+            fname: "",
+            lname: "",
+            email: ""
+        };
+
+        if (this.user.value.firstname.trim().length > 0) {
+            userData.fname = this.user.value.firstname;
+        }
+        if (this.user.value.lastname.trim().length > 0) {
+            userData.lname = this.user.value.lastname;
+        }
+        if (this.user.value.mail.trim().length > 0) {
+            userData.email = this.user.value.mail;
+        }
+        console.log(userData);
+        this.authenticationService.updateUserData(userData)
+            .subscribe(data => {
+                // Show a notification with timeout
+                this.showNotification();
+
+                this.authenticationService.updateEmployee(userData);
+                this.name = this.user.value.firstname + " " + this.user.value.lastname;
+
+                // Route to private dashboard
+                this.router.navigate(['/settings']);
+            },
+            error => {
+                this.errorMessage = error;
             });
-        },
-        error => {
-          // Display the error
-          this.calendarError = error;
-          this.loading = false;
-        });
     }
 
-  }
-
-  linkCals() {
-    this.userService.linkCalendars(this.getSelectedOptions())
-      .subscribe(data => {
-        this.showNotification();
-        // Route to private dashboard
-        this.router.navigate(['/settings']);
-      },
-      error => console.error(error));
-  }
-
-  getSelectedOptions() {
-    return this.checkboxes
-      .filter(cal => cal.checked)
-      .map(cal => cal.id)
-  }
-
-  checkboxClicked(cal) {
-    cal.checked = (cal.checked === "checked") ? "" : "checked";
-    this.checkboxes[this.checkboxes.indexOf(cal)] = cal;
-  }
-
-  saveUserData() {
-    let userData = {
-      fname: "",
-      lname: "",
-      email: ""
-    };
-
-    if (this.user.value.firstname.trim().length > 0) {
-      userData.fname = this.user.value.firstname;
+    showNotification() {
+        this.notificationShown = true;
+        setTimeout(() => {
+            this.notificationShown = false;
+        }, 4000);
     }
-    if (this.user.value.lastname.trim().length > 0) {
-      userData.lname = this.user.value.lastname;
+
+    deleteAccount() {
+        this.authenticationService.deleteAccount()
+            .subscribe(data => {
+                // Router back to landing page
+                this.router.navigate(['/']);
+            });
     }
-    if (this.user.value.mail.trim().length > 0) {
-      userData.email = this.user.value.mail;
-    }
-    console.log(userData);
-    this.authenticationService.updateUserData(userData)
-      .subscribe(data => {
-        // Show a notification with timeout
-        this.showNotification();
-
-        this.authenticationService.updateEmployee(userData);
-        this.name = this.user.value.firstname + " " + this.user.value.lastname;
-
-        // Route to private dashboard
-        this.router.navigate(['/settings']);
-      },
-      error => {
-        this.errorMessage = error;
-      });
-  }
-
-  showNotification() {
-    this.notificationShown = true;
-    setTimeout(() => {
-      this.notificationShown = false;
-    }, 4000);
-  }
-
-  deleteAccount() {
-    if (confirm("Are you sure you want to delete your account?\nThis action cannot be reversed!")) {
-      this.authenticationService.deleteAccount()
-        .subscribe(data => {
-          // Router back to landing page
-          this.router.navigate(['/']);
-        });
-    }
-  }
 
 }
