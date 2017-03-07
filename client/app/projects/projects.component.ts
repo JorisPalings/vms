@@ -66,7 +66,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
             </modal-header>
 
             <modal-content class="notes-details">
-                <form [formGroup]="" *ngIf="isModalEditable" class="container" (submit)="saveNotes(activeNote)">
+                <form [formGroup]="" *ngIf="isModalEditable" (submit)="saveNotes(activeNote)">
                     <textarea [formControl]="noteForm.controls['content']" value="{{activeNote.content}}"></textarea>
                     <button type="submit">Save note</button>
                 </form>
