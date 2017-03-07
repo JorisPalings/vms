@@ -9,7 +9,11 @@ function handleError(res, response) {
     } else {
         var error = JSON.parse(response.body).error;
         //Throw error to the Angular request
-        res.status(error.statusCode).send({ error: error.message });
+        if (error.details !== undefined && error.details[0] !== undefined) {
+            res.status(error.statusCode).send({ error: error.details[0].message });
+        } else {
+            res.status(error.statusCode).send({ error: error.message });
+        }
     }
 }
 
